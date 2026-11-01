@@ -66,3 +66,17 @@ será feito em `ref/paises.csv`.
 
 Os links do SharePoint do OBMigra exigem autenticação institucional (HTTP 401 em teste
 automatizado). Decisão: ingestão manual via `data/landing/`, com hash SHA-256 por arquivo.
+
+## Amparos: decisões de categoria (revisão 1)
+
+- **Proteção internacional** reúne quatro subgrupos: solicitantes de refúgio (290),
+  refugiados reconhecidos (287), acolhida de venezuelanos (273, 299) e acolhida humanitária
+  (Haiti, Afeganistão, Ucrânia, Síria e outros). Decisão de negócio da responsável pelo projeto.
+- **326 e 327** (Portaria 40/2023) ficam fora de proteção internacional e entram em
+  mobilidade regional e acordos (perfil CPLP).
+- Nota conceitual: a "grave e generalizada violação de direitos humanos" (GGVDH,
+  Lei 9.474/1997, art. 1º, III) é um fundamento de reconhecimento da condição de refugiado
+  pelo CONARE. O SISMIGRA não informa o fundamento do reconhecimento: o código 287 cobre
+  todos os refugiados reconhecidos. Acolhida humanitária e acolhida de venezuelanos são
+  autorizações de residência da Lei 13.445/2017, não reconhecimento de refúgio. Por isso os
+  subgrupos são mantidos separados dentro da categoria.
