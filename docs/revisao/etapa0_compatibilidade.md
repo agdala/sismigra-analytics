@@ -69,10 +69,10 @@ automatizado). Decisão: ingestão manual via `data/landing/`, com hash SHA-256 
 
 ## Amparos: decisões de categoria (revisão 1)
 
-- **Proteção internacional** reúne quatro subgrupos: solicitantes de refúgio (290),
+- **Proteção internacional e humanitária** (nome aprovado na revisão 2) reúne quatro subgrupos: solicitantes de refúgio (290),
   refugiados reconhecidos (287), acolhida de venezuelanos (273, 299) e acolhida humanitária
   (Haiti, Afeganistão, Ucrânia, Síria e outros). Decisão de negócio da responsável pelo projeto.
-- **326 e 327** (Portaria 40/2023) ficam fora de proteção internacional e entram em
+- **326 e 327** (Portaria 40/2023) ficam fora de proteção internacional e humanitária e entram em
   mobilidade regional e acordos (perfil CPLP).
 - Nota conceitual: a "grave e generalizada violação de direitos humanos" (GGVDH,
   Lei 9.474/1997, art. 1º, III) é um fundamento de reconhecimento da condição de refugiado
@@ -80,3 +80,4 @@ automatizado). Decisão: ingestão manual via `data/landing/`, com hash SHA-256 
   todos os refugiados reconhecidos. Acolhida humanitária e acolhida de venezuelanos são
   autorizações de residência da Lei 13.445/2017, não reconhecimento de refúgio. Por isso os
   subgrupos são mantidos separados dentro da categoria.
+- **314, 323, 324 e 329** (10 registros no total) foram classificados em Outros (revisão 2).
