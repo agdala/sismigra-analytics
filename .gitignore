@@ -6,6 +6,9 @@ data/
 *.duckdb
 *.duckdb.wal
 !tests/fixtures/*.csv
+# Tabelas de referência e revisão (sem microdados) são versionadas
+!ref/*.csv
+!docs/revisao/*.csv
 
 # Saídas geradas (o inventário da Etapa 0 é versionado de propósito)
 reports/*
