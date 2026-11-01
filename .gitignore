@@ -1,0 +1,28 @@
+# Dados locais: nunca versionar microdados brutos ou derivados
+data/
+*.csv
+*.zip
+*.parquet
+*.duckdb
+*.duckdb.wal
+!tests/fixtures/*.csv
+
+# Saídas geradas (o inventário da Etapa 0 é versionado de propósito)
+reports/*
+!reports/inventario/
+reports/inventario/*
+!reports/inventario/inventario.md
+!reports/inventario/inventario.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
