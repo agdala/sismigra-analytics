@@ -1,0 +1,8 @@
+uf;municipio_fonte;cod_municipio_ibge;municipio_ibge;tipo_correcao;justificativa;status_revisao
+RJ;PARATI;3303807;Paraty;grafia;Grafia antiga. Nome oficial na DTB: Paraty;proposto
+SP;EMBU;3515004;Embu das Artes;nome_alterado;Município renomeado de Embu para Embu das Artes;proposto
+SP;MOJI MIRIM;3530805;Mogi Mirim;grafia;Grafia antiga com J. Nome oficial na DTB: Mogi Mirim;proposto
+MT;SANTO ANTÔNIO DO LEVERGER;5107800;Santo Antônio de Leverger;grafia;Preposição incorreta (do/de);proposto
+BA;UNA;2932507;Unas;grafia;Única correspondência na UF. DTB 2023 grafa Unas;a revisar
+PA;CASTELO DOS SONHOS;1500602;Altamira;distrito;Castelo dos Sonhos é distrito de Altamira (DTB distritos, código 150060207). Atribuído ao município-sede;proposto
+MT;JUREMA;;;sem_correcao;Não existe município nem distrito Jurema em MT (só PI e PE). Corrigir seria adivinhar;proposto
