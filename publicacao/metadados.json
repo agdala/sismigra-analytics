@@ -1,0 +1,172 @@
+{
+  "gerado_em": "2026-11-01T23:38:16+00:00",
+  "limiar_k": 5,
+  "regra": "Nenhuma célula publicada tem de 1 a 4 registros. Ver src/sismigra/divulgacao.py.",
+  "formato": {
+    "separador": ",",
+    "codificacao": "UTF-8 sem BOM",
+    "decimal": ".",
+    "nulo": "vazio",
+    "booleano": "true/false"
+  },
+  "fontes": [
+    {
+      "arquivo": "sismgra_janeiro_setembro_2026.zip",
+      "sha256": "11da4ecb01e19cf72835c740cf5a7029dc1ab1a8dd12ab217005cf323ddf77db",
+      "ano": 2026,
+      "cobertura": "jan-set",
+      "distribuidor": "OBMigra/UnB"
+    },
+    {
+      "arquivo": "sismigra_2021.zip",
+      "sha256": "d0fa253f799f018a9b7f95789b00a6caf88f1b3c040bbf44f414fb98c87da0fa",
+      "ano": 2021,
+      "cobertura": "jan-dez",
+      "distribuidor": "OBMigra/UnB"
+    },
+    {
+      "arquivo": "sismigra_2022.zip",
+      "sha256": "6c85e9428ee7232cf823293573e1fa859b3cbd77d9adb81471eb3a91617c2846",
+      "ano": 2022,
+      "cobertura": "jan-dez",
+      "distribuidor": "OBMigra/UnB"
+    },
+    {
+      "arquivo": "sismigra_2023.zip",
+      "sha256": "e7cc061a35f4860590683b12ca2d35562de57babc92d5f89ee5317f37e8c968f",
+      "ano": 2023,
+      "cobertura": "jan-dez",
+      "distribuidor": "OBMigra/UnB"
+    },
+    {
+      "arquivo": "sismigra_2024.zip",
+      "sha256": "0f6870e43125a0bdb021eb6757bf0c3d780a5c3f1d00e8931f82e9c5f9ee781b",
+      "ano": 2024,
+      "cobertura": "jan-dez",
+      "distribuidor": "OBMigra/UnB"
+    },
+    {
+      "arquivo": "sismigra_janeiro_dezembro_2025.zip",
+      "sha256": "71137873e8d8b57f0f7181186c06589e1d4ee7e5ffaa37d70054b9328d9dbf2e",
+      "ano": 2025,
+      "cobertura": "jan-dez",
+      "distribuidor": "OBMigra/UnB"
+    }
+  ],
+  "tabelas": {
+    "agregado_looker_nacionalidade": {
+      "celulas_iniciais": 20476,
+      "etapas": [
+        {
+          "etapa": 1,
+          "colunas": [
+            "tipologia_ajustada"
+          ],
+          "celulas_agrupadas": 12272,
+          "registros_agrupados": 20923
+        },
+        {
+          "etapa": 2,
+          "colunas": [
+            "subgrupo_protecao"
+          ],
+          "celulas_agrupadas": 12080,
+          "registros_agrupados": 20786
+        },
+        {
+          "etapa": 3,
+          "colunas": [
+            "sexo",
+            "faixa_etaria",
+            "ordem_faixa_etaria",
+            "status_ativo"
+          ],
+          "celulas_agrupadas": 11856,
+          "registros_agrupados": 20538
+        },
+        {
+          "etapa": 4,
+          "colunas": [
+            "categoria_ampla"
+          ],
+          "celulas_agrupadas": 1985,
+          "registros_agrupados": 4371
+        },
+        {
+          "etapa": 5,
+          "colunas": [
+            "pais_nacionalidade",
+            "iso3_nacionalidade"
+          ],
+          "celulas_agrupadas": 582,
+          "registros_agrupados": 1438
+        },
+        {
+          "etapa": 6,
+          "colunas": [
+            "pais_nacionalidade",
+            "continente_nacionalidade"
+          ],
+          "celulas_agrupadas": 10,
+          "registros_agrupados": 31
+        }
+      ],
+      "limiar": 5,
+      "celulas_publicadas": 10562,
+      "celulas_suprimidas": 6,
+      "celulas_supressao_primaria": 3,
+      "celulas_supressao_secundaria": 3,
+      "registros_suprimidos": 24,
+      "registros_publicados": 1361367,
+      "pct_publicado": 99.998
+    },
+    "agregado_looker_territorio": {
+      "celulas_iniciais": 14758,
+      "etapas": [
+        {
+          "etapa": 1,
+          "colunas": [
+            "tipologia_ajustada"
+          ],
+          "celulas_agrupadas": 6054,
+          "registros_agrupados": 11305
+        },
+        {
+          "etapa": 2,
+          "colunas": [
+            "subgrupo_protecao"
+          ],
+          "celulas_agrupadas": 5773,
+          "registros_agrupados": 10965
+        },
+        {
+          "etapa": 3,
+          "colunas": [
+            "sexo",
+            "faixa_etaria",
+            "ordem_faixa_etaria",
+            "status_ativo"
+          ],
+          "celulas_agrupadas": 4974,
+          "registros_agrupados": 9803
+        },
+        {
+          "etapa": 4,
+          "colunas": [
+            "categoria_ampla"
+          ],
+          "celulas_agrupadas": 220,
+          "registros_agrupados": 572
+        }
+      ],
+      "limiar": 5,
+      "celulas_publicadas": 9839,
+      "celulas_suprimidas": 87,
+      "celulas_supressao_primaria": 87,
+      "celulas_supressao_secundaria": 0,
+      "registros_suprimidos": 253,
+      "registros_publicados": 1361138,
+      "pct_publicado": 99.981
+    }
+  }
+}

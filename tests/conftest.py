@@ -11,6 +11,7 @@ import duckdb
 import pytest
 
 from sismigra import bronze, gold, quality, silver
+from sismigra import divulgacao as divulgacao_mod
 from sismigra.config import RAIZ, Config
 
 CAB_2025 = ("DATAREGISTRO;AMPARO;AMPARO_DESCRICAO;CLASSIFICACAO_REGISTRO;DATAENTRADA;UNIDADE_FED_RESIDENCIA;"
@@ -94,7 +95,8 @@ def ambiente(tmp_path_factory) -> Config:
     with zipfile.ZipFile(landing / "teste_2025.zip", "w") as z:
         z.write(base / "teste_2025.csv", "pasta/teste_2025.csv")
     _escrever_csv(landing / "teste_2026.csv", CAB_2026, LINHAS_2026, "2026")
-    return Config(entrada=landing, dados=base / "data", ref=ref, sql=RAIZ / "sql", relatorios=base / "reports")
+    return Config(entrada=landing, dados=base / "data", ref=ref, sql=RAIZ / "sql", relatorios=base / "reports",
+                  publicacao=base / "publicacao")
 
 
 @pytest.fixture(scope="session")
@@ -105,6 +107,7 @@ def execucao(ambiente):
     res = silver.executar(ambiente, manifesto, con)
     contagens = gold.executar(ambiente, con)
     divulgacao = contagens.pop("_divulgacao")
+    divulgacao_mod.escrever_metadados(ambiente.publicacao, manifesto, divulgacao)
     rel = quality.calcular(con, res["leitura"], divulgacao)
     quality.escrever(ambiente, rel)
     yield {"cfg": ambiente, "con": con, "manifesto": manifesto, "contagens": contagens,

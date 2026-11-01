@@ -44,8 +44,10 @@ def executar(cfg: Config, con: duckdb.DuckDBPyConnection) -> dict:
         con.execute(f"COPY {t} TO {lit(destino.as_posix())} (HEADER, DELIMITER ';')")
         _prefixar_bom(destino)
         contagens[t] = con.execute(f"SELECT count(*) FROM {t}").fetchone()[0]
-    # Agregados do Looker Studio, com controle de divulgação (nenhuma célula de 1 a 4 registros)
-    divulgacao_stats = divulgacao.executar(con, cfg.ouro)
+    # Agregados publicáveis, com controle de divulgação (nenhuma célula de 1 a 4 registros).
+    # Vão para publicacao/ (versionada), nunca para data/gold/.
+    cfg.publicacao.mkdir(parents=True, exist_ok=True)
+    divulgacao_stats = divulgacao.executar(con, cfg.publicacao)
     for nome, st in divulgacao_stats.items():
         contagens[nome] = st["celulas_publicadas"]
     contagens["_divulgacao"] = divulgacao_stats

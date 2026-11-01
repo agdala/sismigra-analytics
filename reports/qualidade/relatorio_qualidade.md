@@ -1,6 +1,6 @@
 # Relatório de qualidade: SISMIGRA
 
-Gerado em 2026-11-01T23:10:26+00:00 (UTC) pelo pipeline `python -m sismigra.pipeline`.
+Gerado em 2026-11-01T23:38:16+00:00 (UTC) pelo pipeline `python -m sismigra.pipeline`.
 
 ## Resumo
 
@@ -60,7 +60,7 @@ Nenhuma célula publicada tem de 1 a 4 registros. Células pequenas são primeir
 
 | Tabela | Limiar | Células publicadas | Células suprimidas | Registros suprimidos | % publicado |
 |---|---|---|---|---|---|
-| agregado_looker_nacionalidade | 5 | 10.567 | 10 | 31 | 99.998% |
+| agregado_looker_nacionalidade | 5 | 10.562 | 6 | 24 | 99.998% |
 | agregado_looker_territorio | 5 | 9.839 | 87 | 253 | 99.981% |
 
 | Tabela | Etapa | Colunas agrupadas | Células agrupadas | Registros agrupados |
@@ -70,6 +70,7 @@ Nenhuma célula publicada tem de 1 a 4 registros. Células pequenas são primeir
 | agregado_looker_nacionalidade | 3 | sexo, faixa_etaria, ordem_faixa_etaria, status_ativo | 11.856 | 20.538 |
 | agregado_looker_nacionalidade | 4 | categoria_ampla | 1.985 | 4.371 |
 | agregado_looker_nacionalidade | 5 | pais_nacionalidade, iso3_nacionalidade | 582 | 1.438 |
+| agregado_looker_nacionalidade | 6 | pais_nacionalidade, continente_nacionalidade | 10 | 31 |
 | agregado_looker_territorio | 1 | tipologia_ajustada | 6.054 | 11.305 |
 | agregado_looker_territorio | 2 | subgrupo_protecao | 5.773 | 10.965 |
 | agregado_looker_territorio | 3 | sexo, faixa_etaria, ordem_faixa_etaria, status_ativo | 4.974 | 9.803 |
