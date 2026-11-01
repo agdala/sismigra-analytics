@@ -7,6 +7,12 @@ Nacional Migratório), de 2021 a 2026. São **1.361.391 registros** organizados 
 prata, ouro), com governança e qualidade de dados testadas e um esquema estrela pronto para
 Power BI e Looker Studio.
 
+> [!IMPORTANT]
+> **2026 é um ano parcial (janeiro a setembro).** Os arquivos trazem só o ano do registro, sem mês,
+> então não é possível comparar 2026 com o mesmo período de anos anteriores.
+> **Os painéis filtram por `ano_completo = true`** em todas as comparações de volume (2021 a 2025).
+> 2026 aparece apenas em análises de composição (percentuais), sempre identificado como parcial.
+
 ---
 
 ## 1. Problema
@@ -43,7 +49,9 @@ Este projeto transforma esses arquivos em uma base confiável, rastreável e com
 | 2023 | 232.193 | 63,4% |
 | 2024 | 248.167 | 61,3% |
 | 2025 | 265.523 | 58,1% |
-| 2026 (jan-set) | 203.512 | 52,6% |
+| 2026 (jan-set, **parcial**) | 203.512 | 52,6% |
+
+_2026 não entra nas comparações de volume: o ano tem 9 meses e não há mês nos dados para recortar os demais anos._
 
 ## 3. Arquitetura
 
@@ -63,7 +71,7 @@ flowchart LR
     end
     subgraph Ouro
         I[Esquema estrela<br/>Parquet + CSV]
-        J[agregado_looker.csv]
+        J[Agregados com controle<br/>de divulgação k=5]
     end
     subgraph Consumo
         K[Power BI]
@@ -178,7 +186,8 @@ make run
 | `data/silver/rejeitados.parquet` | Registros rejeitados com o motivo |
 | `data/gold/parquet/*.parquet` | Esquema estrela (para o Power BI) |
 | `data/gold/csv/*.csv` | O mesmo em CSV (`;`, UTF-8 com BOM, abre no Excel) |
-| `data/gold/agregado_looker.csv` | Tabela agregada (cerca de 82 mil linhas) para o Looker Studio |
+| `data/gold/agregado_looker_nacionalidade.csv` | Ano × país × perfil × amparo, com controle de divulgação (cerca de 10 mil linhas, 1,4 MB) |
+| `data/gold/agregado_looker_territorio.csv` | Ano × UF × perfil × amparo, com controle de divulgação (cerca de 10 mil linhas, 1,3 MB) |
 | `reports/qualidade/relatorio_qualidade.md` | Relatório de qualidade da última execução |
 
 ### 4.5 Testes
@@ -207,6 +216,8 @@ Actions sem os microdados.
 - **Rejeição (R00 a R03):** linha malformada, ano do registro ausente ou diferente do ano do arquivo, amparo ausente.
 - **Correção com marcação (C01 a C09):** ano de entrada inválido, UF ausente, município por exceção
   manual, sexo, faixa etária e idade inválida, estado civil e classificação.
+- **Controle de divulgação (k = 5):** nos agregados do Looker Studio, nenhuma célula publicada tem
+  de 1 a 4 registros. Detalhes na seção 6.
 - **Alerta (A01 a A06):** duplicatas exatas, município sem correspondência no IBGE, país ou amparo
   sem referência, "MENOR" com 25 anos ou mais, amparo com mais de uma norma no mesmo ano.
 
@@ -229,12 +240,19 @@ Actions sem os microdados.
 | **Hierarquia de amparo revisada por especialista** | A tipologia da fonte esconde os solicitantes de refúgio e classifica a mobilidade CPLP (326/327) como acolhida humanitária. A revisão é rastreável, linha a linha. |
 | **Tabelas de referência versionadas** | O IBGE e as revisões de negócio ficam em `ref/`, reprodutíveis sem acesso à internet. `scripts/construir_refs.py` as regenera. |
 | **CSV com BOM e `;`** | Abre direto no Excel em português sem quebrar os acentos. |
+| **Controle de divulgação com agrupamento antes da supressão** | Apagar as células com menos de 5 registros esconderia 7,3% dos registros e distorceria os totais (até 17% para alguns países). O método agrupa primeiro os atributos de menor prioridade (tipologia, subgrupo, perfil, categoria e, por último, o país) e só suprime o que continuar pequeno. Resultado: 99,98% ou mais dos registros publicados, e menos de 0,3% de perda nos totais de países e UFs com 5 mil registros ou mais. |
+| **Dois agregados em vez de um** | Cruzar país e UF na mesma tabela gera milhares de células pequenas. Separar nacionalidade e território reduz o risco de reidentificação e o volume suprimido. |
 
 ## 7. Limitações dos dados
 
-- **Só o ano, sem mês:** não dá para fazer série mensal nem comparar janeiro a setembro de 2026 com
-  o mesmo período de 2025. **2026 é parcial**: compare volumes só entre 2021 e 2025 e use 2026 em
-  análises de composição (percentuais). A `dim_tempo` traz `ano_completo` para filtrar.
+- **2026 é parcial e não há mês:** não dá para fazer série mensal nem comparar janeiro a setembro
+  de 2026 com o mesmo período de 2025. Compare volumes só entre 2021 e 2025 e use 2026 em análises
+  de composição (percentuais). O campo `ano_completo` (na `dim_tempo` e nos dois agregados) faz esse
+  filtro, e **os painéis o aplicam por padrão**.
+- **Agregados do Looker com linhas "Agrupado":** cerca de 1,5% dos registros (nacionalidade) e 0,8%
+  (território) estão em linhas em que algum atributo foi trocado por "Agrupado". Os totais por ano,
+  país e UF ficam corretos, mas um gráfico por sexo ou faixa etária mostra essa parcela como
+  "Agrupado". Para análises sem essa restrição, use o esquema estrela no Power BI (uso local).
 - **Registros, não pessoas:** uma pessoa pode ter mais de um registro ao longo dos anos (ex.:
   solicitante que depois é reconhecido como refugiado). Os totais são de registros emitidos.
 - **Fundamento do refúgio:** o SISMIGRA não informa se o reconhecimento foi por perseguição ou por
@@ -252,9 +270,13 @@ Actions sem os microdados.
 
 ## 8. Painéis
 
+**Regra comum aos dois painéis:** comparações de volume usam o filtro `ano_completo = true`
+(2021 a 2025). 2026 aparece só em percentuais, com o rótulo "2026 (jan-set, parcial)".
+
 ### Power BI
 
-> Espaço reservado. Conecte o Power BI aos arquivos de `data/gold/parquet/`.
+> Espaço reservado. Conecte o Power BI aos arquivos de `data/gold/parquet/` e crie o filtro de
+> página `dim_tempo[ano_completo] = true` nos visuais de volume.
 
 ![Painel Power BI](docs/img/powerbi_visao_geral.png)
 
@@ -262,7 +284,10 @@ Actions sem os microdados.
 
 ### Looker Studio
 
-> Espaço reservado. Importe `data/gold/agregado_looker.csv` (Google Sheets ou upload de arquivo).
+> Espaço reservado. Importe `data/gold/agregado_looker_nacionalidade.csv` e
+> `data/gold/agregado_looker_territorio.csv` como duas fontes de dados (upload de arquivo ou
+> Google Sheets) e crie o filtro `ano_completo = true` nos gráficos de volume. Use `SUM(qtd_registros)`:
+> as células suprimidas têm contagem vazia e são ignoradas na soma.
 
 ![Painel Looker Studio](docs/img/looker_visao_geral.png)
 

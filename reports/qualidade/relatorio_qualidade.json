@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-01T22:48:33+00:00",
+  "gerado_em": "2026-11-01T23:10:26+00:00",
   "totais": {
     "lidas": 1361391,
     "aceitas": 1361391,
@@ -57,63 +57,63 @@
     }
   ],
   "correcoes": {
-    "C04": {
-      "2021": 46,
-      "2023": 77,
-      "2026": 82,
-      "2024": 108,
-      "2022": 57,
-      "2025": 96
-    },
-    "C02": {
-      "2022": 563,
-      "2025": 2104,
-      "2021": 358,
-      "2023": 745,
-      "2026": 1964,
-      "2024": 1087
-    },
     "C01": {
       "2022": 26977,
       "2025": 41285,
+      "2024": 24575,
       "2021": 16707,
-      "2023": 16663,
       "2026": 35889,
-      "2024": 24575
+      "2023": 16663
     },
     "C03": {
       "2022": 139,
       "2025": 117,
+      "2024": 169,
       "2021": 65,
-      "2023": 208,
       "2026": 76,
-      "2024": 169
+      "2023": 208
+    },
+    "C02": {
+      "2022": 563,
+      "2025": 2104,
+      "2024": 1087,
+      "2021": 358,
+      "2026": 1964,
+      "2023": 745
     },
     "C05": {
       "2024": 24674,
       "2021": 20420,
-      "2023": 16734,
       "2026": 36006,
-      "2025": 41344,
-      "2022": 27057
+      "2023": 16734,
+      "2022": 27057,
+      "2025": 41344
     },
     "C07": {
       "2025": 1567,
       "2022": 493,
-      "2024": 1151,
       "2021": 135,
+      "2026": 1099,
       "2023": 383,
-      "2026": 1099
+      "2024": 1151
+    },
+    "C04": {
+      "2021": 46,
+      "2026": 82,
+      "2023": 77,
+      "2024": 108,
+      "2025": 96,
+      "2022": 57
     },
     "C08": {
       "2025": 83,
       "2026": 57
     },
-    "C06": {
-      "2026": 693
-    },
     "C09": {
       "2022": 1
+    },
+    "C06": {
+      "2026": 693
     }
   },
   "alertas": {
@@ -220,12 +220,117 @@
   },
   "municipios": {
     "por_status": {
-      "sem correspondência": 105,
       "não especificado": 137875,
       "uf não informada": 6821,
+      "sem correspondência": 105,
       "ibge": 1215816,
       "exceção manual": 774
     },
     "pct_casados_entre_especificados": 99.991
+  },
+  "divulgacao": {
+    "agregado_looker_nacionalidade": {
+      "celulas_iniciais": 20476,
+      "etapas": [
+        {
+          "etapa": 1,
+          "colunas": [
+            "tipologia_ajustada"
+          ],
+          "celulas_agrupadas": 12272,
+          "registros_agrupados": 20923
+        },
+        {
+          "etapa": 2,
+          "colunas": [
+            "subgrupo_protecao"
+          ],
+          "celulas_agrupadas": 12080,
+          "registros_agrupados": 20786
+        },
+        {
+          "etapa": 3,
+          "colunas": [
+            "sexo",
+            "faixa_etaria",
+            "ordem_faixa_etaria",
+            "status_ativo"
+          ],
+          "celulas_agrupadas": 11856,
+          "registros_agrupados": 20538
+        },
+        {
+          "etapa": 4,
+          "colunas": [
+            "categoria_ampla"
+          ],
+          "celulas_agrupadas": 1985,
+          "registros_agrupados": 4371
+        },
+        {
+          "etapa": 5,
+          "colunas": [
+            "pais_nacionalidade",
+            "iso3_nacionalidade"
+          ],
+          "celulas_agrupadas": 582,
+          "registros_agrupados": 1438
+        }
+      ],
+      "limiar": 5,
+      "celulas_publicadas": 10567,
+      "celulas_suprimidas": 10,
+      "registros_suprimidos": 31,
+      "registros_total": 1361391,
+      "registros_publicados": 1361360,
+      "pct_publicado": 99.998
+    },
+    "agregado_looker_territorio": {
+      "celulas_iniciais": 14758,
+      "etapas": [
+        {
+          "etapa": 1,
+          "colunas": [
+            "tipologia_ajustada"
+          ],
+          "celulas_agrupadas": 6054,
+          "registros_agrupados": 11305
+        },
+        {
+          "etapa": 2,
+          "colunas": [
+            "subgrupo_protecao"
+          ],
+          "celulas_agrupadas": 5773,
+          "registros_agrupados": 10965
+        },
+        {
+          "etapa": 3,
+          "colunas": [
+            "sexo",
+            "faixa_etaria",
+            "ordem_faixa_etaria",
+            "status_ativo"
+          ],
+          "celulas_agrupadas": 4974,
+          "registros_agrupados": 9803
+        },
+        {
+          "etapa": 4,
+          "colunas": [
+            "categoria_ampla"
+          ],
+          "celulas_agrupadas": 220,
+          "registros_agrupados": 572
+        }
+      ],
+      "limiar": 5,
+      "celulas_publicadas": 9839,
+      "celulas_suprimidas": 87,
+      "registros_suprimidos": 253,
+      "registros_total": 1361391,
+      "registros_publicados": 1361138,
+      "pct_publicado": 99.981
+    }
   }
 }

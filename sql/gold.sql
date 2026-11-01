@@ -161,9 +161,10 @@ LEFT JOIN dim_localidade l
 JOIN dim_perfil pf USING (sexo, faixa_etaria, estado_civil)
 JOIN dim_ocupacao o ON o.ocupacao = p.profissao;
 
--- ---------------------------------------------------------------- agregado para Looker Studio
--- Tabela larga e leve: contagem por ano, território, nacionalidade, perfil e amparo.
-CREATE OR REPLACE TABLE agregado_looker AS
+-- ---------------------------------------------------------------- base dos agregados
+-- Contagem por ano, território, nacionalidade, perfil e amparo. NÃO é exportada: serve de
+-- entrada para src/sismigra/divulgacao.py, que aplica o controle de divulgação (k = 5).
+CREATE OR REPLACE TABLE agregado_base AS
 SELECT
     f.sk_ano_registro AS ano_registro,
     t.cobertura_registro AS cobertura,

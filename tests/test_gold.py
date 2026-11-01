@@ -32,9 +32,9 @@ def test_chaves_das_dimensoes_unicas(execucao):
         assert um(con, f"SELECT count(*) - count(DISTINCT {pk}) FROM {dim}") == 0
 
 
-def test_agregado_soma_igual_ao_fato(execucao):
+def test_base_dos_agregados_soma_igual_ao_fato(execucao):
     con = execucao["con"]
-    assert um(con, "SELECT sum(qtd_registros) FROM agregado_looker") == um(con, "SELECT count(*) FROM fato_registro")
+    assert um(con, "SELECT sum(qtd_registros) FROM agregado_base") == um(con, "SELECT count(*) FROM fato_registro")
 
 
 def test_grafias_diferentes_viram_um_pais(execucao):
@@ -72,8 +72,8 @@ def test_dim_tempo_marca_ano_parcial(execucao):
 def test_arquivos_exportados(execucao):
     cfg = execucao["cfg"]
     for t in execucao["contagens"]:
-        if t == "agregado_looker":
-            assert (cfg.ouro / "agregado_looker.csv").exists()
+        if t.startswith("agregado_looker"):
+            assert (cfg.ouro / f"{t}.csv").exists()
             continue
         assert (cfg.ouro / "parquet" / f"{t}.parquet").exists()
         csv = cfg.ouro / "csv" / f"{t}.csv"

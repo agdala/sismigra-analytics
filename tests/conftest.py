@@ -30,6 +30,8 @@ PADRAO = {
 # Cada linha: (marcador, alterações). O marcador vai em PROFISSAO para localizar a linha no teste.
 LINHAS_2025 = [
     ("DUP", {}), ("DUP", {}),
+    # 6 registros com o mesmo perfil: formam uma célula >= 5 no agregado (não deve ser alterada)
+    *[(f"GRUPO{i}", {"UNIDADE_FED_RESIDENCIA": "AM", "MUNICIPIO_RESIDENCIA": "MANAUS"}) for i in range(6)],
     ("R01", {"DATAREGISTRO": "abc"}),
     ("R02", {"DATAREGISTRO": "2024"}),
     ("R03", {"AMPARO": ""}),
@@ -102,9 +104,11 @@ def execucao(ambiente):
     con = duckdb.connect()
     res = silver.executar(ambiente, manifesto, con)
     contagens = gold.executar(ambiente, con)
-    rel = quality.calcular(con, res["leitura"])
+    divulgacao = contagens.pop("_divulgacao")
+    rel = quality.calcular(con, res["leitura"], divulgacao)
     quality.escrever(ambiente, rel)
-    yield {"cfg": ambiente, "con": con, "manifesto": manifesto, "contagens": contagens, "qualidade": rel}
+    yield {"cfg": ambiente, "con": con, "manifesto": manifesto, "contagens": contagens,
+           "divulgacao": divulgacao, "qualidade": rel}
     con.close()
 
 

@@ -7,6 +7,7 @@ from pathlib import Path
 
 import duckdb
 
+from . import divulgacao
 from .config import Config
 from .silver import lit
 
@@ -43,9 +44,9 @@ def executar(cfg: Config, con: duckdb.DuckDBPyConnection) -> dict:
         con.execute(f"COPY {t} TO {lit(destino.as_posix())} (HEADER, DELIMITER ';')")
         _prefixar_bom(destino)
         contagens[t] = con.execute(f"SELECT count(*) FROM {t}").fetchone()[0]
-    # Agregado do Looker Studio: vírgula como separador (padrão de importação do Looker)
-    con.execute(
-        f"COPY agregado_looker TO {lit((cfg.ouro / 'agregado_looker.csv').as_posix())} (HEADER, DELIMITER ',')"
-    )
-    contagens["agregado_looker"] = con.execute("SELECT count(*) FROM agregado_looker").fetchone()[0]
+    # Agregados do Looker Studio, com controle de divulgação (nenhuma célula de 1 a 4 registros)
+    divulgacao_stats = divulgacao.executar(con, cfg.ouro)
+    for nome, st in divulgacao_stats.items():
+        contagens[nome] = st["celulas_publicadas"]
+    contagens["_divulgacao"] = divulgacao_stats
     return contagens

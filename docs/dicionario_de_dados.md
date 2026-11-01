@@ -183,10 +183,30 @@ Hierarquia analítica revisada pela responsável pelo projeto em
 Texto da norma de cada código por ano (`amparo_codigo`, `ano`, `amparo_descricao`, `registros`).
 Necessária porque o mesmo código muda de portaria ao longo do tempo (alerta A06).
 
-### `agregado_looker.csv`: tabela larga para o Looker Studio
+### Agregados para o Looker Studio (com controle de divulgação)
 
-Contagem de registros (`qtd_registros`) por `ano_registro`, `cobertura`, `ano_completo`, `regiao`,
-`uf_sigla`, `pais_nacionalidade`, `iso3_nacionalidade`, `continente_nacionalidade`, `sexo`,
-`faixa_etaria`, `ordem_faixa_etaria`, `categoria_ampla`, `subgrupo_protecao`,
-`tipologia_ajustada`, `classificacao` e `status_ativo`. Separador vírgula. A soma de
-`qtd_registros` é igual ao número de linhas do fato (testado).
+Dois arquivos com separador vírgula, gerados a partir de uma base interna (`agregado_base`,
+não exportada) por [`src/sismigra/divulgacao.py`](../src/sismigra/divulgacao.py).
+**Nenhuma célula publicada tem de 1 a 4 registros** (limiar k = 5, testado).
+
+| Arquivo | Dimensões |
+|---|---|
+| `agregado_looker_nacionalidade.csv` | comuns + `pais_nacionalidade`, `iso3_nacionalidade`, `continente_nacionalidade` |
+| `agregado_looker_territorio.csv` | comuns + `regiao`, `uf_sigla` |
+
+| Campo | Definição | Regra |
+|---|---|---|
+| `ano_registro`, `cobertura` | Ano do registro e período coberto | `dim_tempo` |
+| `ano_completo` | O ano tem os 12 meses | **Filtro padrão dos painéis** para comparar volumes (exclui 2026, jan-set) |
+| `sexo`, `faixa_etaria`, `ordem_faixa_etaria` | Perfil | "Agrupado"/"Agrupada" e ordem 9 quando agrupado |
+| `categoria_ampla`, `subgrupo_protecao`, `tipologia_ajustada` | Hierarquia de amparo | "Agrupada"/"Agrupado" quando agrupado |
+| `status_ativo` | Registro ativo | Nulo quando agrupado |
+| `pais_nacionalidade`, `iso3_nacionalidade` | País | Na última etapa, país raro vira "Outros países (continente)" e ISO nulo |
+| `qtd_registros` | Medida | Soma de registros; **nula quando suprimida** |
+| `nivel_agrupamento` | Etapa em que a linha foi agrupada | 0 = sem alteração; 1 a 5 = etapa (ver relatório de qualidade) |
+| `suprimido` | A célula continuou abaixo de 5 depois de todas as etapas | `qtd_registros` nulo |
+
+**Método:** as células com menos de 5 registros têm atributos trocados por "Agrupado" em etapas
+(tipologia, subgrupo, perfil, categoria e, só na tabela de nacionalidade, por último o país), sendo
+somadas de novo a cada etapa. O que continuar abaixo de 5 é suprimido. A soma do publicado mais o
+suprimido é igual ao número de linhas do fato (testado).

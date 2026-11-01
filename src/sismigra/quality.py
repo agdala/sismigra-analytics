@@ -42,7 +42,7 @@ REGRAS = {
 }
 
 
-def calcular(con: duckdb.DuckDBPyConnection, leitura: list[dict]) -> dict:
+def calcular(con: duckdb.DuckDBPyConnection, leitura: list[dict], divulgacao: dict | None = None) -> dict:
     """Calcula as métricas de qualidade a partir das tabelas prata e rejeitados."""
     q = lambda sql: con.execute(sql).fetchall()  # noqa: E731
 
@@ -104,6 +104,7 @@ def calcular(con: duckdb.DuckDBPyConnection, leitura: list[dict]) -> dict:
             "por_status": municipios,
             "pct_casados_entre_especificados": round(100 * casados / especificados, 3) if especificados else None,
         },
+        "divulgacao": divulgacao or {},
     }
 
 
@@ -161,6 +162,20 @@ def escrever(cfg: Config, rel: dict) -> None:
     L.append(f"| A05 | {REGRAS['A05'][1]} | {_fmt(al['A05'])} registros |")
     L.append(f"| A06 | {REGRAS['A06'][1]} | " + (", ".join(
         f"{x['amparo']} em {x['ano']} ({x['descricoes']})" for x in al["A06"]) or "nenhum") + " |")
+    if rel.get("divulgacao"):
+        L += ["", "## Controle de divulgação (agregados do Looker Studio)", "",
+              "Nenhuma célula publicada tem de 1 a 4 registros. Células pequenas são primeiro agrupadas "
+              "(atributos trocados por 'Agrupado', em etapas) e só o que continua abaixo do limiar é suprimido.", "",
+              "| Tabela | Limiar | Células publicadas | Células suprimidas | Registros suprimidos | % publicado |",
+              "|---|---|---|---|---|---|"]
+        for nome, st in rel["divulgacao"].items():
+            L.append(f"| {nome} | {st['limiar']} | {_fmt(st['celulas_publicadas'])} | {_fmt(st['celulas_suprimidas'])} | "
+                     f"{_fmt(st['registros_suprimidos'])} | {st['pct_publicado']}% |")
+        L += ["", "| Tabela | Etapa | Colunas agrupadas | Células agrupadas | Registros agrupados |", "|---|---|---|---|---|"]
+        for nome, st in rel["divulgacao"].items():
+            for e in st["etapas"]:
+                L.append(f"| {nome} | {e['etapa']} | {', '.join(e['colunas'])} | {_fmt(e['celulas_agrupadas'])} | "
+                         f"{_fmt(e['registros_agrupados'])} |")
     L += ["", "## Municípios por situação", "", "| Situação | Registros |", "|---|---|"]
     L += [f"| {k} | {_fmt(v)} |" for k, v in sorted(rel["municipios"]["por_status"].items(), key=lambda x: -x[1])]
     L.append("")

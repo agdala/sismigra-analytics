@@ -32,18 +32,22 @@ def executar(cfg: Config) -> dict:
 
     print("[3/4] Ouro: esquema estrela, Parquet e CSV")
     contagens = gold.executar(cfg, con)
+    divulgacao = contagens.pop("_divulgacao")
     for t, n in contagens.items():
         print(f"      {t}: {n:,} linhas".replace(",", "."))
+    for t, st in divulgacao.items():
+        print(f"      {t}: {st['pct_publicado']}% dos registros publicados, "
+              f"{st['celulas_suprimidas']} célula(s) suprimida(s)")
 
     print("[4/4] Relatório de qualidade")
-    rel = quality.calcular(con, res["leitura"])
+    rel = quality.calcular(con, res["leitura"], divulgacao)
     quality.escrever(cfg, rel)
     t = rel["totais"]
     print(f"      lidas {t['lidas']:,} | aceitas {t['aceitas']:,} | rejeitadas {t['rejeitadas']:,}".replace(",", "."))
     print(f"      relatório: {cfg.relatorios / 'relatorio_qualidade.md'}")
     print(f"Concluído em {time.time() - inicio:.1f}s")
     con.close()
-    return {"manifesto": manifesto, "contagens": contagens, "qualidade": rel}
+    return {"manifesto": manifesto, "contagens": contagens, "divulgacao": divulgacao, "qualidade": rel}
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -1,6 +1,6 @@
 # Relatório de qualidade: SISMIGRA
 
-Gerado em 2026-11-01T22:48:33+00:00 (UTC) pelo pipeline `python -m sismigra.pipeline`.
+Gerado em 2026-11-01T23:10:26+00:00 (UTC) pelo pipeline `python -m sismigra.pipeline`.
 
 ## Resumo
 
@@ -53,6 +53,27 @@ Gerado em 2026-11-01T22:48:33+00:00 (UTC) pelo pipeline `python -m sismigra.pipe
 | A04 | Código de amparo sem categoria em ref/amparos.csv | nenhum |
 | A05 | Profissão 'MENOR' com faixa etária de 25 anos ou mais | 138 registros |
 | A06 | Mesmo código de amparo com mais de uma descrição no mesmo ano | 49 em 2023 (2), 239 em 2023 (2), 265 em 2022 (2), 271 em 2022 (3), 271 em 2023 (2), 278 em 2022 (2), 278 em 2023 (2), 279 em 2022 (3), 279 em 2023 (2), 315 em 2023 (2), 315 em 2025 (2), 316 em 2023 (2), 318 em 2022 (2), 318 em 2023 (2), 319 em 2022 (2), 319 em 2023 (2) |
+
+## Controle de divulgação (agregados do Looker Studio)
+
+Nenhuma célula publicada tem de 1 a 4 registros. Células pequenas são primeiro agrupadas (atributos trocados por 'Agrupado', em etapas) e só o que continua abaixo do limiar é suprimido.
+
+| Tabela | Limiar | Células publicadas | Células suprimidas | Registros suprimidos | % publicado |
+|---|---|---|---|---|---|
+| agregado_looker_nacionalidade | 5 | 10.567 | 10 | 31 | 99.998% |
+| agregado_looker_territorio | 5 | 9.839 | 87 | 253 | 99.981% |
+
+| Tabela | Etapa | Colunas agrupadas | Células agrupadas | Registros agrupados |
+|---|---|---|---|---|
+| agregado_looker_nacionalidade | 1 | tipologia_ajustada | 12.272 | 20.923 |
+| agregado_looker_nacionalidade | 2 | subgrupo_protecao | 12.080 | 20.786 |
+| agregado_looker_nacionalidade | 3 | sexo, faixa_etaria, ordem_faixa_etaria, status_ativo | 11.856 | 20.538 |
+| agregado_looker_nacionalidade | 4 | categoria_ampla | 1.985 | 4.371 |
+| agregado_looker_nacionalidade | 5 | pais_nacionalidade, iso3_nacionalidade | 582 | 1.438 |
+| agregado_looker_territorio | 1 | tipologia_ajustada | 6.054 | 11.305 |
+| agregado_looker_territorio | 2 | subgrupo_protecao | 5.773 | 10.965 |
+| agregado_looker_territorio | 3 | sexo, faixa_etaria, ordem_faixa_etaria, status_ativo | 4.974 | 9.803 |
+| agregado_looker_territorio | 4 | categoria_ampla | 220 | 572 |
 
 ## Municípios por situação
 
