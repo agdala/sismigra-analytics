@@ -11,6 +11,27 @@
 - A alta proporção de linhas idênticas (cerca de 60% entre 2021 e 2025) é evidência direta de que
   os registros não permitem distinguir pessoas.
 
+## Regra de publicação
+
+**Qualquer painel ou arquivo publicado deve usar apenas os agregados protegidos:**
+`agregado_looker_nacionalidade.csv` e `agregado_looker_territorio.csv`, gerados por
+[`src/sismigra/divulgacao.py`](../src/sismigra/divulgacao.py) com limiar k = 5.
+
+| Uso | Fonte permitida |
+|---|---|
+| Painel Power BI publicado (`.pbix`, Power BI Service, "Publicar na Web") | Só os agregados protegidos |
+| Painel Looker Studio | Só os agregados protegidos |
+| CSV, planilha ou imagem compartilhada | Só os agregados protegidos (ou gráficos feitos a partir deles) |
+| Validação, exploração e testes locais | Esquema estrela da camada ouro e camada prata |
+
+- O esquema estrela completo (`data/gold/parquet/` e `data/gold/csv/`) e a camada prata contêm
+  registros individuais e células com menos de 5 registros. **Não podem ser publicados**, nem
+  embutidos num `.pbix` compartilhado.
+- Um número calculado localmente sobre o esquema estrela só pode ser publicado se passar pelo
+  mesmo controle de divulgação (nenhuma célula de 1 a 4 registros).
+- No Power BI, as duas tabelas protegidas entram como tabelas independentes, sem relacionamento,
+  e as células suprimidas (contagem vazia) são ignoradas na soma.
+
 ## Riscos residuais e medidas adotadas
 
 | Risco | Medida |

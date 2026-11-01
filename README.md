@@ -13,6 +13,12 @@ Power BI e Looker Studio.
 > **Os painéis filtram por `ano_completo = true`** em todas as comparações de volume (2021 a 2025).
 > 2026 aparece apenas em análises de composição (percentuais), sempre identificado como parcial.
 
+> [!WARNING]
+> **Regra de publicação:** qualquer painel ou arquivo publicado (Power BI `.pbix`, Looker Studio,
+> CSV, imagem) deve usar **apenas os agregados protegidos** (`agregado_looker_nacionalidade.csv` e
+> `agregado_looker_territorio.csv`). O esquema estrela completo da camada ouro é só para uso interno
+> e não pode ser publicado. Ver a [seção 6](#6-controle-de-divulgação).
+
 ---
 
 ## 1. Problema
@@ -70,10 +76,10 @@ flowchart LR
         G --> H[Regras R/C/A]
     end
     subgraph Ouro
-        I[Esquema estrela<br/>Parquet + CSV]
+        I[Esquema estrela<br/>Parquet + CSV<br/>uso interno]
         J[Agregados com controle<br/>de divulgação k=5]
     end
-    subgraph Consumo
+    subgraph Publicação
         K[Power BI]
         L[Looker Studio]
         M[Relatório de qualidade]
@@ -82,8 +88,9 @@ flowchart LR
     B -->|scripts/construir_refs.py| R[(ref/<br/>tabelas versionadas)]
     D --> E
     R --> G
-    H --> I --> K
-    I --> J --> L
+    H --> I --> J
+    J --> K
+    J --> L
     H --> M
 ```
 
@@ -184,7 +191,7 @@ make run
 | `data/bronze/manifest.json` | Procedência e hash de cada arquivo |
 | `data/silver/registros.parquet` | Registros padronizados |
 | `data/silver/rejeitados.parquet` | Registros rejeitados com o motivo |
-| `data/gold/parquet/*.parquet` | Esquema estrela (para o Power BI) |
+| `data/gold/parquet/*.parquet` | Esquema estrela completo (**uso interno**, não publicar) |
 | `data/gold/csv/*.csv` | O mesmo em CSV (`;`, UTF-8 com BOM, abre no Excel) |
 | `data/gold/agregado_looker_nacionalidade.csv` | Ano × país × perfil × amparo, com controle de divulgação (cerca de 10 mil linhas, 1,4 MB) |
 | `data/gold/agregado_looker_territorio.csv` | Ano × UF × perfil × amparo, com controle de divulgação (cerca de 10 mil linhas, 1,3 MB) |
@@ -217,7 +224,7 @@ Actions sem os microdados.
 - **Correção com marcação (C01 a C09):** ano de entrada inválido, UF ausente, município por exceção
   manual, sexo, faixa etária e idade inválida, estado civil e classificação.
 - **Controle de divulgação (k = 5):** nos agregados do Looker Studio, nenhuma célula publicada tem
-  de 1 a 4 registros. Detalhes na seção 6.
+  de 1 a 4 registros. Detalhes na [seção 6](#6-controle-de-divulgação).
 - **Alerta (A01 a A06):** duplicatas exatas, município sem correspondência no IBGE, país ou amparo
   sem referência, "MENOR" com 25 anos ou mais, amparo com mais de uma norma no mesmo ano.
 
@@ -227,7 +234,42 @@ Actions sem os microdados.
 - um arquivo que não está em `ref/fontes.csv` não é processado;
 - um amparo sem categoria, ou um país sem código, aparece como alerta, e o teste de referência falha.
 
-## 6. Decisões técnicas
+## 6. Controle de divulgação
+
+Os microdados não identificam pessoas, mas uma célula com poucos registros (por exemplo, uma
+nacionalidade rara numa UF pequena, num ano, por sexo e faixa etária) pode permitir a
+reidentificação. Por isso **nenhuma célula publicada tem de 1 a 4 registros** (limiar k = 5).
+
+**Por que não a supressão simples:** apagar as células pequenas do agregado original esconderia
+**7,3% dos registros** (cerca de 99 mil) e distorceria os totais: Portugal, Itália e Alemanha
+perderiam cerca de um terço dos registros, e o Espírito Santo, 41%.
+
+**Método adotado, em duas fases** ([`src/sismigra/divulgacao.py`](src/sismigra/divulgacao.py)):
+
+1. **Agrupamento progressivo:** nas células com menos de 5 registros, os atributos de menor
+   prioridade são trocados por "Agrupado", em etapas, e as células são somadas de novo. Ordem:
+   tipologia, subgrupo, perfil (sexo, faixa etária, status), categoria e, por último, o país
+   ("Outros países (continente)").
+2. **Supressão residual:** o que continuar abaixo de 5 fica com `qtd_registros` vazio e
+   `suprimido = true`.
+
+Além disso, país e UF ficam em **tabelas separadas**, para não gerar o cruzamento mais esparso.
+
+| Método | Registros publicados | Maior perda (países ou UFs com 5 mil registros ou mais) |
+|---|---|---|
+| Supressão simples (agregado único) | 92,7% | 33,5% nos países (Portugal) e 41,4% nas UFs (ES) |
+| **Adotado: agregado por nacionalidade** | **99,998%** | **0,21%** |
+| **Adotado: agregado por território** | **99,981%** | **0,20%** |
+
+**Custo:** cerca de 1,5% (nacionalidade) e 0,8% (território) dos registros ficam em linhas com algum
+atributo "Agrupado". Cada linha traz `nivel_agrupamento` (0 = sem alteração), e o relatório de
+qualidade mostra o resultado de cada etapa. Testes garantem que nenhuma célula publicada tem de 1
+a 4 registros e que publicado + suprimido = total do fato.
+
+**Regra de publicação:** painéis e arquivos publicados usam só os dois agregados protegidos. O
+esquema estrela completo é para uso interno (validação e exploração local) e não pode ser publicado.
+
+## 7. Decisões técnicas
 
 | Decisão | Motivo |
 |---|---|
@@ -240,10 +282,10 @@ Actions sem os microdados.
 | **Hierarquia de amparo revisada por especialista** | A tipologia da fonte esconde os solicitantes de refúgio e classifica a mobilidade CPLP (326/327) como acolhida humanitária. A revisão é rastreável, linha a linha. |
 | **Tabelas de referência versionadas** | O IBGE e as revisões de negócio ficam em `ref/`, reprodutíveis sem acesso à internet. `scripts/construir_refs.py` as regenera. |
 | **CSV com BOM e `;`** | Abre direto no Excel em português sem quebrar os acentos. |
-| **Controle de divulgação com agrupamento antes da supressão** | Apagar as células com menos de 5 registros esconderia 7,3% dos registros e distorceria os totais (até 17% para alguns países). O método agrupa primeiro os atributos de menor prioridade (tipologia, subgrupo, perfil, categoria e, por último, o país) e só suprime o que continuar pequeno. Resultado: 99,98% ou mais dos registros publicados, e menos de 0,3% de perda nos totais de países e UFs com 5 mil registros ou mais. |
+| **Controle de divulgação com agrupamento antes da supressão** | Apagar as células com menos de 5 registros esconderia 7,3% dos registros e distorceria os totais (perda de um terço em países como Portugal e de 41% no Espírito Santo). O método agrupa primeiro os atributos de menor prioridade (tipologia, subgrupo, perfil, categoria e, por último, o país) e só suprime o que continuar pequeno. Resultado: 99,98% ou mais dos registros publicados, e menos de 0,3% de perda nos totais de países e UFs com 5 mil registros ou mais. |
 | **Dois agregados em vez de um** | Cruzar país e UF na mesma tabela gera milhares de células pequenas. Separar nacionalidade e território reduz o risco de reidentificação e o volume suprimido. |
 
-## 7. Limitações dos dados
+## 8. Limitações dos dados
 
 - **2026 é parcial e não há mês:** não dá para fazer série mensal nem comparar janeiro a setembro
   de 2026 com o mesmo período de 2025. Compare volumes só entre 2021 e 2025 e use 2026 em análises
@@ -252,7 +294,8 @@ Actions sem os microdados.
 - **Agregados do Looker com linhas "Agrupado":** cerca de 1,5% dos registros (nacionalidade) e 0,8%
   (território) estão em linhas em que algum atributo foi trocado por "Agrupado". Os totais por ano,
   país e UF ficam corretos, mas um gráfico por sexo ou faixa etária mostra essa parcela como
-  "Agrupado". Para análises sem essa restrição, use o esquema estrela no Power BI (uso local).
+  "Agrupado". Análises sem essa restrição só podem ser feitas localmente sobre o esquema estrela,
+  e o resultado não pode ser publicado sem passar pelo mesmo controle de divulgação.
 - **Registros, não pessoas:** uma pessoa pode ter mais de um registro ao longo dos anos (ex.:
   solicitante que depois é reconhecido como refugiado). Os totais são de registros emitidos.
 - **Fundamento do refúgio:** o SISMIGRA não informa se o reconhecimento foi por perseguição ou por
@@ -268,15 +311,22 @@ Actions sem os microdados.
 - **Fonte secundária:** os arquivos vêm do OBMigra/UnB, não diretamente da Polícia Federal. Os
   hashes no manifesto documentam a versão usada.
 
-## 8. Painéis
+## 9. Painéis
 
-**Regra comum aos dois painéis:** comparações de volume usam o filtro `ano_completo = true`
-(2021 a 2025). 2026 aparece só em percentuais, com o rótulo "2026 (jan-set, parcial)".
+**Regras comuns aos dois painéis:**
+
+1. **Fonte:** só os agregados protegidos (`agregado_looker_nacionalidade.csv` e
+   `agregado_looker_territorio.csv`). Nunca o esquema estrela da camada ouro.
+2. **Período:** comparações de volume usam o filtro `ano_completo = true` (2021 a 2025). 2026 aparece
+   só em percentuais, com o rótulo "2026 (jan-set, parcial)".
+3. **Duas fontes separadas:** não junte as duas tabelas numa só, porque os totais seriam somados duas vezes.
 
 ### Power BI
 
-> Espaço reservado. Conecte o Power BI aos arquivos de `data/gold/parquet/` e crie o filtro de
-> página `dim_tempo[ano_completo] = true` nos visuais de volume.
+> Espaço reservado. Importe os dois agregados protegidos como **duas tabelas independentes**, sem
+> relacionamento entre elas (Obter dados > Texto/CSV, separador vírgula). Use a medida
+> `Registros = SUM(tabela[qtd_registros])` e o filtro `ano_completo = true` nos visuais de volume.
+> O `.pbix` publicado não deve conter nenhuma tabela da camada ouro completa.
 
 ![Painel Power BI](docs/img/powerbi_visao_geral.png)
 
@@ -293,7 +343,7 @@ Actions sem os microdados.
 
 **Link:** _a publicar_
 
-## 9. Estrutura do repositório
+## 10. Estrutura do repositório
 
 ```
 sismigra-analytics/
@@ -308,7 +358,7 @@ sismigra-analytics/
 └── .github/workflows/  # CI com os testes
 ```
 
-## 10. Fontes
+## 11. Fontes
 
 - Microdados do SISMIGRA: Polícia Federal, distribuídos pelo
   OBMigra/UnB ([Portal de Imigração](https://portaldeimigracao.mj.gov.br)).
