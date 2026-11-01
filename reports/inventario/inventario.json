@@ -1,0 +1,3759 @@
+{
+  "gerado_em": "2026-11-01T21:30:31+00:00",
+  "duckdb": "2.0.0",
+  "arquivos": [
+    {
+      "arquivo": "sismigra_janeiro_dezembro_2025.csv",
+      "origem": "sismigra_janeiro_dezembro_2025.zip::sismigra_janeiro_dezembro_2025.csv",
+      "tamanho_bytes": 61232853,
+      "sha256": "0f137e5f9e8d7a083ec690d7eba8e0dbe491a9f1cdc7df5f74aaa4ce5258e129",
+      "codificacao": "utf-8",
+      "delimitador": ";",
+      "cabecalho_bruto": "DATAREGISTRO;AMPARO;AMPARO_DESCRICAO;CLASSIFICACAO_REGISTRO;DATAENTRADA;UNIDADE_FED_RESIDENCIA;MUNICIPIO_RESIDENCIA;PAIS_NASCIMENTO;PAIS_NACIONALIDADE;CONTINENTE;FAIXA_ETARIA;SEXO;ESTADO_CIVIL;PROFISSAO;STATUS;CLASSIFICACAO_REVISADA;TIPOLOGIA_AMPAROS",
+      "linhas": 265523,
+      "linhas_distintas": 106752,
+      "linhas_duplicadas_exatas": 158771,
+      "n_colunas": 17,
+      "colunas": [
+        {
+          "coluna": "DATAREGISTRO",
+          "tipo_inferido": "inteiro",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 1,
+          "tamanho_min": 4,
+          "tamanho_max": 4,
+          "categorias": [
+            {
+              "valor": "2025",
+              "n": 265523
+            }
+          ],
+          "min": 2025.0,
+          "max": 2025.0,
+          "soma": 537684075.0
+        },
+        {
+          "coluna": "AMPARO",
+          "tipo_inferido": "inteiro",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 77,
+          "tamanho_min": 3,
+          "tamanho_max": 3,
+          "categorias": [
+            {
+              "valor": "273",
+              "n": 82728
+            },
+            {
+              "valor": "290",
+              "n": 65326
+            },
+            {
+              "valor": "209",
+              "n": 45195
+            },
+            {
+              "valor": "286",
+              "n": 19187
+            },
+            {
+              "valor": "280",
+              "n": 9776
+            },
+            {
+              "valor": "200",
+              "n": 8514
+            },
+            {
+              "valor": "132",
+              "n": 4136
+            },
+            {
+              "valor": "166",
+              "n": 3581
+            },
+            {
+              "valor": "279",
+              "n": 3301
+            },
+            {
+              "valor": "326",
+              "n": 2875
+            },
+            {
+              "valor": "282",
+              "n": 2323
+            },
+            {
+              "valor": "274",
+              "n": 2117
+            },
+            {
+              "valor": "283",
+              "n": 1899
+            },
+            {
+              "valor": "126",
+              "n": 1800
+            },
+            {
+              "valor": "285",
+              "n": 1553
+            },
+            {
+              "valor": "278",
+              "n": 1438
+            },
+            {
+              "valor": "284",
+              "n": 1320
+            },
+            {
+              "valor": "281",
+              "n": 1286
+            },
+            {
+              "valor": "036",
+              "n": 1013
+            },
+            {
+              "valor": "186",
+              "n": 969
+            },
+            {
+              "valor": "287",
+              "n": 966
+            },
+            {
+              "valor": "168",
+              "n": 469
+            },
+            {
+              "valor": "210",
+              "n": 394
+            },
+            {
+              "valor": "321",
+              "n": 367
+            },
+            {
+              "valor": "322",
+              "n": 348
+            },
+            {
+              "valor": "288",
+              "n": 269
+            },
+            {
+              "valor": "315",
+              "n": 264
+            },
+            {
+              "valor": "218",
+              "n": 220
+            },
+            {
+              "valor": "156",
+              "n": 212
+            },
+            {
+              "valor": "259",
+              "n": 177
+            },
+            {
+              "valor": "319",
+              "n": 166
+            },
+            {
+              "valor": "296",
+              "n": 162
+            },
+            {
+              "valor": "233",
+              "n": 123
+            },
+            {
+              "valor": "311",
+              "n": 121
+            },
+            {
+              "valor": "201",
+              "n": 111
+            },
+            {
+              "valor": "310",
+              "n": 107
+            },
+            {
+              "valor": "265",
+              "n": 95
+            },
+            {
+              "valor": "228",
+              "n": 76
+            },
+            {
+              "valor": "256",
+              "n": 68
+            },
+            {
+              "valor": "306",
+              "n": 61
+            },
+            {
+              "valor": "095",
+              "n": 60
+            },
+            {
+              "valor": "299",
+              "n": 55
+            },
+            {
+              "valor": "255",
+              "n": 39
+            },
+            {
+              "valor": "190",
+              "n": 30
+            },
+            {
+              "valor": "316",
+              "n": 29
+            },
+            {
+              "valor": "084",
+              "n": 25
+            },
+            {
+              "valor": "211",
+              "n": 24
+            },
+            {
+              "valor": "239",
+              "n": 18
+            },
+            {
+              "valor": "291",
+              "n": 17
+            },
+            {
+              "valor": "212",
+              "n": 13
+            },
+            {
+              "valor": "014",
+              "n": 12
+            },
+            {
+              "valor": "289",
+              "n": 11
+            },
+            {
+              "valor": "267",
+              "n": 10
+            },
+            {
+              "valor": "085",
+              "n": 9
+            },
+            {
+              "valor": "325",
+              "n": 8
+            },
+            {
+              "valor": "297",
+              "n": 6
+            },
+            {
+              "valor": "293",
+              "n": 4
+            },
+            {
+              "valor": "298",
+              "n": 4
+            },
+            {
+              "valor": "327",
+              "n": 4
+            },
+            {
+              "valor": "204",
+              "n": 3
+            },
+            {
+              "valor": "271",
+              "n": 3
+            },
+            {
+              "valor": "301",
+              "n": 3
+            },
+            {
+              "valor": "308",
+              "n": 3
+            },
+            {
+              "valor": "094",
+              "n": 2
+            },
+            {
+              "valor": "292",
+              "n": 2
+            },
+            {
+              "valor": "302",
+              "n": 2
+            },
+            {
+              "valor": "303",
+              "n": 2
+            },
+            {
+              "valor": "312",
+              "n": 2
+            },
+            {
+              "valor": "318",
+              "n": 2
+            },
+            {
+              "valor": "039",
+              "n": 1
+            },
+            {
+              "valor": "049",
+              "n": 1
+            },
+            {
+              "valor": "051",
+              "n": 1
+            },
+            {
+              "valor": "249",
+              "n": 1
+            },
+            {
+              "valor": "268",
+              "n": 1
+            },
+            {
+              "valor": "295",
+              "n": 1
+            },
+            {
+              "valor": "323",
+              "n": 1
+            },
+            {
+              "valor": "328",
+              "n": 1
+            }
+          ],
+          "min": 14.0,
+          "max": 328.0,
+          "soma": 69042359.0
+        },
+        {
+          "coluna": "AMPARO_DESCRICAO",
+          "tipo_inferido": "texto",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 78,
+          "tamanho_min": 19,
+          "tamanho_max": 73,
+          "categorias": [
+            {
+              "valor": "273 - PORTARIA INTERMINISTERIAL N 19/2021",
+              "n": 82728
+            },
+            {
+              "valor": "290 - ART. 2. DECRETO 9.277/2018",
+              "n": 65326
+            },
+            {
+              "valor": "209 - ACORDO RESIDENCIA MERCOSUL E ASSOCIADOS",
+              "n": 45195
+            },
+            {
+              "valor": "286 - ART. 37, LEI 13.445/2017.",
+              "n": 19187
+            },
+            {
+              "valor": "280 - ART.14,I,D 13.445/17",
+              "n": 9776
+            },
+            {
+              "valor": "200 - ACORDO BRASIL/ARGENTINA DEC. 6736/09",
+              "n": 8514
+            },
+            {
+              "valor": "132 - RNS 03 E 04/2017 - CNIG",
+              "n": 4136
+            },
+            {
+              "valor": "166 - RN 05, 06 E 22/2017- CNIG - MARITMO",
+              "n": 3581
+            },
+            {
+              "valor": "279 - PORTARIA MJSP/MRE N. 51/2024",
+              "n": 3301
+            },
+            {
+              "valor": "326 - PORTARIA INTERMINISTERIAL MJSP/MRE N. 40, DE 2023",
+              "n": 2875
+            },
+            {
+              "valor": "282 - ART. 14, I, LETRA E DA LEI 13.445/2017.",
+              "n": 2323
+            },
+            {
+              "valor": "274 - ACORDO DE RESIDENCIA BRASIL/URUGUAI.",
+              "n": 2117
+            },
+            {
+              "valor": "283 - ART. 30, I, LETRA E DA LEI 13.445/2017.",
+              "n": 1899
+            },
+            {
+              "valor": "126 - RN 14/17 - CNIG - TEMPORÁRIO",
+              "n": 1800
+            },
+            {
+              "valor": "285 - ART. 30, I, LEI 13.445/2017.",
+              "n": 1553
+            },
+            {
+              "valor": "278 - PORTARIA INTERMINISTERIAL N. 51/2024",
+              "n": 1438
+            },
+            {
+              "valor": "284 - ART. 14, I, LEI 13.445/2017.",
+              "n": 1320
+            },
+            {
+              "valor": "281 - ART. 30, I, LETRA D DA LEI 13.445/2017.",
+              "n": 1286
+            },
+            {
+              "valor": "36 - ART.23 L.13445/17 C/C ART.90 DEC.9199/17",
+              "n": 1013
+            },
+            {
+              "valor": "186 - FRONTEIRICO - URUGUAI - DECRETO 5105/04",
+              "n": 969
+            },
+            {
+              "valor": "287 - ART. 30, II, LETRA E DA LEI 13.445/2017.",
+              "n": 966
+            },
+            {
+              "valor": "168 - RN 11 OU 12/2017 - CNIG",
+              "n": 469
+            },
+            {
+              "valor": "210 - DEPEND.ACORDO RESID. MERCOSUL/ASSOCIADOS",
+              "n": 394
+            },
+            {
+              "valor": "321 - RESOLUÇÃO CNIG MJSP Nº 45/2021",
+              "n": 367
+            },
+            {
+              "valor": "322 - RESOLUÇÃO CNIG MJSP Nº 45/2021",
+              "n": 348
+            },
+            {
+              "valor": "288 - RNS 20/17, 24/18 E 27/18 - CNIG",
+              "n": 269
+            },
+            {
+              "valor": "218 - ART 14, F DA LEI 13445/17",
+              "n": 220
+            },
+            {
+              "valor": "156 - RN 15/2017 - CNIG",
+              "n": 212
+            },
+            {
+              "valor": "315 - PORTARIA INTERMINISTERIAL MJSP/MRE Nº 42, DE 22 DE SETEMBRO DE 2023",
+              "n": 181
+            },
+            {
+              "valor": "259 - RN 13/2017 - CNIG",
+              "n": 177
+            },
+            {
+              "valor": "319 - PORTARIA INTERMINISTERIAL MJSP/MRE Nº 36, DE 13 DE MARÇO DE 2023",
+              "n": 166
+            },
+            {
+              "valor": "296 - RN 36/2018 - CNIG",
+              "n": 162
+            },
+            {
+              "valor": "233 - FRONTEIRICO - ARGENTINO D 8636/2016",
+              "n": 123
+            },
+            {
+              "valor": "311 - RN 40/19 - CNIG",
+              "n": 121
+            },
+            {
+              "valor": "201 - ACORDO BRASIL/ARGENTINA DEC. 6736/09",
+              "n": 111
+            },
+            {
+              "valor": "310 - RN 40/19 - CNIG",
+              "n": 107
+            },
+            {
+              "valor": "265 - RESOLUÇÃO CNIG MJSP Nº 47/2022",
+              "n": 95
+            },
+            {
+              "valor": "315 - PORTARIA INTERMINISTERIAL MJSP/MRE N 49, DE 24 DE DEZEMBRO DE 2024",
+              "n": 83
+            },
+            {
+              "valor": "228 - ART. 158 DECRETO 9199/2017",
+              "n": 76
+            },
+            {
+              "valor": "256 - FRONTEIRICO - PORTARIA MJ 1512/2014",
+              "n": 68
+            },
+            {
+              "valor": "306 - PORTARIA INTERMINISTERIAL Nº 9/2019",
+              "n": 61
+            },
+            {
+              "valor": "95 - PORTARIA INTERMINISTERIAL 08/2018.",
+              "n": 60
+            },
+            {
+              "valor": "299 - PORTARIA INTERMINISTERIAL Nº 19/2021",
+              "n": 55
+            },
+            {
+              "valor": "255 - ART. 159 DECRETO 9.199/2017",
+              "n": 39
+            },
+            {
+              "valor": "190 - FRONTEIRICO - BOLIVIA - DECRETO 6737/09",
+              "n": 30
+            },
+            {
+              "valor": "316 - PORTARIA INTERMINISTERIAL MJSP/MRE Nº 42, DE 22 DE SETEMBRO DE 2023",
+              "n": 29
+            },
+            {
+              "valor": "84 - RN 08/17 - CNIG",
+              "n": 25
+            },
+            {
+              "valor": "211 - ART.5 ACORDO RESID. MERCOSUL/ASSOCIADOS.",
+              "n": 24
+            },
+            {
+              "valor": "239 - RN 02/17 C/C RN 30/18 - CNIG - LABORAL PRAZO INDETERMINADO",
+              "n": 18
+            },
+            {
+              "valor": "291 - RN 26/18 CNIG",
+              "n": 17
+            },
+            {
+              "valor": "212 - DEPEND.ART 5 ACORDO MERCOSUL/ASSOCIADOS",
+              "n": 13
+            },
+            {
+              "valor": "14 - PORTARIA NR. 526/95 DO MIN. DA JUSTICA",
+              "n": 12
+            },
+            {
+              "valor": "289 - RNS 20/17 E 24/18- CNIG.",
+              "n": 11
+            },
+            {
+              "valor": "267 - RN 16/2017 - CNIG",
+              "n": 10
+            },
+            {
+              "valor": "85 - RN 07/17 - CNIG",
+              "n": 9
+            },
+            {
+              "valor": "325 - PORTARIA INTERMINISTERIAL MJSP/MRE N. 40, DE 2023",
+              "n": 8
+            },
+            {
+              "valor": "297 - RESOLUÇÃO CONJUNTA 01/2018 - MTE/MJ/CGI",
+              "n": 6
+            },
+            {
+              "valor": "293 - ART. 142, II, H C/C ART. 160, D. 9199/2017.",
+              "n": 4
+            },
+            {
+              "valor": "298 - PORTARIA INTERMINISTERIAL Nº 18/2018",
+              "n": 4
+            },
+            {
+              "valor": "327 - PORTARIA INTERMINISTERIAL MJSP/MRE N. 40, DE 2023",
+              "n": 4
+            },
+            {
+              "valor": "204 - RN 23/17 - CNIG - TEMPORÁRIO",
+              "n": 3
+            },
+            {
+              "valor": "271 - PORTARIA MJSP/MRE N. 51/2024",
+              "n": 3
+            },
+            {
+              "valor": "301 - PORTARIA INTERMINISTERIAL Nº 197/2019",
+              "n": 3
+            },
+            {
+              "valor": "308 - RN 14/17 - CNIG - PRAZO INDETERMINADO",
+              "n": 3
+            },
+            {
+              "valor": "292 - RN 23/17 CNIG - PRAZO INDETERMINADO",
+              "n": 2
+            },
+            {
+              "valor": "302 - PORTARIA INTERMINSTERIAL Nº 04/2019",
+              "n": 2
+            },
+            {
+              "valor": "303 - PORTARIA INTERMINISTERIAL Nº 05/2019",
+              "n": 2
+            },
+            {
+              "valor": "312 - PORTARIA INTERMINISTERIAL Nº 10/2019",
+              "n": 2
+            },
+            {
+              "valor": "318 - PORTARIA INTERMINISTERIAL MJSP/MRE Nº 36, DE 13 DE MARÇO DE 2023",
+              "n": 2
+            },
+            {
+              "valor": "94 - RESIDENCIA COM BASE EM DECISAO JUDICIAL",
+              "n": 2
+            },
+            {
+              "valor": "249 - DEPENDENTE TITULAR - VITEM LEI 12.871/13",
+              "n": 1
+            },
+            {
+              "valor": "268 - RN 25/2018 - CNIG",
+              "n": 1
+            },
+            {
+              "valor": "295 - RN 35/2018 - CNIG",
+              "n": 1
+            },
+            {
+              "valor": "323 - RESOLUÇÃO CNIG MJSP Nº 46, DE 9 DE DEZEMBRO DE 2021",
+              "n": 1
+            },
+            {
+              "valor": "328 - RESOLUCAO CNIG MJSP N. 50, DE 27 DE JUNHO DE 2024",
+              "n": 1
+            },
+            {
+              "valor": "39 - ART. 142 § 3 DEC 9199/17 - RN 30/18",
+              "n": 1
+            },
+            {
+              "valor": "49 - RN 24/18 C/C RN 30/18 - CNIG - PRAZO INDETERMINADO",
+              "n": 1
+            },
+            {
+              "valor": "51 - ART 1º RN 45/00 DO CNI/MTE",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "coluna": "CLASSIFICACAO_REGISTRO",
+          "tipo_inferido": "texto",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 4,
+          "tamanho_min": 9,
+          "tamanho_max": 11,
+          "categorias": [
+            {
+              "valor": "Temporário",
+              "n": 166190
+            },
+            {
+              "valor": "Provisório",
+              "n": 65365
+            },
+            {
+              "valor": "Residente",
+              "n": 31765
+            },
+            {
+              "valor": "Fronteiriço",
+              "n": 2203
+            }
+          ]
+        },
+        {
+          "coluna": "DATAENTRADA",
+          "tipo_inferido": "texto",
+          "nulos": 11312,
+          "vazios": 0,
+          "pct_ausente": 4.26,
+          "distintos": 116,
+          "tamanho_min": 1,
+          "tamanho_max": 4,
+          "categorias": [
+            {
+              "valor": "2025",
+              "n": 179683
+            },
+            {
+              "valor": "2024",
+              "n": 34964
+            },
+            {
+              "valor": "--",
+              "n": 22948
+            },
+            {
+              "valor": null,
+              "n": 11312
+            },
+            {
+              "valor": "-",
+              "n": 6176
+            },
+            {
+              "valor": "2023",
+              "n": 3742
+            },
+            {
+              "valor": "2022",
+              "n": 1333
+            },
+            {
+              "valor": "2019",
+              "n": 966
+            },
+            {
+              "valor": "2021",
+              "n": 709
+            },
+            {
+              "valor": "2018",
+              "n": 659
+            },
+            {
+              "valor": "2020",
+              "n": 605
+            },
+            {
+              "valor": "0025",
+              "n": 375
+            },
+            {
+              "valor": "2017",
+              "n": 255
+            },
+            {
+              "valor": "####",
+              "n": 172
+            },
+            {
+              "valor": "2015",
+              "n": 162
+            },
+            {
+              "valor": "2014",
+              "n": 157
+            },
+            {
+              "valor": "2016",
+              "n": 154
+            },
+            {
+              "valor": "0024",
+              "n": 115
+            },
+            {
+              "valor": "2012",
+              "n": 76
+            },
+            {
+              "valor": "2013",
+              "n": 76
+            },
+            {
+              "valor": "2005",
+              "n": 75
+            },
+            {
+              "valor": "2010",
+              "n": 74
+            },
+            {
+              "valor": "2011",
+              "n": 59
+            },
+            {
+              "valor": "2000",
+              "n": 54
+            },
+            {
+              "valor": "0205",
+              "n": 47
+            },
+            {
+              "valor": "2004",
+              "n": 45
+            },
+            {
+              "valor": "0202",
+              "n": 33
+            },
+            {
+              "valor": "2009",
+              "n": 32
+            },
+            {
+              "valor": "2002",
+              "n": 30
+            },
+            {
+              "valor": "2008",
+              "n": 21
+            },
+            {
+              "valor": "0225",
+              "n": 19
+            },
+            {
+              "valor": "1995",
+              "n": 19
+            },
+            {
+              "valor": "1111",
+              "n": 17
+            },
+            {
+              "valor": "2001",
+              "n": 17
+            },
+            {
+              "valor": "2006",
+              "n": 17
+            },
+            {
+              "valor": "1998",
+              "n": 16
+            },
+            {
+              "valor": "1993",
+              "n": 14
+            },
+            {
+              "valor": "2007",
+              "n": 14
+            },
+            {
+              "valor": "1991",
+              "n": 13
+            },
+            {
+              "valor": "2003",
+              "n": 13
+            },
+            {
+              "valor": "0023",
+              "n": 12
+            },
+            {
+              "valor": "0022",
+              "n": 11
+            },
+            {
+              "valor": "1994",
+              "n": 11
+            },
+            {
+              "valor": "1990",
+              "n": 10
+            },
+            {
+              "valor": "1996",
+              "n": 10
+            },
+            {
+              "valor": "1988",
+              "n": 9
+            },
+            {
+              "valor": "1999",
+              "n": 9
+            },
+            {
+              "valor": "1986",
+              "n": 8
+            },
+            {
+              "valor": "1997",
+              "n": 8
+            },
+            {
+              "valor": "1980",
+              "n": 7
+            },
+            {
+              "valor": "1985",
+              "n": 7
+            },
+            {
+              "valor": "1975",
+              "n": 6
+            },
+            {
+              "valor": "1984",
+              "n": 6
+            },
+            {
+              "valor": "0019",
+              "n": 5
+            },
+            {
+              "valor": "1982",
+              "n": 5
+            },
+            {
+              "valor": "1987",
+              "n": 5
+            },
+            {
+              "valor": "1989",
+              "n": 5
+            },
+            {
+              "valor": "0204",
+              "n": 4
+            },
+            {
+              "valor": "0224",
+              "n": 4
+            },
+            {
+              "valor": "1025",
+              "n": 4
+            },
+            {
+              "valor": "1965",
+              "n": 4
+            },
+            {
+              "valor": "1970",
+              "n": 4
+            },
+            {
+              "valor": "1971",
+              "n": 4
+            },
+            {
+              "valor": "1974",
+              "n": 4
+            },
+            {
+              "valor": "1976",
+              "n": 4
+            },
+            {
+              "valor": "1977",
+              "n": 4
+            },
+            {
+              "valor": "1979",
+              "n": 4
+            },
+            {
+              "valor": "1981",
+              "n": 4
+            },
+            {
+              "valor": "1983",
+              "n": 4
+            },
+            {
+              "valor": "0020",
+              "n": 3
+            },
+            {
+              "valor": "1954",
+              "n": 3
+            },
+            {
+              "valor": "1958",
+              "n": 3
+            },
+            {
+              "valor": "1959",
+              "n": 3
+            },
+            {
+              "valor": "1964",
+              "n": 3
+            },
+            {
+              "valor": "1973",
+              "n": 3
+            },
+            {
+              "valor": "1978",
+              "n": 3
+            },
+            {
+              "valor": "1992",
+              "n": 3
+            },
+            {
+              "valor": "2026",
+              "n": 3
+            },
+            {
+              "valor": "0203",
+              "n": 2
+            },
+            {
+              "valor": "1024",
+              "n": 2
+            },
+            {
+              "valor": "1202",
+              "n": 2
+            },
+            {
+              "valor": "1953",
+              "n": 2
+            },
+            {
+              "valor": "1969",
+              "n": 2
+            },
+            {
+              "valor": "1972",
+              "n": 2
+            },
+            {
+              "valor": "2027",
+              "n": 2
+            },
+            {
+              "valor": "0007",
+              "n": 1
+            },
+            {
+              "valor": "0010",
+              "n": 1
+            },
+            {
+              "valor": "0012",
+              "n": 1
+            },
+            {
+              "valor": "0013",
+              "n": 1
+            },
+            {
+              "valor": "0018",
+              "n": 1
+            },
+            {
+              "valor": "0091",
+              "n": 1
+            },
+            {
+              "valor": "0200",
+              "n": 1
+            },
+            {
+              "valor": "0201",
+              "n": 1
+            },
+            {
+              "valor": "0215",
+              "n": 1
+            },
+            {
+              "valor": "0218",
+              "n": 1
+            },
+            {
+              "valor": "0520",
+              "n": 1
+            },
+            {
+              "valor": "0812",
+              "n": 1
+            },
+            {
+              "valor": "1015",
+              "n": 1
+            },
+            {
+              "valor": "1022",
+              "n": 1
+            },
+            {
+              "valor": "1091",
+              "n": 1
+            },
+            {
+              "valor": "1120",
+              "n": 1
+            },
+            {
+              "valor": "1924",
+              "n": 1
+            },
+            {
+              "valor": "1934",
+              "n": 1
+            },
+            {
+              "valor": "1936",
+              "n": 1
+            },
+            {
+              "valor": "1939",
+              "n": 1
+            },
+            {
+              "valor": "1946",
+              "n": 1
+            },
+            {
+              "valor": "1947",
+              "n": 1
+            },
+            {
+              "valor": "1950",
+              "n": 1
+            },
+            {
+              "valor": "1951",
+              "n": 1
+            },
+            {
+              "valor": "1952",
+              "n": 1
+            },
+            {
+              "valor": "1957",
+              "n": 1
+            },
+            {
+              "valor": "1961",
+              "n": 1
+            },
+            {
+              "valor": "1962",
+              "n": 1
+            },
+            {
+              "valor": "1963",
+              "n": 1
+            },
+            {
+              "valor": "1967",
+              "n": 1
+            },
+            {
+              "valor": "1968",
+              "n": 1
+            },
+            {
+              "valor": "2028",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "coluna": "UNIDADE_FED_RESIDENCIA",
+          "tipo_inferido": "texto",
+          "nulos": 1962,
+          "vazios": 0,
+          "pct_ausente": 0.74,
+          "distintos": 28,
+          "tamanho_min": 1,
+          "tamanho_max": 2,
+          "categorias": [
+            {
+              "valor": "SP",
+              "n": 61494
+            },
+            {
+              "valor": "RR",
+              "n": 39104
+            },
+            {
+              "valor": "PR",
+              "n": 37399
+            },
+            {
+              "valor": "SC",
+              "n": 35296
+            },
+            {
+              "valor": "RS",
+              "n": 20006
+            },
+            {
+              "valor": "RJ",
+              "n": 12757
+            },
+            {
+              "valor": "AM",
+              "n": 9876
+            },
+            {
+              "valor": "MG",
+              "n": 8367
+            },
+            {
+              "valor": "MT",
+              "n": 6375
+            },
+            {
+              "valor": "MS",
+              "n": 5964
+            },
+            {
+              "valor": "GO",
+              "n": 4642
+            },
+            {
+              "valor": "BA",
+              "n": 3527
+            },
+            {
+              "valor": "DF",
+              "n": 2772
+            },
+            {
+              "valor": "RO",
+              "n": 2430
+            },
+            {
+              "valor": "CE",
+              "n": 2100
+            },
+            {
+              "valor": "PE",
+              "n": 1993
+            },
+            {
+              "valor": null,
+              "n": 1962
+            },
+            {
+              "valor": "PA",
+              "n": 1578
+            },
+            {
+              "valor": "ES",
+              "n": 1564
+            },
+            {
+              "valor": "AC",
+              "n": 1347
+            },
+            {
+              "valor": "RN",
+              "n": 1291
+            },
+            {
+              "valor": "PB",
+              "n": 958
+            },
+            {
+              "valor": "MA",
+              "n": 718
+            },
+            {
+              "valor": "AP",
+              "n": 458
+            },
+            {
+              "valor": "AL",
+              "n": 410
+            },
+            {
+              "valor": "SE",
+              "n": 388
+            },
+            {
+              "valor": "PI",
+              "n": 307
+            },
+            {
+              "valor": "TO",
+              "n": 298
+            },
+            {
+              "valor": "-",
+              "n": 142
+            }
+          ]
+        },
+        {
+          "coluna": "MUNICIPIO_RESIDENCIA",
+          "tipo_inferido": "texto",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 796,
+          "tamanho_min": 3,
+          "tamanho_max": 32,
+          "mais_frequentes": [
+            {
+              "valor": "SÃO PAULO",
+              "n": 38523
+            },
+            {
+              "valor": "BOA VISTA",
+              "n": 35014
+            },
+            {
+              "valor": "NÃO ESPECIFICADO",
+              "n": 28728
+            },
+            {
+              "valor": "CURITIBA",
+              "n": 12861
+            },
+            {
+              "valor": "MANAUS",
+              "n": 8759
+            }
+          ]
+        },
+        {
+          "coluna": "PAIS_NASCIMENTO",
+          "tipo_inferido": "texto",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 219,
+          "tamanho_min": 1,
+          "tamanho_max": 30,
+          "categorias": [
+            {
+              "valor": "VENEZUELA",
+              "n": 101652
+            },
+            {
+              "valor": "CUBA",
+              "n": 37451
+            },
+            {
+              "valor": "BOLÍVIA",
+              "n": 21365
+            },
+            {
+              "valor": "ARGENTINA",
+              "n": 13473
+            },
+            {
+              "valor": "HAITI",
+              "n": 12101
+            },
+            {
+              "valor": "COLÔMBIA",
+              "n": 11549
+            },
+            {
+              "valor": "PARAGUAI",
+              "n": 7239
+            },
+            {
+              "valor": "CHINA",
+              "n": 6379
+            },
+            {
+              "valor": "PERU",
+              "n": 4461
+            },
+            {
+              "valor": "ANGOLA",
+              "n": 3829
+            },
+            {
+              "valor": "ESTADOS UNIDOS",
+              "n": 3255
+            },
+            {
+              "valor": "URUGUAI",
+              "n": 3219
+            },
+            {
+              "valor": "FRANÇA",
+              "n": 2831
+            },
+            {
+              "valor": "EQUADOR",
+              "n": 1717
+            },
+            {
+              "valor": "BANGLADESH",
+              "n": 1645
+            },
+            {
+              "valor": "CHILE",
+              "n": 1610
+            },
+            {
+              "valor": "PORTUGAL",
+              "n": 1609
+            },
+            {
+              "valor": "ITÁLIA",
+              "n": 1455
+            },
+            {
+              "valor": "ALEMANHA",
+              "n": 1408
+            },
+            {
+              "valor": "MARROCOS",
+              "n": 1117
+            },
+            {
+              "valor": "FEDERAÇÃO RUSSA",
+              "n": 1031
+            },
+            {
+              "valor": "MÉXICO",
+              "n": 1012
+            },
+            {
+              "valor": "CONGO",
+              "n": 973
+            },
+            {
+              "valor": "NIGÉRIA",
+              "n": 866
+            },
+            {
+              "valor": "FILIPINAS",
+              "n": 864
+            },
+            {
+              "valor": "JAPÃO",
+              "n": 863
+            },
+            {
+              "valor": "GANA",
+              "n": 856
+            },
+            {
+              "valor": "ESPANHA",
+              "n": 793
+            },
+            {
+              "valor": "MOÇAMBIQUE",
+              "n": 777
+            },
+            {
+              "valor": "ÍNDIA",
+              "n": 714
+            },
+            {
+              "valor": "REPÚBLICA DOMINICANA",
+              "n": 695
+            },
+            {
+              "valor": "GRÃ-BRETANHA",
+              "n": 662
+            },
+            {
+              "valor": "LÍBANO",
+              "n": 653
+            },
+            {
+              "valor": "GUINÉ-BISSAU",
+              "n": 652
+            },
+            {
+              "valor": "EGITO",
+              "n": 626
+            },
+            {
+              "valor": "TUNÍSIA",
+              "n": 564
+            },
+            {
+              "valor": "SÍRIA",
+              "n": 536
+            },
+            {
+              "valor": "GUIANA",
+              "n": 507
+            },
+            {
+              "valor": "CORÉIA DO SUL",
+              "n": 462
+            },
+            {
+              "valor": "AFEGANISTÃO",
+              "n": 425
+            },
+            {
+              "valor": "TURQUIA",
+              "n": 359
+            },
+            {
+              "valor": "UCRÂNIA",
+              "n": 353
+            },
+            {
+              "valor": "PAQUISTÃO",
+              "n": 349
+            },
+            {
+              "valor": "HOLANDA",
+              "n": 301
+            },
+            {
+              "valor": "NORUEGA",
+              "n": 289
+            },
+            {
+              "valor": "GUINÉ",
+              "n": 277
+            },
+            {
+              "valor": "IRÃ",
+              "n": 275
+            },
+            {
+              "valor": "BÉLGICA",
+              "n": 252
+            },
+            {
+              "valor": "SUÍÇA",
+              "n": 245
+            },
+            {
+              "valor": "CANADÁ",
+              "n": 238
+            },
+            {
+              "valor": "HONDURAS",
+              "n": 233
+            },
+            {
+              "valor": "REP. DEM. CONGO",
+              "n": 228
+            },
+            {
+              "valor": "SUÉCIA",
+              "n": 225
+            },
+            {
+              "valor": "TOGO",
+              "n": 225
+            },
+            {
+              "valor": "INDONÉSIA",
+              "n": 220
+            },
+            {
+              "valor": "MAURITÂNIA",
+              "n": 213
+            },
+            {
+              "valor": "FRANÇA METROPOLITANA",
+              "n": 211
+            },
+            {
+              "valor": "ÁFRICA DO SUL",
+              "n": 209
+            },
+            {
+              "valor": "POLÔNIA",
+              "n": 194
+            },
+            {
+              "valor": "RÚSSIA",
+              "n": 187
+            },
+            {
+              "valor": "MADAGASCAR",
+              "n": 182
+            },
+            {
+              "valor": "BENIN",
+              "n": 180
+            },
+            {
+              "valor": "CABO VERDE",
+              "n": 179
+            },
+            {
+              "valor": "SENEGAL",
+              "n": 174
+            },
+            {
+              "valor": "ROMÊNIA",
+              "n": 168
+            },
+            {
+              "valor": "REINO UNIDO",
+              "n": 159
+            },
+            {
+              "valor": "CAMARÕES",
+              "n": 155
+            },
+            {
+              "valor": "INDIA",
+              "n": 153
+            },
+            {
+              "valor": "ESTADO DA PALESTINA",
+              "n": 150
+            },
+            {
+              "valor": "BRASIL",
+              "n": 143
+            },
+            {
+              "valor": "GUINÉ BISSAU",
+              "n": 131
+            },
+            {
+              "valor": "QUÊNIA",
+              "n": 130
+            },
+            {
+              "valor": "AUSTRÁLIA",
+              "n": 127
+            },
+            {
+              "valor": "DINAMARCA",
+              "n": 122
+            },
+            {
+              "valor": "SURINAME",
+              "n": 120
+            },
+            {
+              "valor": "MALÁSIA",
+              "n": 118
+            },
+            {
+              "valor": "REP. DOMINICANA",
+              "n": 117
+            },
+            {
+              "valor": "COSTA RICA",
+              "n": 116
+            },
+            {
+              "valor": "CROÁCIA",
+              "n": 106
+            },
+            {
+              "valor": "ISRAEL",
+              "n": 106
+            },
+            {
+              "valor": "LÍBIA",
+              "n": 105
+            },
+            {
+              "valor": "ÁUSTRIA",
+              "n": 103
+            },
+            {
+              "valor": "PANAMÁ",
+              "n": 101
+            },
+            {
+              "valor": "SUDÃO",
+              "n": 98
+            },
+            {
+              "valor": "FINLÂNDIA",
+              "n": 96
+            },
+            {
+              "valor": "GUATEMALA",
+              "n": 92
+            },
+            {
+              "valor": "ARGÉLIA",
+              "n": 91
+            },
+            {
+              "valor": "BULGÁRIA",
+              "n": 91
+            },
+            {
+              "valor": "ARÁBIA SAUDITA",
+              "n": 84
+            },
+            {
+              "valor": "MALI",
+              "n": 80
+            },
+            {
+              "valor": "ETIÓPIA",
+              "n": 78
+            },
+            {
+              "valor": "GRÉCIA",
+              "n": 71
+            },
+            {
+              "valor": "REPÚBLICA TCHECA",
+              "n": 71
+            },
+            {
+              "valor": "TAIWAN",
+              "n": 70
+            },
+            {
+              "valor": "IÊMEN",
+              "n": 69
+            },
+            {
+              "valor": "EL SALVADOR",
+              "n": 68
+            },
+            {
+              "valor": "GUIANA FRANCESA",
+              "n": 65
+            },
+            {
+              "valor": "LETÔNIA",
+              "n": 62
+            },
+            {
+              "valor": "TAILÂNDIA",
+              "n": 61
+            },
+            {
+              "valor": "IRLANDA",
+              "n": 60
+            },
+            {
+              "valor": "SÃO TOMÉ E PRÍNCIPE",
+              "n": 60
+            },
+            {
+              "valor": "-",
+              "n": 59
+            },
+            {
+              "valor": "CAZAQUISTÃO",
+              "n": 59
+            },
+            {
+              "valor": "NICARÁGUA",
+              "n": 58
+            },
+            {
+              "valor": "BELARUS",
+              "n": 55
+            },
+            {
+              "valor": "TIMOR LESTE",
+              "n": 54
+            },
+            {
+              "valor": "CINGAPURA",
+              "n": 52
+            },
+            {
+              "valor": "EMIRADOS ÁRABES UNIDOS",
+              "n": 52
+            },
+            {
+              "valor": "PAÍSES BAIXOS",
+              "n": 52
+            },
+            {
+              "valor": "VIETNÃ",
+              "n": 51
+            },
+            {
+              "valor": "ZIMBÁBUE",
+              "n": 48
+            },
+            {
+              "valor": "JORDÂNIA",
+              "n": 46
+            },
+            {
+              "valor": "NOVA ZELÂNDIA",
+              "n": 46
+            },
+            {
+              "valor": "UZBEQUISTÃO",
+              "n": 45
+            },
+            {
+              "valor": "HUNGRIA",
+              "n": 44
+            },
+            {
+              "valor": "IRAQUE",
+              "n": 43
+            },
+            {
+              "valor": "JAMAICA",
+              "n": 43
+            },
+            {
+              "valor": "MAURÍCIO",
+              "n": 42
+            },
+            {
+              "valor": "SUÍCA",
+              "n": 40
+            },
+            {
+              "valor": "ESLOVÁQUIA",
+              "n": 38
+            },
+            {
+              "valor": "TRINIDAD E TOBAGO",
+              "n": 38
+            },
+            {
+              "valor": "COSTA DO MARFIM",
+              "n": 37
+            },
+            {
+              "valor": "GÂMBIA",
+              "n": 36
+            },
+            {
+              "valor": "TANZÂNIA",
+              "n": 35
+            },
+            {
+              "valor": "NEPAL",
+              "n": 34
+            },
+            {
+              "valor": "PALESTINA",
+              "n": 34
+            },
+            {
+              "valor": "SÉRVIA",
+              "n": 34
+            },
+            {
+              "valor": "LITUÂNIA",
+              "n": 33
+            },
+            {
+              "valor": "MIANMAR",
+              "n": 33
+            },
+            {
+              "valor": "REPÚBLICA DEMOCRÁTICA DO CONGO",
+              "n": 33
+            },
+            {
+              "valor": "AFRICA DO SUL",
+              "n": 32
+            },
+            {
+              "valor": "VATICANO",
+              "n": 32
+            },
+            {
+              "valor": "SERRA LEOA",
+              "n": 31
+            },
+            {
+              "valor": "GABÃO",
+              "n": 30
+            },
+            {
+              "valor": "BURUNDI",
+              "n": 27
+            },
+            {
+              "valor": "NAMÍBIA",
+              "n": 27
+            },
+            {
+              "valor": "GEÓRGIA",
+              "n": 25
+            },
+            {
+              "valor": "ESLOVÊNIA",
+              "n": 24
+            },
+            {
+              "valor": "AUSTRIA",
+              "n": 22
+            },
+            {
+              "valor": "SRI LANKA",
+              "n": 22
+            },
+            {
+              "valor": "BURKINA FASSO",
+              "n": 21
+            },
+            {
+              "valor": "ARMÊNIA",
+              "n": 19
+            },
+            {
+              "valor": "KUWEIT",
+              "n": 19
+            },
+            {
+              "valor": "UGANDA",
+              "n": 19
+            },
+            {
+              "valor": "QUIRGUÍZIA",
+              "n": 18
+            },
+            {
+              "valor": "SOMÁLIA",
+              "n": 17
+            },
+            {
+              "valor": "ESTÔNIA",
+              "n": 16
+            },
+            {
+              "valor": "GUINÉ EQUATORIAL",
+              "n": 16
+            },
+            {
+              "valor": "MOLDÁVIA",
+              "n": 16
+            },
+            {
+              "valor": "ALBÂNIA",
+              "n": 15
+            },
+            {
+              "valor": "DOMINICA",
+              "n": 15
+            },
+            {
+              "valor": "VANUATU",
+              "n": 15
+            },
+            {
+              "valor": "PORTO RICO",
+              "n": 14
+            },
+            {
+              "valor": "SAMOA OCIDENTAL",
+              "n": 14
+            },
+            {
+              "valor": "RUANDA",
+              "n": 13
+            },
+            {
+              "valor": "AZERBAIJÃO",
+              "n": 11
+            },
+            {
+              "valor": "LUXEMBURGO",
+              "n": 11
+            },
+            {
+              "valor": "SAO TOMÉ E PRÍNCIPE",
+              "n": 11
+            },
+            {
+              "valor": "ZÂMBIA",
+              "n": 11
+            },
+            {
+              "valor": "BÓSNIA E HERZEGÓVINA",
+              "n": 10
+            },
+            {
+              "valor": "HONG KONG",
+              "n": 10
+            },
+            {
+              "valor": "CATAR",
+              "n": 9
+            },
+            {
+              "valor": "CHIPRE",
+              "n": 9
+            },
+            {
+              "valor": "ISLÂNDIA",
+              "n": 8
+            },
+            {
+              "valor": "MARTINICA",
+              "n": 8
+            },
+            {
+              "valor": "TAIWAN, PROVINCIA DA CHINA",
+              "n": 8
+            },
+            {
+              "valor": "MALTA",
+              "n": 7
+            },
+            {
+              "valor": "CHADE",
+              "n": 6
+            },
+            {
+              "valor": "TADJIQUISTÃO",
+              "n": 6
+            },
+            {
+              "valor": "ANDORRA",
+              "n": 5
+            },
+            {
+              "valor": "BOTSWANA",
+              "n": 5
+            },
+            {
+              "valor": "BURKINA FASO",
+              "n": 5
+            },
+            {
+              "valor": "MONGÓLIA",
+              "n": 5
+            },
+            {
+              "valor": "BARBADOS",
+              "n": 4
+            },
+            {
+              "valor": "ERITRÉIA",
+              "n": 4
+            },
+            {
+              "valor": "GUADALUPE",
+              "n": 4
+            },
+            {
+              "valor": "MACEDÔNIA",
+              "n": 4
+            },
+            {
+              "valor": "NIGER",
+              "n": 4
+            },
+            {
+              "valor": "NOVA CALEDÔNIA",
+              "n": 4
+            },
+            {
+              "valor": "TURCOMÊNIA",
+              "n": 4
+            },
+            {
+              "valor": "BAREIN",
+              "n": 3
+            },
+            {
+              "valor": "EMIRADOS ÁRABES",
+              "n": 3
+            },
+            {
+              "valor": "FIJI",
+              "n": 3
+            },
+            {
+              "valor": "MONTENEGRO",
+              "n": 3
+            },
+            {
+              "valor": "REPÚBLICA CENTRO-AFRICANA",
+              "n": 3
+            },
+            {
+              "valor": "SAMOA AMERICANA",
+              "n": 3
+            },
+            {
+              "valor": "TONGA",
+              "n": 3
+            },
+            {
+              "valor": "VIETINA",
+              "n": 3
+            },
+            {
+              "valor": "ANTILHAS HOLANDESAS",
+              "n": 2
+            },
+            {
+              "valor": "ARUBA",
+              "n": 2
+            },
+            {
+              "valor": "BELIZE",
+              "n": 2
+            },
+            {
+              "valor": "BOTSUANA",
+              "n": 2
+            },
+            {
+              "valor": "CAMBOJA",
+              "n": 2
+            },
+            {
+              "valor": "GROENLÂNDIA",
+              "n": 2
+            },
+            {
+              "valor": "ILHAS REUNIÃO",
+              "n": 2
+            },
+            {
+              "valor": "KUAITE",
+              "n": 2
+            },
+            {
+              "valor": "MALAVI",
+              "n": 2
+            },
+            {
+              "valor": "REP. MONTENEGRO",
+              "n": 2
+            },
+            {
+              "valor": "SANTA LÚCIA",
+              "n": 2
+            },
+            {
+              "valor": "ANGUILLA",
+              "n": 1
+            },
+            {
+              "valor": "BAHAMAS",
+              "n": 1
+            },
+            {
+              "valor": "BRUNEI",
+              "n": 1
+            },
+            {
+              "valor": "BÓSNIA-HERZEGOVINA",
+              "n": 1
+            },
+            {
+              "valor": "GRANADA",
+              "n": 1
+            },
+            {
+              "valor": "ILHAS CAYMAN",
+              "n": 1
+            },
+            {
+              "valor": "ILHAS SANTA HELENA",
+              "n": 1
+            },
+            {
+              "valor": "ILHAS VIRGENS BRITÂNICAS",
+              "n": 1
+            },
+            {
+              "valor": "JERSEY",
+              "n": 1
+            },
+            {
+              "valor": "LAOS",
+              "n": 1
+            },
+            {
+              "valor": "LESOTO",
+              "n": 1
+            },
+            {
+              "valor": "LIBÉRIA",
+              "n": 1
+            },
+            {
+              "valor": "LIECHTENSTEIN",
+              "n": 1
+            },
+            {
+              "valor": "MAYOTTE",
+              "n": 1
+            },
+            {
+              "valor": "MICRONÉSIA",
+              "n": 1
+            },
+            {
+              "valor": "MOLDOVA",
+              "n": 1
+            },
+            {
+              "valor": "MYANMAR",
+              "n": 1
+            },
+            {
+              "valor": "MÔNACO",
+              "n": 1
+            },
+            {
+              "valor": "OMÃ",
+              "n": 1
+            },
+            {
+              "valor": "REP. CENTRO AFRICANA",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "coluna": "PAIS_NACIONALIDADE",
+          "tipo_inferido": "texto",
+          "nulos": 1,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 204,
+          "tamanho_min": 1,
+          "tamanho_max": 30,
+          "categorias": [
+            {
+              "valor": "VENEZUELA",
+              "n": 101937
+            },
+            {
+              "valor": "CUBA",
+              "n": 37373
+            },
+            {
+              "valor": "BOLÍVIA",
+              "n": 21417
+            },
+            {
+              "valor": "ARGENTINA",
+              "n": 13500
+            },
+            {
+              "valor": "HAITI",
+              "n": 12146
+            },
+            {
+              "valor": "COLÔMBIA",
+              "n": 11472
+            },
+            {
+              "valor": "PARAGUAI",
+              "n": 7254
+            },
+            {
+              "valor": "CHINA",
+              "n": 6379
+            },
+            {
+              "valor": "PERU",
+              "n": 4422
+            },
+            {
+              "valor": "ANGOLA",
+              "n": 3801
+            },
+            {
+              "valor": "ESTADOS UNIDOS",
+              "n": 3361
+            },
+            {
+              "valor": "URUGUAI",
+              "n": 3252
+            },
+            {
+              "valor": "FRANÇA",
+              "n": 2979
+            },
+            {
+              "valor": "PORTUGAL",
+              "n": 1735
+            },
+            {
+              "valor": "EQUADOR",
+              "n": 1701
+            },
+            {
+              "valor": "BANGLADESH",
+              "n": 1637
+            },
+            {
+              "valor": "CHILE",
+              "n": 1608
+            },
+            {
+              "valor": "ITÁLIA",
+              "n": 1470
+            },
+            {
+              "valor": "ALEMANHA",
+              "n": 1442
+            },
+            {
+              "valor": "MARROCOS",
+              "n": 1129
+            },
+            {
+              "valor": "FEDERAÇÃO RUSSA",
+              "n": 1083
+            },
+            {
+              "valor": "MÉXICO",
+              "n": 996
+            },
+            {
+              "valor": "CONGO",
+              "n": 979
+            },
+            {
+              "valor": "JAPÃO",
+              "n": 867
+            },
+            {
+              "valor": "NIGÉRIA",
+              "n": 862
+            },
+            {
+              "valor": "FILIPINAS",
+              "n": 856
+            },
+            {
+              "valor": "GANA",
+              "n": 854
+            },
+            {
+              "valor": "ESPANHA",
+              "n": 796
+            },
+            {
+              "valor": "MOÇAMBIQUE",
+              "n": 770
+            },
+            {
+              "valor": "ÍNDIA",
+              "n": 699
+            },
+            {
+              "valor": "GRÃ-BRETANHA",
+              "n": 656
+            },
+            {
+              "valor": "REPÚBLICA DOMINICANA",
+              "n": 656
+            },
+            {
+              "valor": "GUINÉ-BISSAU",
+              "n": 654
+            },
+            {
+              "valor": "LÍBANO",
+              "n": 624
+            },
+            {
+              "valor": "EGITO",
+              "n": 575
+            },
+            {
+              "valor": "TUNÍSIA",
+              "n": 563
+            },
+            {
+              "valor": "SÍRIA",
+              "n": 529
+            },
+            {
+              "valor": "GUIANA",
+              "n": 514
+            },
+            {
+              "valor": "CORÉIA DO SUL",
+              "n": 456
+            },
+            {
+              "valor": "TURQUIA",
+              "n": 442
+            },
+            {
+              "valor": "AFEGANISTÃO",
+              "n": 430
+            },
+            {
+              "valor": "PAQUISTÃO",
+              "n": 350
+            },
+            {
+              "valor": "UCRÂNIA",
+              "n": 335
+            },
+            {
+              "valor": "HOLANDA",
+              "n": 321
+            },
+            {
+              "valor": "NORUEGA",
+              "n": 290
+            },
+            {
+              "valor": "GUINÉ",
+              "n": 274
+            },
+            {
+              "valor": "CANADÁ",
+              "n": 269
+            },
+            {
+              "valor": "IRÃ",
+              "n": 252
+            },
+            {
+              "valor": "BÉLGICA",
+              "n": 244
+            },
+            {
+              "valor": "SUÉCIA",
+              "n": 237
+            },
+            {
+              "valor": "SUÍÇA",
+              "n": 237
+            },
+            {
+              "valor": "HONDURAS",
+              "n": 228
+            },
+            {
+              "valor": "TOGO",
+              "n": 226
+            },
+            {
+              "valor": "REP. DEM. CONGO",
+              "n": 218
+            },
+            {
+              "valor": "MAURITÂNIA",
+              "n": 212
+            },
+            {
+              "valor": "INDONÉSIA",
+              "n": 210
+            },
+            {
+              "valor": "FRANÇA METROPOLITANA",
+              "n": 194
+            },
+            {
+              "valor": "ESTADO DA PALESTINA",
+              "n": 190
+            },
+            {
+              "valor": "POLÔNIA",
+              "n": 188
+            },
+            {
+              "valor": "RÚSSIA",
+              "n": 187
+            },
+            {
+              "valor": "ÁFRICA DO SUL",
+              "n": 187
+            },
+            {
+              "valor": "MADAGASCAR",
+              "n": 181
+            },
+            {
+              "valor": "CABO VERDE",
+              "n": 179
+            },
+            {
+              "valor": "BENIN",
+              "n": 178
+            },
+            {
+              "valor": "SENEGAL",
+              "n": 170
+            },
+            {
+              "valor": "ROMÊNIA",
+              "n": 163
+            },
+            {
+              "valor": "REINO UNIDO",
+              "n": 159
+            },
+            {
+              "valor": "INDIA",
+              "n": 153
+            },
+            {
+              "valor": "CAMARÕES",
+              "n": 149
+            },
+            {
+              "valor": "AUSTRÁLIA",
+              "n": 135
+            },
+            {
+              "valor": "GUINÉ BISSAU",
+              "n": 131
+            },
+            {
+              "valor": "SUDÃO",
+              "n": 127
+            },
+            {
+              "valor": "QUÊNIA",
+              "n": 126
+            },
+            {
+              "valor": "DINAMARCA",
+              "n": 124
+            },
+            {
+              "valor": "SURINAME",
+              "n": 119
+            },
+            {
+              "valor": "REP. DOMINICANA",
+              "n": 117
+            },
+            {
+              "valor": "COSTA RICA",
+              "n": 115
+            },
+            {
+              "valor": "LÍBIA",
+              "n": 107
+            },
+            {
+              "valor": "CROÁCIA",
+              "n": 105
+            },
+            {
+              "valor": "ÁUSTRIA",
+              "n": 105
+            },
+            {
+              "valor": "MALÁSIA",
+              "n": 103
+            },
+            {
+              "valor": "ISRAEL",
+              "n": 99
+            },
+            {
+              "valor": "FINLÂNDIA",
+              "n": 97
+            },
+            {
+              "valor": "PANAMÁ",
+              "n": 96
+            },
+            {
+              "valor": "BULGÁRIA",
+              "n": 91
+            },
+            {
+              "valor": "GUATEMALA",
+              "n": 88
+            },
+            {
+              "valor": "IÊMEN",
+              "n": 82
+            },
+            {
+              "valor": "MALI",
+              "n": 81
+            },
+            {
+              "valor": "ARGÉLIA",
+              "n": 78
+            },
+            {
+              "valor": "IRLANDA",
+              "n": 74
+            },
+            {
+              "valor": "ETIÓPIA",
+              "n": 72
+            },
+            {
+              "valor": "REPÚBLICA TCHECA",
+              "n": 69
+            },
+            {
+              "valor": "GRÉCIA",
+              "n": 67
+            },
+            {
+              "valor": "CINGAPURA",
+              "n": 66
+            },
+            {
+              "valor": "TAIWAN",
+              "n": 62
+            },
+            {
+              "valor": "SÃO TOMÉ E PRÍNCIPE",
+              "n": 61
+            },
+            {
+              "valor": "LETÔNIA",
+              "n": 60
+            },
+            {
+              "valor": "-",
+              "n": 59
+            },
+            {
+              "valor": "EL SALVADOR",
+              "n": 59
+            },
+            {
+              "valor": "NICARÁGUA",
+              "n": 57
+            },
+            {
+              "valor": "JORDÂNIA",
+              "n": 54
+            },
+            {
+              "valor": "TIMOR LESTE",
+              "n": 54
+            },
+            {
+              "valor": "BELARUS",
+              "n": 53
+            },
+            {
+              "valor": "NOVA ZELÂNDIA",
+              "n": 52
+            },
+            {
+              "valor": "PAÍSES BAIXOS",
+              "n": 52
+            },
+            {
+              "valor": "TAILÂNDIA",
+              "n": 51
+            },
+            {
+              "valor": "HUNGRIA",
+              "n": 46
+            },
+            {
+              "valor": "ZIMBÁBUE",
+              "n": 46
+            },
+            {
+              "valor": "MAURÍCIO",
+              "n": 43
+            },
+            {
+              "valor": "IRAQUE",
+              "n": 41
+            },
+            {
+              "valor": "SUÍCA",
+              "n": 40
+            },
+            {
+              "valor": "JAMAICA",
+              "n": 39
+            },
+            {
+              "valor": "ESLOVÁQUIA",
+              "n": 37
+            },
+            {
+              "valor": "CAZAQUISTÃO",
+              "n": 36
+            },
+            {
+              "valor": "GÂMBIA",
+              "n": 36
+            },
+            {
+              "valor": "NEPAL",
+              "n": 34
+            },
+            {
+              "valor": "PALESTINA",
+              "n": 34
+            },
+            {
+              "valor": "LITUÂNIA",
+              "n": 33
+            },
+            {
+              "valor": "REPÚBLICA DEMOCRÁTICA DO CONGO",
+              "n": 33
+            },
+            {
+              "valor": "AFRICA DO SUL",
+              "n": 32
+            },
+            {
+              "valor": "SERRA LEOA",
+              "n": 32
+            },
+            {
+              "valor": "COSTA DO MARFIM",
+              "n": 31
+            },
+            {
+              "valor": "GABÃO",
+              "n": 31
+            },
+            {
+              "valor": "MIANMAR",
+              "n": 30
+            },
+            {
+              "valor": "DOMINICA",
+              "n": 29
+            },
+            {
+              "valor": "SÉRVIA",
+              "n": 29
+            },
+            {
+              "valor": "UZBEQUISTÃO",
+              "n": 29
+            },
+            {
+              "valor": "TANZÂNIA",
+              "n": 28
+            },
+            {
+              "valor": "VIETNÃ",
+              "n": 28
+            },
+            {
+              "valor": "BURUNDI",
+              "n": 25
+            },
+            {
+              "valor": "NAMÍBIA",
+              "n": 23
+            },
+            {
+              "valor": "TRINIDAD E TOBAGO",
+              "n": 23
+            },
+            {
+              "valor": "AUSTRIA",
+              "n": 22
+            },
+            {
+              "valor": "GUIANA FRANCESA",
+              "n": 22
+            },
+            {
+              "valor": "SRI LANKA",
+              "n": 22
+            },
+            {
+              "valor": "BURKINA FASSO",
+              "n": 20
+            },
+            {
+              "valor": "GEÓRGIA",
+              "n": 18
+            },
+            {
+              "valor": "UGANDA",
+              "n": 18
+            },
+            {
+              "valor": "ESLOVÊNIA",
+              "n": 16
+            },
+            {
+              "valor": "GUINÉ EQUATORIAL",
+              "n": 16
+            },
+            {
+              "valor": "SOMÁLIA",
+              "n": 15
+            },
+            {
+              "valor": "ESTÔNIA",
+              "n": 14
+            },
+            {
+              "valor": "RUANDA",
+              "n": 14
+            },
+            {
+              "valor": "SAMOA OCIDENTAL",
+              "n": 14
+            },
+            {
+              "valor": "QUIRGUÍZIA",
+              "n": 13
+            },
+            {
+              "valor": "ARMÊNIA",
+              "n": 11
+            },
+            {
+              "valor": "LUXEMBURGO",
+              "n": 11
+            },
+            {
+              "valor": "SAO TOMÉ E PRÍNCIPE",
+              "n": 11
+            },
+            {
+              "valor": "ARÁBIA SAUDITA",
+              "n": 10
+            },
+            {
+              "valor": "ZÂMBIA",
+              "n": 10
+            },
+            {
+              "valor": "CHADE",
+              "n": 9
+            },
+            {
+              "valor": "ALBÂNIA",
+              "n": 8
+            },
+            {
+              "valor": "AZERBAIJÃO",
+              "n": 8
+            },
+            {
+              "valor": "TAIWAN, PROVINCIA DA CHINA",
+              "n": 8
+            },
+            {
+              "valor": "ANDORRA",
+              "n": 7
+            },
+            {
+              "valor": "CHIPRE",
+              "n": 7
+            },
+            {
+              "valor": "HONG KONG",
+              "n": 7
+            },
+            {
+              "valor": "ISLÂNDIA",
+              "n": 7
+            },
+            {
+              "valor": "MALTA",
+              "n": 7
+            },
+            {
+              "valor": "BURKINA FASO",
+              "n": 5
+            },
+            {
+              "valor": "BÓSNIA E HERZEGÓVINA",
+              "n": 5
+            },
+            {
+              "valor": "ERITRÉIA",
+              "n": 5
+            },
+            {
+              "valor": "MONGÓLIA",
+              "n": 5
+            },
+            {
+              "valor": "BARBADOS",
+              "n": 4
+            },
+            {
+              "valor": "BOTSWANA",
+              "n": 4
+            },
+            {
+              "valor": "MOLDÁVIA",
+              "n": 4
+            },
+            {
+              "valor": "PORTO RICO",
+              "n": 4
+            },
+            {
+              "valor": "EMIRADOS ÁRABES",
+              "n": 3
+            },
+            {
+              "valor": "FIJI",
+              "n": 3
+            },
+            {
+              "valor": "GRANADA",
+              "n": 3
+            },
+            {
+              "valor": "SAMOA AMERICANA",
+              "n": 3
+            },
+            {
+              "valor": "TURCOMÊNIA",
+              "n": 3
+            },
+            {
+              "valor": "VANUATU",
+              "n": 3
+            },
+            {
+              "valor": "VIETINA",
+              "n": 3
+            },
+            {
+              "valor": "ANTIGUA E BARBUDA",
+              "n": 2
+            },
+            {
+              "valor": "ARUBA",
+              "n": 2
+            },
+            {
+              "valor": "BELIZE",
+              "n": 2
+            },
+            {
+              "valor": "BOTSUANA",
+              "n": 2
+            },
+            {
+              "valor": "CAMBOJA",
+              "n": 2
+            },
+            {
+              "valor": "GUADALUPE",
+              "n": 2
+            },
+            {
+              "valor": "KUAITE",
+              "n": 2
+            },
+            {
+              "valor": "MACEDÔNIA",
+              "n": 2
+            },
+            {
+              "valor": "MALAVI",
+              "n": 2
+            },
+            {
+              "valor": "MONTENEGRO",
+              "n": 2
+            },
+            {
+              "valor": "NIGER",
+              "n": 2
+            },
+            {
+              "valor": "REP. MONTENEGRO",
+              "n": 2
+            },
+            {
+              "valor": "REPÚBLICA CENTRO-AFRICANA",
+              "n": 2
+            },
+            {
+              "valor": "SANTA LÚCIA",
+              "n": 2
+            },
+            {
+              "valor": "SÃO CRISTÓVÃO E NÉVIS",
+              "n": 2
+            },
+            {
+              "valor": "TADJIQUISTÃO",
+              "n": 2
+            },
+            {
+              "valor": "TONGA",
+              "n": 2
+            },
+            {
+              "valor": "ANTILHAS HOLANDESAS",
+              "n": 1
+            },
+            {
+              "valor": "BAHAMAS",
+              "n": 1
+            },
+            {
+              "valor": "BAREIN",
+              "n": 1
+            },
+            {
+              "valor": "BÓSNIA-HERZEGOVINA",
+              "n": 1
+            },
+            {
+              "valor": "EMIRADOS ÁRABES UNIDOS",
+              "n": 1
+            },
+            {
+              "valor": "ILHAS VIRGENS BRITÂNICAS",
+              "n": 1
+            },
+            {
+              "valor": "KUWEIT",
+              "n": 1
+            },
+            {
+              "valor": "LESOTO",
+              "n": 1
+            },
+            {
+              "valor": "MOLDOVA",
+              "n": 1
+            },
+            {
+              "valor": "MYANMAR",
+              "n": 1
+            },
+            {
+              "valor": "PALAU",
+              "n": 1
+            },
+            {
+              "valor": "REP. CENTRO AFRICANA",
+              "n": 1
+            },
+            {
+              "valor": "VATICANO",
+              "n": 1
+            },
+            {
+              "valor": null,
+              "n": 1
+            }
+          ]
+        },
+        {
+          "coluna": "CONTINENTE",
+          "tipo_inferido": "texto",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 8,
+          "tamanho_min": 4,
+          "tamanho_max": 24,
+          "categorias": [
+            {
+              "valor": "AMÉRICA DO SUL",
+              "n": 167055
+            },
+            {
+              "valor": "AMÉRICA CENTRAL E CARIBE",
+              "n": 51139
+            },
+            {
+              "valor": "ÁSIA",
+              "n": 14802
+            },
+            {
+              "valor": "EUROPA",
+              "n": 14162
+            },
+            {
+              "valor": "ÁFRICA",
+              "n": 13575
+            },
+            {
+              "valor": "AMÉRICA DO NORTE",
+              "n": 4522
+            },
+            {
+              "valor": "OCEANIA",
+              "n": 209
+            },
+            {
+              "valor": "NÃO ESPECIFICADO",
+              "n": 59
+            }
+          ]
+        },
+        {
+          "coluna": "FAIXA_ETARIA",
+          "tipo_inferido": "texto",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 6,
+          "tamanho_min": 11,
+          "tamanho_max": 16,
+          "categorias": [
+            {
+              "valor": "25 |-- 40 anos",
+              "n": 73739
+            },
+            {
+              "valor": "15 |-- 25 anos",
+              "n": 56929
+            },
+            {
+              "valor": "40 |-- 65 anos",
+              "n": 45818
+            },
+            {
+              "valor": "NÃO ESPECIFICADO",
+              "n": 41344
+            },
+            {
+              "valor": "0 |-- 15 anos",
+              "n": 40441
+            },
+            {
+              "valor": "65 |-- anos",
+              "n": 7252
+            }
+          ]
+        },
+        {
+          "coluna": "SEXO",
+          "tipo_inferido": "texto",
+          "nulos": 6,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 6,
+          "tamanho_min": 1,
+          "tamanho_max": 16,
+          "categorias": [
+            {
+              "valor": "Masculino",
+              "n": 145291
+            },
+            {
+              "valor": "Feminino",
+              "n": 120136
+            },
+            {
+              "valor": "Não Declarado",
+              "n": 69
+            },
+            {
+              "valor": "Não especificado",
+              "n": 16
+            },
+            {
+              "valor": null,
+              "n": 6
+            },
+            {
+              "valor": "Nao Declarado",
+              "n": 4
+            },
+            {
+              "valor": "-",
+              "n": 1
+            }
+          ]
+        },
+        {
+          "coluna": "ESTADO_CIVIL",
+          "tipo_inferido": "texto",
+          "nulos": 3,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 10,
+          "tamanho_min": 5,
+          "tamanho_max": 24,
+          "categorias": [
+            {
+              "valor": "SOLTEIRO",
+              "n": 214806
+            },
+            {
+              "valor": "CASADO",
+              "n": 39845
+            },
+            {
+              "valor": "DIVORCIADO",
+              "n": 3957
+            },
+            {
+              "valor": "OUTROS",
+              "n": 3606
+            },
+            {
+              "valor": "DESCONHECIDO",
+              "n": 1564
+            },
+            {
+              "valor": "VIUVO",
+              "n": 1522
+            },
+            {
+              "valor": "SEPARADO CONSENSUALMENTE",
+              "n": 100
+            },
+            {
+              "valor": "SEPARADO_JUDICIALMENTE",
+              "n": 83
+            },
+            {
+              "valor": "SEPARADO JUDICIALMENTE",
+              "n": 21
+            },
+            {
+              "valor": "DESQUITADO",
+              "n": 16
+            },
+            {
+              "valor": null,
+              "n": 3
+            }
+          ]
+        },
+        {
+          "coluna": "PROFISSAO",
+          "tipo_inferido": "texto",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 93,
+          "tamanho_min": 1,
+          "tamanho_max": 230,
+          "categorias": [
+            {
+              "valor": "OUTRA OCUPACAO NAO CLASSIFICADA",
+              "n": 63823
+            },
+            {
+              "valor": "SEM OCUPACAO",
+              "n": 48329
+            },
+            {
+              "valor": "ESTUDANTE",
+              "n": 39754
+            },
+            {
+              "valor": "MENOR ( CRIANCA , NAO ESTUDANTE )",
+              "n": 19480
+            },
+            {
+              "valor": "VENDEDOR OU EMPREGADO DE CASA COMERCIAL, COMERCIARIO, VENDEDOR AMBULANTE, VENDEDOR A DOMICILIO, JORNALEIRO, OU ASSEMELHADO",
+              "n": 13022
+            },
+            {
+              "valor": "PRENDAS DOMESTICAS ( LIDES DO LAR )",
+              "n": 10603
+            },
+            {
+              "valor": "DECORADOR, COSTUREIRO, ALFAIATE, MODISTA, PELETEIRO, TAPECEIRO, OU ASSEMELHADO",
+              "n": 10029
+            },
+            {
+              "valor": "PEDREIRO, SERVENTE, LADRILHEIRO, GESSEIRO, VIDRACEIRO, OU ASSEMELHADO, A OUTRO TRABALHADOR DA CONSTRUCAO CIVIL, NAO CLASSIFICADO SOB OUTRA DEMOMINACAO",
+              "n": 4879
+            },
+            {
+              "valor": "COZINHEIRO, MORDOMO, GOVERNANTA, CAMAREIRO, GARCAO, OU ASSEMELHADO",
+              "n": 3246
+            },
+            {
+              "valor": "PROFISSIONAL LIBERAL, TECNICO, OU ASSEMELHADO, NAO CLASSIFICADO SOB OUTRA DEMOMINACAO",
+              "n": 3234
+            },
+            {
+              "valor": "OFICIAL, PILOTO, MAQUINISTA, MARINHEIRO, OU OUTRO TRABALHADOR, NA NAVEGACAO MARITIMA OU FLUVIAL",
+              "n": 3193
+            },
+            {
+              "valor": "APOSENTADO, PENSIONISTA, OU ASSEMELHADO",
+              "n": 2798
+            },
+            {
+              "valor": "ARQUITETO, ENGENHEIRO, AGRIMENSOR, OU ASSEMELHADO",
+              "n": 2745
+            },
+            {
+              "valor": "PROFESSOR, OU ASSEMELHADO",
+              "n": 2706
+            },
+            {
+              "valor": "TRABALHADOR AGRICOLA, JARDINEIRO, OU ASSEMELHADO, AGRICULTOR, LAVRADOR",
+              "n": 2362
+            },
+            {
+              "valor": "MEDICO, CIRURGIAO, DENTISTA, OU ASSEMELHADO",
+              "n": 2243
+            },
+            {
+              "valor": "VENDEDOR VIAJANTE, PROPAGANDISTA, REPRESENTANTE COMERCIAL, COMISSIONISTA, OU ASSEMELHADO",
+              "n": 2194
+            },
+            {
+              "valor": "SACERDOTE, OU MEMBRO ASSELHADO DE ORDENS, OU SEITAS RELIGIOSAS",
+              "n": 2177
+            },
+            {
+              "valor": "MECANICO, OPERADOR, AJUSTADOR, CHAPEADOR, LANTERNEIRO DE VEICULOS, BOMBEIRO HIDRAULICO, ENCANADOR, SOLDADOR, GALVANIZADOR, OU OUTRO TRABALHADOR EM METAIS, NAO CLASSIFICADO SOB OUTRA DENOMINACAO",
+              "n": 1771
+            },
+            {
+              "valor": "BARBEIRO, CABELEIREIRO, ESTETICISTA, ESPECIALISTA DE INSTITUTO DE BELEZA, OU ASSEMELHADO",
+              "n": 1746
+            },
+            {
+              "valor": "MOTORISTA, CONDUTOR, OU OUTRO TRABALHADOR, DE TRANSPORTE RODOVIARIO",
+              "n": 1557
+            },
+            {
+              "valor": "PORTEIRO, ZELADOR, ASCENSSORISTA, FAXINEIRO, EMPREGADO DE LIMPEZA, EMPREGADO DOMESTICO, OU ASSEMELHADO",
+              "n": 1475
+            },
+            {
+              "valor": "DIRETOR , GERENTE OU PROPRIETARIO, NAO CLASSIFICADO SOB OUTRA DEMOMINACAO",
+              "n": 1408
+            },
+            {
+              "valor": "PADEIRO, CERVEJEIRO, ACOUGUEIRO, TRABALHADOR EM LATICINIOS, OU OUTRO TRABALHADOR, NA PRODUCAO DE ALIMENTOS OU BEBIDAS",
+              "n": 1313
+            },
+            {
+              "valor": "ECONOMISTA, ATUARIO, CONTADOR, TECNICO EM CONTABILIDADE, AUDITOR, ESTATISTICO, ADMINISTRADOR, OU ASSEMELHADO",
+              "n": 1275
+            },
+            {
+              "valor": "EMPREGADO DE ESCRITORIO, SECRETARIO, BANCARIO SECURITARIO, ECOMOMIARIO, TAQUIGRAFO, RECEPCIONISTA, MECANOGRAFO ( DATILOGRAFO ), OU ASSEMELHADO",
+              "n": 1061
+            },
+            {
+              "valor": "PROGRAMADOR, ANALISTA, OU OUTRO TECNICO, NO PROCESSAMENTO ELETRONICO DE DADOS",
+              "n": 1056
+            },
+            {
+              "valor": "ENFERMEIRO, PARTEIRA, MASSAGISTA, NUTRICIONISTA, OU TECNICO PARAMEDICO",
+              "n": 1027
+            },
+            {
+              "valor": "DIRETOR , GERENTE OU PROPRIETARIO, DE CASA COMERCIAL, ATACADISTA OU VAREJISTA, EXPORTADORA OU IMPORTADORA, OU ASSEMELHADO",
+              "n": 1016
+            },
+            {
+              "valor": "ELETRICISTA, MECANICO ELETRICISTA, MECANICO DE ELETRONICA, REPARADOR DE APARELHOS, DE RADIO E TELEVISAO, DE INSTALACOES TELEFONICAS, E TELEGRAFICAS, OU ASSEMELHADO",
+              "n": 931
+            },
+            {
+              "valor": "ADMINISTRADOR OU FUNCIONARIO EXECUTIVO, DA ADMINISTRACAO PUBLICA, DIRETA OU INDIRETA, ( INCLUSIVE OCUPANTE DE CARGO ELETIVO )",
+              "n": 731
+            },
+            {
+              "valor": "DEPENDENTE DE TITULAR DE VITEM.",
+              "n": 662
+            },
+            {
+              "valor": "ARTISTA, ATOR, MUSICO, OU ASSEMELHADO",
+              "n": 601
+            },
+            {
+              "valor": "ATLETA, ESPORTISTA, OU ASSEMELHADO",
+              "n": 601
+            },
+            {
+              "valor": "JURISTA, ADVOGADO, MAGISTRADO, PROMOTOR, OU ASSEMELHADO",
+              "n": 571
+            },
+            {
+              "valor": "CARPINTEIRO, MARCENEIRO, TANOEIRO, OU ASSEMELHADO",
+              "n": 498
+            },
+            {
+              "valor": "PUBLICITARIO, PROFISSIONAL DE RELACOES PUBLICAS, DESENHISTA, OU ASSEMELHADO",
+              "n": 446
+            },
+            {
+              "valor": "PSICOLOGO, ANALISTA, SOCIOLOGO, ASSISTENTE SOCIAL, OU ASSEMELHADO",
+              "n": 420
+            },
+            {
+              "valor": "PATRULHEIRO, VIGIA, GUARDA, BOMBEIRO, OU ASSEMELHADO",
+              "n": 416
+            },
+            {
+              "valor": "BIOLOGO, VETERINARIO, ZOOTECNISTA, AGRONOMO, OU ASSEMELHADO",
+              "n": 415
+            },
+            {
+              "valor": "INDUSTRIARIO OU SEVENTE, NAO CLASSIFICADO SOB OUTRA DEMOMINACAO",
+              "n": 404
+            },
+            {
+              "valor": "PINTOR, EMPAPELADOR, OU ASSEMELHADO, DA CONSTRUCAO CIVIL DE CONSERVACAO",
+              "n": 404
+            },
+            {
+              "valor": "DIRETOR , GERENTE OU PROPRIETARIO, DE INDUSTRIA DE EMPRESA, DE CONSTRUCAO, DE ELETRICIDADE, DE GAS, DE AGUA, DE ESGOTOS, DE EMPRESAS DE EXPLORACAO, DE MINAS OU PEDREIRAS, OU ASSEMELHADO",
+              "n": 342
+            },
+            {
+              "valor": "DIRETOR , GERENTE OU PROPRIETARIO, DE HOSPITAL, DE EMPRESAS DE HOTELARIA, FORNECIMENTO DE REFEICOES, TURISMO, OU ASSEMELHADO",
+              "n": 333
+            },
+            {
+              "valor": "OPERADOR DE MAQUINA ESTACIONARIA, DE GUINDASTE, DE MAQUINA DE TERRAPLANAGEM, DE EMPILHADEIRA, OU OUTRO OPERADOR ASSEMELHADO, LUBRIFICADOR OU GRAXEIRO DESSAS MAQUINAS",
+              "n": 323
+            },
+            {
+              "valor": "ESCRITOR, JORNALISTA, TRADUTOR, OU ASSEMELHADO",
+              "n": 321
+            },
+            {
+              "valor": "FUNCIONARIO PUBLICO CIVIL ATIVO, NAO CLASSIFICADO SOB OUTRA OCUPACAO",
+              "n": 303
+            },
+            {
+              "valor": "PROPRIETARIO MOTORISTA, DE VEICULO DE TRANSPORTE DE PASSAGEIROS",
+              "n": 300
+            },
+            {
+              "valor": "GARIMPEIROS, TRABALHADOR DE MINAS OU PEDREIRA, BENEFICIADOR DE MINERAIS, PERFURADOR DE POCOS, TRABALHADOR NA EXTRACAO, DE GAS OU PETROLEO, OU ASSEMELHADO",
+              "n": 285
+            },
+            {
+              "valor": "CAIXA, TESOUREIRO, OU ASSEMELHADO",
+              "n": 272
+            },
+            {
+              "valor": "PROPRIETARIO MOTORISTA, DE VEICULO DE TRANSPORTE DE CARGA",
+              "n": 257
+            },
+            {
+              "valor": "FOTOGRAFO, CINEGRAFISTA, OU ASSEMELHADO",
+              "n": 255
+            },
+            {
+              "valor": "PESCADOR, LENHADOR, OU ASSEMELHADO",
+              "n": 254
+            },
+            {
+              "valor": "TRABALHADOR DA FABRICACAO, DE INSTRUMENTOS MUSICAIS, ARTESAO OU TRABALHADOR, DOS DIVERSOS PROCESSOS DE PRODUCAO, NAO CLASSIFICADO SOB OUTRA DENOMINACAO",
+              "n": 251
+            },
+            {
+              "valor": "BOLSISTA, ESTAGIARIO, OU ASSEMELHADO",
+              "n": 247
+            },
+            {
+              "valor": "QUIMICO, FISICO, GEOLOGO, OU OUTRO ESPECIALISTA, EM CIENCIAS FISICAS",
+              "n": 247
+            },
+            {
+              "valor": "POLICIAS, DELEGADO, AGENTE, INVESTIGADOR, ESCRIVAO, PERITO, PAPILOSCOPISTA, OU ASSEMELHADO",
+              "n": 238
+            },
+            {
+              "valor": "TRABALHADOR EM SERVICOS DE ESPORTES, OU DIVERSOES, NAO CLASSIFICADO SOB OUTRA DENOMINACAO",
+              "n": 222
+            },
+            {
+              "valor": "DIRETOR , GERENTE OU PROPRIETARIO, DE EMPRESA DE TRANSPORTE, ARMAZENAGEM, COMUNICACOES, PRODUCAO CINEMATOGRAFICA, OU ASSEMELHADO",
+              "n": 208
+            },
+            {
+              "valor": "FARMACEUTICO, OU ASSEMELHADO",
+              "n": 202
+            },
+            {
+              "valor": "DEPENDENTE DE TITULAR DE VIPER.",
+              "n": 193
+            },
+            {
+              "valor": "DIRETOR , GERENTE OU PROPRIETARIO, DE ESTABELECIMENTO AGRICOLA OU PECUARIO, ( AGRICULTOR , FAZENDEIRO , PECUARISTA ), OU ASSEMELHADO",
+              "n": 188
+            },
+            {
+              "valor": "LAVADEIRO, LIMPADOR A SECO, PASSADOR, OU ASSEMELHADO",
+              "n": 186
+            },
+            {
+              "valor": "CORRETOR OU AGENTE DE SEGUROS, CORRETOR OU AGENTE DE IMOBILIARIO, CORRETOR, AGENTE DE VENDA DE SERVICOS, LEILOEIRO, AVALIADOR, OU ASSEMELHADO",
+              "n": 170
+            },
+            {
+              "valor": "DIRETOR , GERENTE OU PROPRIETARIO, DE ESTABELECIMENTO FINANCEIRO, DE SEGUROS OU IMOBILIARIO, INCORPORADOR, OU ASSEMELHADO",
+              "n": 113
+            },
+            {
+              "valor": "MECANICO DE PRECISAO, RELOJOEIRO, JOALHEIRO, OURIVES, OU ASSEMELHADO",
+              "n": 113
+            },
+            {
+              "valor": "FUNDIDOR, LAMINADOR, FERREIRO, TREFILADOR, OU ASSEMELHADO DA PRODUCAO, E TRATAMENTO DE METAIS",
+              "n": 112
+            },
+            {
+              "valor": "MILITAR NA INATIVIDADE",
+              "n": 104
+            },
+            {
+              "valor": "TRABALHADOR DA INDUSTRIA QUIMICA, DA INDUSTRIA DE PRODUDOS FARMACEUTICOS, E VETERINARIOS, DA INDUSTRIA DE PERFUMARIA, SABOES E VELAS, DA INDUSTRIA DE PRODUTOS, DE MATERIAS PLASTICAS, DA INDUSTRIA DE PAPEL E PALELAO, OU ASSEMELHADO",
+              "n": 94
+            },
+            {
+              "valor": "AERONAUTA, PILOTO, NAVEGADOR, COMISSARIO, AEROMOCA, MECAMICO, OU OUTRO TRABALHADOR, DA NAVEGACAO AEREA",
+              "n": 89
+            },
+            {
+              "valor": "TRABALHADOR DE TRANSPORTE, OU COMUNICACOES, NAO CLASSIFICADO SOB OUTRA DENOMINACAO",
+              "n": 87
+            },
+            {
+              "valor": "ESTIVADOR, CARREGADOR, OU ASSEMELHADO",
+              "n": 86
+            },
+            {
+              "valor": "FUNCIONARIO DIPLOMATICO ESTRANGEIRO, ADIDO ESTRANGEIRO, MILITAR ESTRANGEIRO, OU ASSEMELHADO",
+              "n": 55
+            },
+            {
+              "valor": "EMPACOTADOR, ETIQUETADOR, OU ASSEMELHADO",
+              "n": 49
+            },
+            {
+              "valor": "LOCUTOR, RADIALISTA, TELEPISTA, RADIOTELEGRAFISTA, TELEGRAFISTA, TELEFONISTA, OU ASSEMELHADO",
+              "n": 47
+            },
+            {
+              "valor": "SAPATEIRO, CORREEIRO, COSEDOR DE COUROS, OU ASSEMELHADO",
+              "n": 37
+            },
+            {
+              "valor": "BIBLIOTECARIO, TECNICO ARQUIVISTA, OU ASSEMELHADO",
+              "n": 33
+            },
+            {
+              "valor": "VULCANIZADOR OU TRABALHADOR, DE FABRICACAO DE PNEUMATICA, TRABALHADOR DA FABRICACAO, DE INSTRUMENTOS MUSICAIS, OU OUTRO ARTESAO, OU TRABALHADOR, DOS DIVERSOS PROCESSOS DE PRODUCAO, NAO CLASSIFICADO SOB OUTRA DENOMINACAO",
+              "n": 33
+            },
+            {
+              "valor": "COBRADOR, FISCAL, INSPETOR, OU ASSEMELHADO, NAO CLASSIFICADO SOB OUTRA DEMOMINACAO",
+              "n": 28
+            },
+            {
+              "valor": "TIPOGRAFO, COMPOSITOR, IMPRESSOR, LINOTIPISTA, OPERADOR DE MAQUINA DE IMPRESSAO, GRAVADOR, ENCARDENADOR, OU ASSEMELHADO",
+              "n": 27
+            },
+            {
+              "valor": "MAQUINISTA, FOGUISTA, CHEFE DE TREM, CHEFE DE ESTACAO, OU OUTRO TRABALHADOR, DE TRANSPORTE FERROVIARIO OU METROVIARIO",
+              "n": 24
+            },
+            {
+              "valor": "MILITAR NA ATIVA",
+              "n": 24
+            },
+            {
+              "valor": "CAPITALISTA, ( PROPRIETARIO DE TITULOS MOBILIARIOS ), OU ASSEMELHADO",
+              "n": 22
+            },
+            {
+              "valor": "MANEQUIM, MODELO, OU ASSEMELHADO",
+              "n": 21
+            },
+            {
+              "valor": "OLEIRO, OPERADOR DE FORNO, MOLDADOR DE VIDRO, DE ARGILA, OU ASSEMELHADO",
+              "n": 21
+            },
+            {
+              "valor": "CARTEIRO, MENSAGEIRO, OU ASSEMELHADO",
+              "n": 18
+            },
+            {
+              "valor": "TRABALHADOR NA INDUSTRIA DO FUMO",
+              "n": 18
+            },
+            {
+              "valor": "EMBAIXADOR, DIPLOMATA, OU ASSEMELHADO",
+              "n": 17
+            },
+            {
+              "valor": "EMBALSAMADOR, OU EMPREGADO DE EMPRESA FUNERARIA",
+              "n": 9
+            },
+            {
+              "valor": "FIANDEIRO, TECELAO, TECELAO DE MALHARIA, TINTUREIRO, OU ASSEMELHADO",
+              "n": 9
+            },
+            {
+              "valor": "TABELIAO, OFICIAL DE CARTORIO, OFICIAL DE JUSTICA, OU ASSEMELHADO",
+              "n": 8
+            },
+            {
+              "valor": "-",
+              "n": 3
+            },
+            {
+              "valor": "OCUPANTE DE CARGO LEGISLATIVO, ( SENADOR , DEPUTADO OU VEREADOR )",
+              "n": 3
+            }
+          ]
+        },
+        {
+          "coluna": "STATUS",
+          "tipo_inferido": "texto",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 6,
+          "tamanho_min": 5,
+          "tamanho_max": 14,
+          "categorias": [
+            {
+              "valor": "Ativo",
+              "n": 264704
+            },
+            {
+              "valor": "Prazo vencido",
+              "n": 775
+            },
+            {
+              "valor": "Cancelado",
+              "n": 20
+            },
+            {
+              "valor": "Excluído",
+              "n": 11
+            },
+            {
+              "valor": "Inativo",
+              "n": 9
+            },
+            {
+              "valor": "Erro de Ofício",
+              "n": 4
+            }
+          ]
+        },
+        {
+          "coluna": "CLASSIFICACAO_REVISADA",
+          "tipo_inferido": "texto",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 5,
+          "tamanho_min": 9,
+          "tamanho_max": 13,
+          "categorias": [
+            {
+              "valor": "TEMPORÁRIO",
+              "n": 166190
+            },
+            {
+              "valor": "NÃO APLICÁVEL",
+              "n": 65326
+            },
+            {
+              "valor": "RESIDENTE",
+              "n": 31765
+            },
+            {
+              "valor": "FRONTEIRIÇO",
+              "n": 2203
+            },
+            {
+              "valor": "PROVISÓRIO",
+              "n": 39
+            }
+          ]
+        },
+        {
+          "coluna": "TIPOLOGIA_AMPAROS",
+          "tipo_inferido": "texto",
+          "nulos": 0,
+          "vazios": 0,
+          "pct_ausente": 0.0,
+          "distintos": 11,
+          "tamanho_min": 6,
+          "tamanho_max": 22,
+          "categorias": [
+            {
+              "valor": "ACOLHIDA VENEZUELANOS",
+              "n": 82783
+            },
+            {
+              "valor": "NÃO APLICÁVEL",
+              "n": 65326
+            },
+            {
+              "valor": "ACORDOS AMÉRICA DO SUL",
+              "n": 55863
+            },
+            {
+              "valor": "REUNIÃO FAMILIAR",
+              "n": 22570
+            },
+            {
+              "valor": "TRABALHO/INVESTIMENTOS",
+              "n": 14575
+            },
+            {
+              "valor": "ESTUDOS",
+              "n": 11062
+            },
+            {
+              "valor": "ACOLHIDA HUMANITÁRIA",
+              "n": 8141
+            },
+            {
+              "valor": "FRONTEIRIÇOS",
+              "n": 2203
+            },
+            {
+              "valor": "MISSÃO RELIGIOSA",
+              "n": 1803
+            },
+            {
+              "valor": "REFÚGIO/ASILO",
+              "n": 966
+            },
+            {
+              "valor": "OUTROS",
+              "n": 231
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
