@@ -10,12 +10,17 @@ data/
 !ref/*.csv
 !docs/revisao/*.csv
 
-# Saídas geradas (o inventário da Etapa 0 é versionado de propósito)
+# Saídas geradas. São versionados de propósito: o inventário da Etapa 0 e o
+# relatório de qualidade mais recente (só contagens, sem microdados).
 reports/*
 !reports/inventario/
 reports/inventario/*
 !reports/inventario/inventario.md
 !reports/inventario/inventario.json
+!reports/qualidade/
+reports/qualidade/*
+!reports/qualidade/relatorio_qualidade.md
+!reports/qualidade/relatorio_qualidade.json
 
 # Python
 __pycache__/

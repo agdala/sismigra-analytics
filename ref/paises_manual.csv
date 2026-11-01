@@ -1,0 +1,52 @@
+nome_fonte;iso3;nome_padronizado;observacao
+RÚSSIA;RUS;Rússia;
+REP. DOMINICANA;DOM;República Dominicana;
+IRÃ;IRN;Irã;
+GRÃ-BRETANHA;GBR;Reino Unido;
+-;;Não informado;Valor ausente na fonte
+REPÚBLICA DEMOCRÁTICA DO CONGO;COD;República Democrática do Congo;
+REP. DEM. CONGO;COD;República Democrática do Congo;
+HOLANDA;NLD;Países Baixos;
+PALESTINA;PSE;Palestina;
+FRANÇA METROPOLITANA;FRA;França;
+BELARUS;BLR;Belarus;
+TRINIDAD E TOBAGO;TTO;Trinidad e Tobago;
+VIETINA;VNM;Vietnã;Grafia incorreta na fonte
+VATICANO;VAT;Santa Sé (Vaticano);
+EMIRADOS ÁRABES;ARE;Emirados Árabes Unidos;
+BURKINA FASSO;BFA;Burkina Faso;
+MIANMAR;MMR;Mianmar;
+MOLDOVA;MDA;Moldávia;
+KUAITE;KWT;Kuwait;
+KUWEIT;KWT;Kuwait;
+HONG-KONG (R.A.E.);HKG;Hong Kong;Região administrativa especial da China
+SAMOA OCIDENTAL;WSM;Samoa;
+REP. MONTENEGRO;MNE;Montenegro;
+QUIRGUÍZIA;KGZ;Quirguistão;
+MACEDÔNIA;MKD;Macedônia do Norte;
+MALAVI;MWI;Malawi;
+NACIONALIDADE INDEFINIDA;;Não informado;Nacionalidade indefinida na fonte
+BOTSWANA;BWA;Botsuana;
+ANTÍGUA;ATG;Antígua e Barbuda;
+BAHAMA,IS;BHS;Bahamas;
+REP. CENTRO AFRICANA;CAF;República Centro-Africana;
+TURCOMÊNIA;TKM;Turcomenistão;
+OMÃ, SULTANATO DE;OMN;Omã;
+FIJI, ILHAS;FJI;Fiji;
+BAREINE;BHR;Bahrein;
+IUGUSLAVIA;YUG;Iugoslávia;Código histórico (país extinto), fora da ISO 3166-1 atual
+IUGOSLÁVIA;YUG;Iugoslávia;Código histórico (país extinto), fora da ISO 3166-1 atual
+APÁTRIDA;XXA;Apátrida;Código ICAO para apátrida (Doc 9303), fora da ISO 3166-1
+APATRIDA;XXA;Apátrida;Código ICAO para apátrida (Doc 9303), fora da ISO 3166-1
+ILHAS REUNIÃO;REU;Reunião;
+REUNIAO,IS;REU;Reunião;
+MACAU (R.A.E.);MAC;Macau;Região administrativa especial da China
+MICRONÉSIA;FSM;Micronésia;
+ANTILHAS HOLANDESAS;ANT;Antilhas Holandesas;Código histórico (dissolvidas em 2010)
+ANTILHAS HOLÂNDESAS;ANT;Antilhas Holandesas;Código histórico (dissolvidas em 2010)
+VIRGENS, IS;;Ilhas Virgens (não especificado);Ambíguo entre Ilhas Virgens Britânicas (VGB) e Americanas (VIR)
+FEROES, IS;FRO;Ilhas Faroé;
+ANTÁRCTICA;ATA;Antártida;
+GROELÂNDIA;GRL;Groenlândia;
+MARSHALL, ILHAS;MHL;Ilhas Marshall;
+ILHAS SANTA HELENA;SHN;Santa Helena;
