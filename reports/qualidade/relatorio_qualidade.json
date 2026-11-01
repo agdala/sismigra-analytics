@@ -1,0 +1,231 @@
+{
+  "gerado_em": "2026-11-01T22:48:33+00:00",
+  "totais": {
+    "lidas": 1361391,
+    "aceitas": 1361391,
+    "rejeitadas": 0,
+    "pct_aceitas": 100.0
+  },
+  "por_arquivo": [
+    {
+      "arquivo_csv": "sismgra_janeiro_setembro_2026.csv",
+      "ano": 2026,
+      "lidas": 203512,
+      "aceitas": 203512,
+      "rejeitadas": 0,
+      "rejeicoes_por_regra": {}
+    },
+    {
+      "arquivo_csv": "sismigra_2021.csv",
+      "ano": 2021,
+      "lidas": 168321,
+      "aceitas": 168321,
+      "rejeitadas": 0,
+      "rejeicoes_por_regra": {}
+    },
+    {
+      "arquivo_csv": "sismigra_2022.csv",
+      "ano": 2022,
+      "lidas": 243675,
+      "aceitas": 243675,
+      "rejeitadas": 0,
+      "rejeicoes_por_regra": {}
+    },
+    {
+      "arquivo_csv": "sismigra_2023.csv",
+      "ano": 2023,
+      "lidas": 232193,
+      "aceitas": 232193,
+      "rejeitadas": 0,
+      "rejeicoes_por_regra": {}
+    },
+    {
+      "arquivo_csv": "sismigra_2024.csv",
+      "ano": 2024,
+      "lidas": 248167,
+      "aceitas": 248167,
+      "rejeitadas": 0,
+      "rejeicoes_por_regra": {}
+    },
+    {
+      "arquivo_csv": "sismigra_janeiro_dezembro_2025.csv",
+      "ano": 2025,
+      "lidas": 265523,
+      "aceitas": 265523,
+      "rejeitadas": 0,
+      "rejeicoes_por_regra": {}
+    }
+  ],
+  "correcoes": {
+    "C04": {
+      "2021": 46,
+      "2023": 77,
+      "2026": 82,
+      "2024": 108,
+      "2022": 57,
+      "2025": 96
+    },
+    "C02": {
+      "2022": 563,
+      "2025": 2104,
+      "2021": 358,
+      "2023": 745,
+      "2026": 1964,
+      "2024": 1087
+    },
+    "C01": {
+      "2022": 26977,
+      "2025": 41285,
+      "2021": 16707,
+      "2023": 16663,
+      "2026": 35889,
+      "2024": 24575
+    },
+    "C03": {
+      "2022": 139,
+      "2025": 117,
+      "2021": 65,
+      "2023": 208,
+      "2026": 76,
+      "2024": 169
+    },
+    "C05": {
+      "2024": 24674,
+      "2021": 20420,
+      "2023": 16734,
+      "2026": 36006,
+      "2025": 41344,
+      "2022": 27057
+    },
+    "C07": {
+      "2025": 1567,
+      "2022": 493,
+      "2024": 1151,
+      "2021": 135,
+      "2023": 383,
+      "2026": 1099
+    },
+    "C08": {
+      "2025": 83,
+      "2026": 57
+    },
+    "C06": {
+      "2026": 693
+    },
+    "C09": {
+      "2022": 1
+    }
+  },
+  "alertas": {
+    "A01": {
+      "2021": 107718,
+      "2022": 172453,
+      "2023": 164664,
+      "2024": 174556,
+      "2025": 186125,
+      "2026": 88486
+    },
+    "A02": [
+      {
+        "uf": "MT",
+        "municipio": "JUREMA",
+        "registros": 105
+      }
+    ],
+    "A03": [],
+    "A04": [],
+    "A05": 138,
+    "A06": [
+      {
+        "amparo": 49,
+        "ano": 2023,
+        "descricoes": 2
+      },
+      {
+        "amparo": 239,
+        "ano": 2023,
+        "descricoes": 2
+      },
+      {
+        "amparo": 265,
+        "ano": 2022,
+        "descricoes": 2
+      },
+      {
+        "amparo": 271,
+        "ano": 2022,
+        "descricoes": 3
+      },
+      {
+        "amparo": 271,
+        "ano": 2023,
+        "descricoes": 2
+      },
+      {
+        "amparo": 278,
+        "ano": 2022,
+        "descricoes": 2
+      },
+      {
+        "amparo": 278,
+        "ano": 2023,
+        "descricoes": 2
+      },
+      {
+        "amparo": 279,
+        "ano": 2022,
+        "descricoes": 3
+      },
+      {
+        "amparo": 279,
+        "ano": 2023,
+        "descricoes": 2
+      },
+      {
+        "amparo": 315,
+        "ano": 2023,
+        "descricoes": 2
+      },
+      {
+        "amparo": 315,
+        "ano": 2025,
+        "descricoes": 2
+      },
+      {
+        "amparo": 316,
+        "ano": 2023,
+        "descricoes": 2
+      },
+      {
+        "amparo": 318,
+        "ano": 2022,
+        "descricoes": 2
+      },
+      {
+        "amparo": 318,
+        "ano": 2023,
+        "descricoes": 2
+      },
+      {
+        "amparo": 319,
+        "ano": 2022,
+        "descricoes": 2
+      },
+      {
+        "amparo": 319,
+        "ano": 2023,
+        "descricoes": 2
+      }
+    ]
+  },
+  "municipios": {
+    "por_status": {
+      "sem correspondência": 105,
+      "não especificado": 137875,
+      "uf não informada": 6821,
+      "ibge": 1215816,
+      "exceção manual": 774
+    },
+    "pct_casados_entre_especificados": 99.991
+  }
+}
