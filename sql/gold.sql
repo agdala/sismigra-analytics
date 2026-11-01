@@ -170,7 +170,7 @@ SELECT
     t.cobertura_registro AS cobertura,
     t.ano_completo,
     l.regiao,
-    l.uf_sigla,
+    coalesce(l.uf_sigla, 'Não informado') AS uf_sigla,
     pn.pais AS pais_nacionalidade,
     pn.iso3 AS iso3_nacionalidade,
     pn.continente AS continente_nacionalidade,

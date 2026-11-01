@@ -17,6 +17,8 @@ class Config:
     ref: Path = RAIZ / "ref"
     sql: Path = RAIZ / "sql"
     relatorios: Path = RAIZ / "reports" / "qualidade"
+    # Única pasta de dados versionada: agregados protegidos (k = 5), fonte oficial dos painéis
+    publicacao: Path = RAIZ / "publicacao"
 
     @property
     def bronze(self) -> Path:
@@ -35,7 +37,7 @@ class Config:
         return self.bronze / "manifest.json"
 
     def criar_pastas(self) -> None:
-        for p in (self.entrada, self.bronze, self.prata, self.ouro, self.relatorios):
+        for p in (self.entrada, self.bronze, self.prata, self.ouro, self.relatorios, self.publicacao):
             p.mkdir(parents=True, exist_ok=True)
 
 

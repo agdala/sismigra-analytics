@@ -14,7 +14,8 @@
 ## Regra de publicação
 
 **Qualquer painel ou arquivo publicado deve usar apenas os agregados protegidos:**
-`agregado_looker_nacionalidade.csv` e `agregado_looker_territorio.csv`, gerados por
+`agregado_looker_nacionalidade.csv` e `agregado_looker_territorio.csv`, da pasta
+[`publicacao/`](../publicacao/) (fonte oficial dos painéis, versionada no repositório), gerados por
 [`src/sismigra/divulgacao.py`](../src/sismigra/divulgacao.py) com limiar k = 5.
 
 | Uso | Fonte permitida |
@@ -37,8 +38,8 @@
 | Risco | Medida |
 |---|---|
 | Reidentificação por combinação rara de atributos (ex.: nacionalidade pouco frequente em UF pequena) | Os painéis públicos usam só os agregados com **controle de divulgação (k = 5)**: sem município, sem idade exata, país e UF em tabelas separadas, e nenhuma célula publicada com 1 a 4 registros. As células pequenas são agrupadas e, se ainda pequenas, suprimidas (`src/sismigra/divulgacao.py`, coberto por testes). |
-| Inferência por diferença (total conhecido menos células publicadas) | A supressão residual atinge menos de 0,02% dos registros e células espalhadas por vários anos e UFs, o que torna a diferença pouco informativa. Os totais oficiais publicados no README são por ano, não por célula. |
-| Redistribuição dos microdados | Nenhum dado bruto ou da prata é versionado (`.gitignore` bloqueia `data/`, `*.csv`, `*.zip` e `*.parquet`). Cada pessoa baixa os arquivos da fonte original. |
+| Inferência por diferença (total conhecido menos células publicadas) | O README publica o total exato de cada ano. A **supressão secundária** garante que nenhum ano tenha exatamente uma célula suprimida: quando isso aconteceria, a menor célula publicada do mesmo ano também é suprimida, e a subtração revela só a soma de duas ou mais células (testado). |
+| Redistribuição dos microdados | Nenhum dado bruto, da prata ou do esquema estrela é versionado (`.gitignore` bloqueia `data/`, `*.csv`, `*.zip` e `*.parquet`). A única exceção são os CSVs de `publicacao/`, já protegidos. Cada pessoa baixa os microdados da fonte original. |
 | `id_registro` interpretado como identificador pessoal | É um identificador técnico (hash do arquivo + número da linha), só para rastrear a linha de origem. Não se liga a nenhuma pessoa. |
 | Uso discriminatório das análises | As análises são agregadas e descritivas, voltadas a políticas públicas e à proteção de pessoas migrantes e refugiadas. |
 
@@ -51,6 +52,7 @@
 ## O que fica no repositório
 
 Versionados: código, SQL, testes, documentação, tabelas de referência (`ref/`), o inventário
-estrutural (`reports/inventario/`, só estatísticas por coluna) e o relatório de qualidade (só contagens).
+estrutural (`reports/inventario/`, só estatísticas por coluna), o relatório de qualidade (só contagens)
+e os agregados protegidos de `publicacao/` (k = 5).
 
 Não versionados: os ZIPs e CSVs do SISMIGRA e todas as saídas das camadas bronze, prata e ouro.

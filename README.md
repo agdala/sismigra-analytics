@@ -15,8 +15,8 @@ Power BI e Looker Studio.
 
 > [!WARNING]
 > **Regra de publicação:** qualquer painel ou arquivo publicado (Power BI `.pbix`, Looker Studio,
-> CSV, imagem) deve usar **apenas os agregados protegidos** (`agregado_looker_nacionalidade.csv` e
-> `agregado_looker_territorio.csv`). O esquema estrela completo da camada ouro é só para uso interno
+> CSV, imagem) deve usar **apenas os agregados protegidos da pasta [`publicacao/`](publicacao/)**,
+> a fonte oficial dos painéis. O esquema estrela completo da camada ouro é só para uso interno
 > e não pode ser publicado. Ver a [seção 6](#6-controle-de-divulgação).
 
 ---
@@ -193,8 +193,9 @@ make run
 | `data/silver/rejeitados.parquet` | Registros rejeitados com o motivo |
 | `data/gold/parquet/*.parquet` | Esquema estrela completo (**uso interno**, não publicar) |
 | `data/gold/csv/*.csv` | O mesmo em CSV (`;`, UTF-8 com BOM, abre no Excel) |
-| `data/gold/agregado_looker_nacionalidade.csv` | Ano × país × perfil × amparo, com controle de divulgação (cerca de 10 mil linhas, 1,4 MB) |
-| `data/gold/agregado_looker_territorio.csv` | Ano × UF × perfil × amparo, com controle de divulgação (cerca de 10 mil linhas, 1,3 MB) |
+| `publicacao/agregado_looker_nacionalidade.csv` | Ano × país × perfil × amparo, com controle de divulgação (cerca de 10,6 mil linhas, 1,4 MB). **Versionado** |
+| `publicacao/agregado_looker_territorio.csv` | Ano × UF × perfil × amparo, com controle de divulgação (cerca de 9,8 mil linhas, 1,3 MB). **Versionado** |
+| `publicacao/metadados.json` | Data de geração, hashes dos arquivos de origem e resultado do controle de divulgação. **Versionado** |
 | `reports/qualidade/relatorio_qualidade.md` | Relatório de qualidade da última execução |
 
 ### 4.5 Testes
@@ -251,7 +252,9 @@ perderiam cerca de um terço dos registros, e o Espírito Santo, 41%.
    tipologia, subgrupo, perfil (sexo, faixa etária, status), categoria e, por último, o país
    ("Outros países (continente)").
 2. **Supressão residual:** o que continuar abaixo de 5 fica com `qtd_registros` vazio e
-   `suprimido = true`.
+   `suprimido = true`. Inclui uma **supressão secundária**: como o README publica o total exato de
+   cada ano, nenhum ano pode ficar com uma única célula suprimida (o valor sairia por subtração).
+   Quando isso acontece, a menor célula publicada do mesmo ano também é suprimida.
 
 Além disso, país e UF ficam em **tabelas separadas**, para não gerar o cruzamento mais esparso.
 
@@ -313,17 +316,21 @@ esquema estrela completo é para uso interno (validação e exploração local) 
 
 ## 9. Painéis
 
+**Fonte oficial dos painéis: a pasta [`publicacao/`](publicacao/).** Ela contém os dois agregados
+protegidos, versionados no repositório, e o [`LEIAME`](publicacao/LEIAME.md) com o tipo, um exemplo e
+a descrição de cada coluna. É a única pasta com dados no Git.
+
 **Regras comuns aos dois painéis:**
 
-1. **Fonte:** só os agregados protegidos (`agregado_looker_nacionalidade.csv` e
-   `agregado_looker_territorio.csv`). Nunca o esquema estrela da camada ouro.
+1. **Fonte:** só `publicacao/agregado_looker_nacionalidade.csv` e
+   `publicacao/agregado_looker_territorio.csv`. Nunca o esquema estrela da camada ouro.
 2. **Período:** comparações de volume usam o filtro `ano_completo = true` (2021 a 2025). 2026 aparece
    só em percentuais, com o rótulo "2026 (jan-set, parcial)".
 3. **Duas fontes separadas:** não junte as duas tabelas numa só, porque os totais seriam somados duas vezes.
 
 ### Power BI
 
-> Espaço reservado. Importe os dois agregados protegidos como **duas tabelas independentes**, sem
+> Espaço reservado. Importe os dois arquivos de `publicacao/` como **duas tabelas independentes**, sem
 > relacionamento entre elas (Obter dados > Texto/CSV, separador vírgula). Use a medida
 > `Registros = SUM(tabela[qtd_registros])` e o filtro `ano_completo = true` nos visuais de volume.
 > O `.pbix` publicado não deve conter nenhuma tabela da camada ouro completa.
@@ -334,8 +341,8 @@ esquema estrela completo é para uso interno (validação e exploração local) 
 
 ### Looker Studio
 
-> Espaço reservado. Importe `data/gold/agregado_looker_nacionalidade.csv` e
-> `data/gold/agregado_looker_territorio.csv` como duas fontes de dados (upload de arquivo ou
+> Espaço reservado. Importe `publicacao/agregado_looker_nacionalidade.csv` e
+> `publicacao/agregado_looker_territorio.csv` como duas fontes de dados (upload de arquivo ou
 > Google Sheets) e crie o filtro `ano_completo = true` nos gráficos de volume. Use `SUM(qtd_registros)`:
 > as células suprimidas têm contagem vazia e são ignoradas na soma.
 

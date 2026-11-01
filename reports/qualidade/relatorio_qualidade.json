@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-01T23:10:26+00:00",
+  "gerado_em": "2026-11-01T23:38:16+00:00",
   "totais": {
     "lidas": 1361391,
     "aceitas": 1361391,
@@ -57,60 +57,60 @@
     }
   ],
   "correcoes": {
-    "C01": {
-      "2022": 26977,
-      "2025": 41285,
-      "2024": 24575,
-      "2021": 16707,
-      "2026": 35889,
-      "2023": 16663
-    },
-    "C03": {
-      "2022": 139,
-      "2025": 117,
-      "2024": 169,
-      "2021": 65,
-      "2026": 76,
-      "2023": 208
-    },
-    "C02": {
-      "2022": 563,
-      "2025": 2104,
-      "2024": 1087,
-      "2021": 358,
-      "2026": 1964,
-      "2023": 745
-    },
-    "C05": {
-      "2024": 24674,
-      "2021": 20420,
-      "2026": 36006,
-      "2023": 16734,
-      "2022": 27057,
-      "2025": 41344
-    },
     "C07": {
+      "2026": 1099,
+      "2021": 135,
+      "2023": 383,
       "2025": 1567,
       "2022": 493,
-      "2021": 135,
-      "2026": 1099,
-      "2023": 383,
       "2024": 1151
     },
+    "C05": {
+      "2022": 27057,
+      "2024": 24674,
+      "2026": 36006,
+      "2021": 20420,
+      "2023": 16734,
+      "2025": 41344
+    },
+    "C01": {
+      "2024": 24575,
+      "2022": 26977,
+      "2025": 41285,
+      "2026": 35889,
+      "2021": 16707,
+      "2023": 16663
+    },
     "C04": {
-      "2021": 46,
+      "2025": 96,
       "2026": 82,
+      "2021": 46,
       "2023": 77,
       "2024": 108,
-      "2025": 96,
       "2022": 57
+    },
+    "C02": {
+      "2024": 1087,
+      "2022": 563,
+      "2025": 2104,
+      "2026": 1964,
+      "2021": 358,
+      "2023": 745
+    },
+    "C03": {
+      "2024": 169,
+      "2022": 139,
+      "2025": 117,
+      "2026": 76,
+      "2021": 65,
+      "2023": 208
+    },
+    "C09": {
+      "2022": 1
     },
     "C08": {
       "2025": 83,
       "2026": 57
-    },
-    "C09": {
-      "2022": 1
     },
     "C06": {
       "2026": 693
@@ -220,9 +220,9 @@
   },
   "municipios": {
     "por_status": {
+      "sem correspondência": 105,
       "não especificado": 137875,
       "uf não informada": 6821,
-      "sem correspondência": 105,
       "ibge": 1215816,
       "exceção manual": 774
     },
@@ -275,14 +275,25 @@
           ],
           "celulas_agrupadas": 582,
           "registros_agrupados": 1438
+        },
+        {
+          "etapa": 6,
+          "colunas": [
+            "pais_nacionalidade",
+            "continente_nacionalidade"
+          ],
+          "celulas_agrupadas": 10,
+          "registros_agrupados": 31
         }
       ],
       "limiar": 5,
-      "celulas_publicadas": 10567,
-      "celulas_suprimidas": 10,
-      "registros_suprimidos": 31,
+      "celulas_publicadas": 10562,
+      "celulas_suprimidas": 6,
+      "celulas_supressao_primaria": 3,
+      "celulas_supressao_secundaria": 3,
+      "registros_suprimidos": 24,
       "registros_total": 1361391,
-      "registros_publicados": 1361360,
+      "registros_publicados": 1361367,
       "pct_publicado": 99.998
     },
     "agregado_looker_territorio": {
@@ -327,6 +338,8 @@
       "limiar": 5,
       "celulas_publicadas": 9839,
       "celulas_suprimidas": 87,
+      "celulas_supressao_primaria": 87,
+      "celulas_supressao_secundaria": 0,
       "registros_suprimidos": 253,
       "registros_total": 1361391,
       "registros_publicados": 1361138,

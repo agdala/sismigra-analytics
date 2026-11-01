@@ -6,6 +6,8 @@ data/
 *.duckdb
 *.duckdb.wal
 !tests/fixtures/*.csv
+# Agregados protegidos (k = 5): única saída de dados versionada, fonte oficial dos painéis
+!publicacao/*.csv
 # Tabelas de referência e revisão (sem microdados) são versionadas
 !ref/*.csv
 !docs/revisao/*.csv

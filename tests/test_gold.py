@@ -73,7 +73,8 @@ def test_arquivos_exportados(execucao):
     cfg = execucao["cfg"]
     for t in execucao["contagens"]:
         if t.startswith("agregado_looker"):
-            assert (cfg.ouro / f"{t}.csv").exists()
+            assert (cfg.publicacao / f"{t}.csv").exists()
+            assert not (cfg.ouro / f"{t}.csv").exists()
             continue
         assert (cfg.ouro / "parquet" / f"{t}.parquet").exists()
         csv = cfg.ouro / "csv" / f"{t}.csv"

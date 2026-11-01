@@ -16,6 +16,7 @@ from pathlib import Path
 import duckdb
 
 from . import bronze, gold, quality, silver
+from . import divulgacao as divulgacao_mod
 from .config import Config
 
 
@@ -33,11 +34,13 @@ def executar(cfg: Config) -> dict:
     print("[3/4] Ouro: esquema estrela, Parquet e CSV")
     contagens = gold.executar(cfg, con)
     divulgacao = contagens.pop("_divulgacao")
+    divulgacao_mod.escrever_metadados(cfg.publicacao, manifesto, divulgacao)
     for t, n in contagens.items():
         print(f"      {t}: {n:,} linhas".replace(",", "."))
     for t, st in divulgacao.items():
         print(f"      {t}: {st['pct_publicado']}% dos registros publicados, "
               f"{st['celulas_suprimidas']} célula(s) suprimida(s)")
+    print(f"      agregados publicáveis em: {cfg.publicacao}")
 
     print("[4/4] Relatório de qualidade")
     rel = quality.calcular(con, res["leitura"], divulgacao)
