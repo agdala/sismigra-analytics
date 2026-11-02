@@ -64,8 +64,8 @@ será feito em `ref/paises.csv`.
 
 ## Ingestão
 
-Os links do SharePoint do OBMigra exigem autenticação institucional (HTTP 401 em teste
-automatizado). Decisão: ingestão manual via `data/landing/`, com hash SHA-256 por arquivo.
+Os arquivos são públicos, e o site do OBMigra os disponibiliza para download. Decisão: ingestão
+manual via `data/landing/`, com hash SHA-256 por arquivo.
 
 ## Amparos: decisões de categoria (revisão 1)
 

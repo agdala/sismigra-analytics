@@ -135,8 +135,8 @@ erDiagram
 
 ### 4.1 Baixar os dados
 
-Os arquivos ficam em pastas do OBMigra/UnB no SharePoint, que **exigem login institucional**. Por
-isso o download é manual (os links estão em [`ref/fontes.csv`](ref/fontes.csv)):
+Os arquivos são públicos e ficam em pastas do OBMigra/UnB no SharePoint. O site disponibiliza os
+arquivos para download, então essa etapa é manual (os links estão em [`ref/fontes.csv`](ref/fontes.csv)):
 
 1. Baixe os ZIPs de cada ano.
 2. Coloque-os, **sem descompactar**, na pasta `data/landing/` do projeto.
@@ -277,7 +277,7 @@ esquema estrela completo é para uso interno (validação e exploração local) 
 | Decisão | Motivo |
 |---|---|
 | **DuckDB com SQL puro** | Processa 1,36 milhão de linhas em cerca de 17 segundos num notebook, sem servidor. O SQL fica versionado e legível (`sql/`). |
-| **Ingestão manual com hash** | Os links do SharePoint exigem autenticação (testado: HTTP 401). O SHA-256 no manifesto prova qual versão de cada arquivo foi usada. |
+| **Ingestão manual com hash** | O site do OBMigra disponibiliza os arquivos para download, sem uma API de acesso direto. O SHA-256 no manifesto prova qual versão de cada arquivo foi usada. |
 | **Duplicatas mantidas** | Sem identificador pessoal, linhas iguais são pessoas diferentes. Prova: em 2026, com idade exata, a taxa de duplicatas cai de cerca de 60% para 35%. |
 | **Faixa etária de 2026 derivada da idade** | Mantém a série comparável, com os mesmos cortes da fonte. A idade exata fica disponível para 2026. |
 | **Municípios por nome normalizado + exceções** | A fonte não tem código. 99,99% dos municípios informados casam com a DTB; os 7 casos restantes estão em `ref/excecoes_municipios.csv`, cada um com justificativa. |

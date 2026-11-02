@@ -1,8 +1,8 @@
 """Camada bronze: guarda os arquivos originais sem alteração e registra a procedência.
 
-Os arquivos do SISMIGRA são distribuídos pelo OBMigra/UnB em pastas do SharePoint que
-exigem autenticação institucional. Por isso a entrada é manual: o usuário coloca os ZIPs
-(ou CSVs) em data/landing/ e a bronze:
+Os arquivos do SISMIGRA são públicos e distribuídos pelo OBMigra/UnB em pastas do SharePoint.
+O site disponibiliza os arquivos para download, então a entrada é manual: o usuário baixa os
+ZIPs (ou CSVs), coloca-os em data/landing/ e a bronze:
 
 1. calcula o SHA-256 de cada arquivo;
 2. copia o arquivo, byte a byte, para data/bronze/originais/;
