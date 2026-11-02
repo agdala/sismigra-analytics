@@ -11,6 +11,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10", "3.12"]
+    env:
+      DBT_SEND_ANONYMOUS_USAGE_STATS: "false"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -19,5 +21,9 @@ jobs:
           cache: pip
       - name: Instalar dependências
         run: pip install -r requirements.txt
-      - name: Rodar testes
+      - name: Rodar testes (pytest, inclui o pipeline com dbt sobre dados sintéticos)
         run: pytest -v
+      - name: dbt build com dados sintéticos (sem rede, sem pacotes do dbt Hub)
+        run: python -m sismigra.sinteticos "$RUNNER_TEMP/sinteticos"
+      - name: Conferir que ref/ e publicacao/ não foram alterados
+        run: git diff --exit-code -- ref/ publicacao/
