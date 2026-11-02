@@ -36,3 +36,9 @@ venv/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# dbt: artefatos gerados (o site de docs é publicado pelo CI) e cópia das seeds de ref/
+dbt/target/
+dbt/logs/
+dbt/seeds/
+dbt/.user.yml

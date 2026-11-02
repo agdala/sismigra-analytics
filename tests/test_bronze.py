@@ -39,6 +39,6 @@ def test_ingestao_idempotente(execucao):
 
 def test_entrada_vazia_falha_com_mensagem(tmp_path, ambiente):
     cfg = Config(entrada=tmp_path / "vazia", dados=tmp_path / "data", ref=ambiente.ref,
-                 sql=ambiente.sql, relatorios=tmp_path / "r")
+                 relatorios=tmp_path / "r", publicacao=tmp_path / "p")
     with pytest.raises(FileNotFoundError, match="Nenhum ZIP ou CSV"):
         bronze.executar(cfg)

@@ -2,7 +2,7 @@
 
 
 def regras_rejeitadas(con):
-    return dict(con.execute("SELECT regra, count(*) FROM rejeitados GROUP BY 1").fetchall())
+    return dict(con.execute("SELECT regra, count(*) FROM stg_rejeitados GROUP BY 1").fetchall())
 
 
 def test_rejeicoes(execucao):
@@ -12,7 +12,7 @@ def test_rejeicoes(execucao):
 
 def test_duplicatas_exatas_sao_mantidas_e_marcadas(execucao):
     rows = execucao["con"].execute(
-        "SELECT flag_duplicata_exata FROM prata WHERE profissao = 'DUP'").fetchall()
+        "SELECT flag_duplicata_exata FROM int_registros_enriquecidos WHERE profissao = 'DUP'").fetchall()
     assert rows == [(True,), (True,)]
 
 
@@ -78,5 +78,5 @@ def test_idade_invalida(linha):
 
 
 def test_id_registro_unico(execucao):
-    n, d = execucao["con"].execute("SELECT count(*), count(DISTINCT id_registro) FROM prata").fetchone()
+    n, d = execucao["con"].execute("SELECT count(*), count(DISTINCT id_registro) FROM int_registros_enriquecidos").fetchone()
     assert n == d

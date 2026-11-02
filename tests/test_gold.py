@@ -16,7 +16,7 @@ def um(con, sql, params=None):
 
 def test_fato_tem_todos_os_registros_aceitos(execucao):
     con = execucao["con"]
-    assert um(con, "SELECT count(*) FROM fato_registro") == um(con, "SELECT count(*) FROM prata")
+    assert um(con, "SELECT count(*) FROM fato_registro") == um(con, "SELECT count(*) FROM int_registros_enriquecidos")
 
 
 def test_integridade_referencial(execucao):
@@ -40,7 +40,7 @@ def test_base_dos_agregados_soma_igual_ao_fato(execucao):
 def test_grafias_diferentes_viram_um_pais(execucao):
     con = execucao["con"]
     sks = con.execute(
-        "SELECT DISTINCT f.sk_pais_nacionalidade FROM fato_registro f JOIN prata p USING (id_registro) "
+        "SELECT DISTINCT f.sk_pais_nacionalidade FROM fato_registro f JOIN int_registros_enriquecidos p USING (id_registro) "
         "WHERE p.profissao IN ('KUAITE', 'KUWEIT')").fetchall()
     assert len(sks) == 1
     assert um(con, "SELECT iso3 FROM dim_pais WHERE sk_pais = ?", [sks[0][0]]) == "KWT"
@@ -48,7 +48,7 @@ def test_grafias_diferentes_viram_um_pais(execucao):
 
 def test_pais_ausente_vai_para_membro_nao_informado(execucao):
     con = execucao["con"]
-    assert um(con, "SELECT f.sk_pais_nacionalidade FROM fato_registro f JOIN prata p USING (id_registro) "
+    assert um(con, "SELECT f.sk_pais_nacionalidade FROM fato_registro f JOIN int_registros_enriquecidos p USING (id_registro) "
                    "WHERE p.profissao = 'PAIS_TRACO'") == -1
 
 

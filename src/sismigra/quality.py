@@ -1,11 +1,11 @@
 """Regras de qualidade e relatório gerado a cada execução.
 
-As regras são declaradas uma única vez em REGRAS. O SQL da prata aplica as regras de
-rejeição (R) e correção (C); os alertas (A) são calculados aqui. Os testes em tests/
-verificam cada regra com dados sintéticos.
+As regras são declaradas uma única vez em REGRAS. Os modelos dbt (dbt/models/) aplicam as
+regras de rejeição (R) e correção (C) e as testam (dbt/tests/); os alertas (A) são calculados
+aqui para o relatório. Os testes em tests/ verificam cada regra com dados sintéticos.
 
 Severidades:
-  rejeicao  o registro sai da prata e vai para rejeitados.parquet
+  rejeicao  o registro sai da prata e vai para staging.stg_rejeitados
   correcao  o registro fica; o valor é padronizado ou marcado como "Não informado"
   alerta    nada muda nos dados; o achado aparece no relatório para análise
 """
@@ -43,14 +43,14 @@ REGRAS = {
 
 
 def calcular(con: duckdb.DuckDBPyConnection, leitura: list[dict], divulgacao: dict | None = None) -> dict:
-    """Calcula as métricas de qualidade a partir das tabelas prata e rejeitados."""
+    """Calcula as métricas de qualidade a partir dos modelos dbt (prata e rejeitados)."""
     q = lambda sql: con.execute(sql).fetchall()  # noqa: E731
 
     por_arquivo = []
     for item in leitura:
         nome = item["arquivo_csv"]
-        aceitas = q(f"SELECT count(*) FROM prata WHERE arquivo_csv = '{nome}'")[0][0]
-        rej = dict(q(f"SELECT regra, count(*) FROM rejeitados WHERE arquivo_csv = '{nome}' GROUP BY 1"))
+        aceitas = q(f"SELECT count(*) FROM intermediate.int_registros_enriquecidos WHERE arquivo_csv = '{nome}'")[0][0]
+        rej = dict(q(f"SELECT regra, count(*) FROM staging.stg_rejeitados WHERE arquivo_csv = '{nome}' GROUP BY 1"))
         lidas = item["lidas_validas"] + item["malformadas"]
         por_arquivo.append({
             "arquivo_csv": nome, "ano": item["ano"], "lidas": lidas, "aceitas": aceitas,
@@ -59,30 +59,30 @@ def calcular(con: duckdb.DuckDBPyConnection, leitura: list[dict], divulgacao: di
 
     correcoes = {}
     for ano, regra, n in q(
-        "SELECT ano_registro, c, count(*) FROM (SELECT ano_registro, unnest(correcoes) c FROM prata) GROUP BY ALL"
+        "SELECT ano_registro, c, count(*) FROM (SELECT ano_registro, unnest(correcoes) c FROM intermediate.int_registros_enriquecidos) GROUP BY ALL"
     ):
         correcoes.setdefault(regra, {})[str(ano)] = n
 
     alertas = {
         "A01": dict((str(a), n) for a, n in q(
-            "SELECT ano_registro, count(*) FROM prata WHERE flag_duplicata_exata GROUP BY 1 ORDER BY 1")),
+            "SELECT ano_registro, count(*) FROM intermediate.int_registros_enriquecidos WHERE flag_duplicata_exata GROUP BY 1 ORDER BY 1")),
         "A02": [{"uf": u, "municipio": m, "registros": n} for u, m, n in q(
-            "SELECT uf_sigla, municipio_fonte, count(*) FROM prata WHERE municipio_status = 'sem correspondência' "
+            "SELECT uf_sigla, municipio_fonte, count(*) FROM intermediate.int_registros_enriquecidos WHERE municipio_status = 'sem correspondência' "
             "GROUP BY ALL ORDER BY 3 DESC")],
         "A03": [{"pais": p, "registros": n} for p, n in q(
-            "SELECT p, count(*) FROM (SELECT unnest([pais_nascimento_fonte, pais_nacionalidade_fonte]) p FROM prata) "
-            "WHERE p NOT IN (SELECT nome_fonte FROM ref_paises) GROUP BY 1 ORDER BY 2 DESC")],
+            "SELECT p, count(*) FROM (SELECT unnest([pais_nascimento_fonte, pais_nacionalidade_fonte]) p FROM intermediate.int_registros_enriquecidos) "
+            "WHERE p NOT IN (SELECT nome_fonte FROM ref.paises) GROUP BY 1 ORDER BY 2 DESC")],
         "A04": [{"amparo": c, "registros": n} for c, n in q(
-            "SELECT amparo_codigo, count(*) FROM prata WHERE amparo_codigo NOT IN (SELECT codigo FROM ref_amparos) "
+            "SELECT amparo_codigo, count(*) FROM intermediate.int_registros_enriquecidos WHERE amparo_codigo NOT IN (SELECT codigo FROM ref.amparos) "
             "GROUP BY 1 ORDER BY 2 DESC")],
-        "A05": q("SELECT count(*) FROM prata WHERE profissao LIKE 'MENOR%' "
+        "A05": q("SELECT count(*) FROM intermediate.int_registros_enriquecidos WHERE profissao LIKE 'MENOR%' "
                  "AND faixa_etaria IN ('25 a 39 anos', '40 a 64 anos', '65 anos ou mais')")[0][0],
         "A06": [{"amparo": c, "ano": a, "descricoes": n} for c, a, n in q(
-            "SELECT amparo_codigo, ano_registro, count(DISTINCT amparo_descricao) n FROM prata "
+            "SELECT amparo_codigo, ano_registro, count(DISTINCT amparo_descricao) n FROM intermediate.int_registros_enriquecidos "
             "GROUP BY 1, 2 HAVING n > 1 ORDER BY 1, 2")],
     }
 
-    municipios = dict(q("SELECT municipio_status, count(*) FROM prata GROUP BY 1"))
+    municipios = dict(q("SELECT municipio_status, count(*) FROM intermediate.int_registros_enriquecidos GROUP BY 1"))
     especificados = municipios.get("ibge", 0) + municipios.get("exceção manual", 0) + municipios.get(
         "sem correspondência", 0)
     casados = municipios.get("ibge", 0) + municipios.get("exceção manual", 0)

@@ -1,6 +1,6 @@
 import pytest
 
-from sismigra.silver import ErroContrato, validar_contrato
+from sismigra.carga import ErroContrato, validar_contrato
 from conftest import CAB_2025, CAB_2026
 
 

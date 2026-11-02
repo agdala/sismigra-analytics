@@ -29,7 +29,7 @@ def test_relatorio_gravado(execucao):
 
 
 def test_todo_codigo_de_regra_do_sql_esta_documentado():
-    sql = (RAIZ / "sql" / "silver.sql").read_text(encoding="utf-8")
+    sql = "".join(p.read_text(encoding="utf-8") for p in (RAIZ / "dbt" / "models").rglob("*.sql"))
     usados = set(re.findall(r"'([RC]\d\d)'", sql))
     assert usados, "nenhum código de regra encontrado no SQL"
     assert usados <= set(REGRAS), f"regras sem documentação: {usados - set(REGRAS)}"
