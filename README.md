@@ -1,11 +1,14 @@
 # sismigra-analytics
 
 [![testes](https://github.com/agdala/sismigra-analytics/actions/workflows/tests.yml/badge.svg)](https://github.com/agdala/sismigra-analytics/actions/workflows/tests.yml)
+[![dbt docs](https://github.com/agdala/sismigra-analytics/actions/workflows/docs.yml/badge.svg)](https://agdala.github.io/sismigra-analytics/)
 
-Pipeline em **Python + DuckDB** sobre os microdados públicos do **SISMIGRA** (Sistema de Registro
-Nacional Migratório), de 2021 a 2026. São **1.361.391 registros** organizados em camadas (bronze,
-prata, ouro), com governança e qualidade de dados testadas e um esquema estrela pronto para
-Power BI e Looker Studio.
+Pipeline em **Python + dbt + DuckDB** sobre os microdados públicos do **SISMIGRA** (Sistema de
+Registro Nacional Migratório), de 2021 a 2026. São **1.361.391 registros** organizados em camadas
+(bronze em Python, prata e ouro em dbt), com governança e qualidade de dados testadas, um esquema
+estrela e agregados protegidos para Power BI e Looker Studio.
+
+**Documentação dos modelos (dbt docs):** <https://agdala.github.io/sismigra-analytics/>
 
 > [!IMPORTANT]
 > **2026 é um ano parcial (janeiro a setembro).** Os arquivos trazem só o ano do registro, sem mês,
@@ -70,14 +73,17 @@ flowchart LR
     subgraph Bronze
         C[data/landing/] --> D[Cópia sem alteração<br/>+ SHA-256 + manifesto<br/>URL, data, cobertura]
     end
-    subgraph Prata
-        E[Contrato de layout] --> F[Padronização<br/>tipos, datas, sexo, idade]
-        F --> G[Município IBGE<br/>País ISO]
-        G --> H[Regras R/C/A]
+    subgraph Carga["Carga (Python)"]
+        E[Contrato de layout<br/>fontes bronze no DuckDB]
     end
-    subgraph Ouro
-        I[Esquema estrela<br/>Parquet + CSV<br/>uso interno]
-        J[Agregados com controle<br/>de divulgação k=5]
+    subgraph Prata["Prata (dbt)"]
+        F[stg_: padronização<br/>tipos, datas, sexo, idade]
+        F --> G[int_: município IBGE<br/>país ISO, correções]
+        G --> H[Testes R/C/A]
+    end
+    subgraph Ouro["Ouro (dbt + Python)"]
+        I[marts: esquema estrela<br/>uso interno]
+        J[Agregados com controle<br/>de divulgação k=5<br/>Python]
     end
     subgraph Publicação
         K[Power BI]
@@ -86,8 +92,8 @@ flowchart LR
     end
     A -->|download manual| C
     B -->|scripts/construir_refs.py| R[(ref/<br/>tabelas versionadas)]
-    D --> E
-    R --> G
+    D --> E --> F
+    R -->|seeds| G
     H --> I --> J
     J --> K
     J --> L
@@ -189,8 +195,7 @@ make run
 | Caminho | Conteúdo |
 |---|---|
 | `data/bronze/manifest.json` | Procedência e hash de cada arquivo |
-| `data/silver/registros.parquet` | Registros padronizados |
-| `data/silver/rejeitados.parquet` | Registros rejeitados com o motivo |
+| `data/sismigra.duckdb` | Banco DuckDB com as fontes bronze e todos os modelos do dbt (staging, intermediate, marts, ref) |
 | `data/gold/parquet/*.parquet` | Esquema estrela completo (**uso interno**, não publicar) |
 | `data/gold/csv/*.csv` | O mesmo em CSV (`;`, UTF-8 com BOM, abre no Excel) |
 | `publicacao/agregado_looker_nacionalidade.csv` | Ano × país × perfil × amparo, com controle de divulgação (cerca de 10,6 mil linhas, 1,4 MB). **Versionado** |
@@ -231,7 +236,8 @@ Actions sem os microdados.
 
 **Contratos que fazem o pipeline falhar em vez de errar em silêncio:**
 
-- um arquivo com coluna nova ou faltando interrompe a prata (`ErroContrato`);
+- um arquivo com coluna nova ou faltando interrompe a carga (`ErroContrato`);
+- um teste do dbt com severidade de erro interrompe o pipeline (`ErroDbt`);
 - um arquivo que não está em `ref/fontes.csv` não é processado;
 - um amparo sem categoria, ou um país sem código, aparece como alerta, e o teste de referência falha.
 
@@ -272,11 +278,118 @@ a 4 registros e que publicado + suprimido = total do fato.
 **Regra de publicação:** painéis e arquivos publicados usam só os dois agregados protegidos. O
 esquema estrela completo é para uso interno (validação e exploração local) e não pode ser publicado.
 
-## 7. Decisões técnicas
+## 7. Camada dbt
+
+As camadas prata e ouro são modelos **dbt** (dbt-core com o adaptador dbt-duckdb), no mesmo
+arquivo DuckDB do pipeline. O Python continua responsável pelo que não é transformação: download
+e hash (bronze), contrato de layout e carga das fontes, exportação e controle de divulgação.
+
+**Documentação navegável (modelos, colunas, testes e linhagem):** <https://agdala.github.io/sismigra-analytics/>
+(gerada no CI a partir de dados sintéticos, sem nenhum dado real).
+
+### 7.1 Estrutura dos modelos
+
+| Camada | Schema | Materialização | Modelos | Papel |
+|---|---|---|---|---|
+| Fontes | `bronze` | tabelas (Python) | `registros_brutos`, `linhas_malformadas`, `manifesto` | CSVs originais como texto, com procedência; `freshness` pelo campo `ingerido_em` |
+| Seeds | `ref` | tabelas | `amparos`, `paises`, `municipios_ibge`, `excecoes_municipios`, `uf`, `fontes` | Tabelas de referência de `ref/` |
+| Staging | `staging` | view | `stg_registros`, `stg_rejeitados` | Tipos, datas, ausentes, sexo, idade e faixa etária; rejeições R00 a R03 |
+| Intermediate | `intermediate` | view / tabela | `int_registros_municipio`, `int_registros_enriquecidos`, `int_paises`, `int_mapa_pais` | Município IBGE, país ISO, lista de correções (equivale à antiga prata) |
+| Marts | `marts` | tabela | `fato_registro`, `dim_tempo`, `dim_pais`, `dim_localidade`, `dim_perfil`, `dim_amparo`, `dim_ocupacao`, `amparo_descricao_ano`, `agregado_base` | Esquema estrela e base do controle de divulgação |
+| Exposures | | | `painel_looker_studio`, `painel_power_bi` | Painéis que dependem só dos agregados protegidos |
+
+### 7.2 Linhagem
+
+```mermaid
+flowchart LR
+    subgraph fontes[Fontes bronze]
+        RB[registros_brutos]
+        LM[linhas_malformadas]
+    end
+    subgraph seeds[Seeds ref/]
+        SM[municipios_ibge]
+        SE[excecoes_municipios]
+        SP[paises]
+        SA[amparos]
+        SF[fontes]
+    end
+    RB --> STG[stg_registros]
+    RB --> REJ[stg_rejeitados]
+    LM --> REJ
+    STG --> IM[int_registros_municipio]
+    SM --> IM
+    SE --> IM
+    IM --> IE[int_registros_enriquecidos]
+    IE --> IP[int_paises]
+    SP --> IP
+    IP --> MP[int_mapa_pais]
+    IE --> DIM[dim_tempo / dim_localidade /<br/>dim_perfil / dim_amparo / dim_ocupacao]
+    SF --> DIM
+    SA --> DIM
+    IP --> DP[dim_pais]
+    IE --> F[fato_registro]
+    MP --> F
+    DIM --> F
+    F --> AB[agregado_base]
+    DP --> AB
+    AB -->|Python, k=5| PUB[publicacao/]
+    PUB --> E1([Looker Studio])
+    PUB --> E2([Power BI])
+```
+
+### 7.3 Testes do dbt
+
+- **Genéricos (dbt-core):** `not_null`, `unique`, `relationships` (as 8 chaves do fato com as
+  dimensões, municípios com a DTB, países com o mapa) e `accepted_values` (sexo, faixa etária,
+  categoria e subgrupo de amparo, região, cobertura...).
+- **Genéricos próprios** (`dbt/macros/testes/`): `expressao_verdadeira` e `sem_linhas`, sem pacotes
+  do dbt Hub.
+- **Singulares** (`dbt/tests/`), um por regra de qualidade: reconciliação lidas = aceitas +
+  rejeitadas, ano de entrada até o ano do registro, faixa coerente com a idade, código IBGE na UF
+  certa, um nome por código ISO, país e amparo com referência (A03, A04), fato = soma do agregado e
+  coerência de `ano_completo`.
+- **Alertas** com `severity: warn` (não bloqueiam): A02 município sem correspondência no IBGE,
+  A05 "MENOR" com 25 anos ou mais e A06 amparo com mais de uma norma no ano.
+- Resultado com os dados reais: **140 testes passam e 3 alertas** (os mesmos do relatório de qualidade).
+
+### 7.4 Equivalência com o pipeline anterior
+
+A migração do SQL puro para o dbt não mudou nenhum resultado. A comparação linha a linha das 13
+tabelas, dos totais por ano, país e UF e dos CSVs de `publicacao/` (byte a byte) está em
+[`docs/revisao/equivalencia_dbt.md`](docs/revisao/equivalencia_dbt.md), gerada por
+`scripts/comparar_equivalencia.py`.
+
+### 7.5 Como rodar
+
+O comando único continua o mesmo e já roda o `dbt build`:
+
+```bash
+python -m sismigra.pipeline
+```
+
+Comandos do dbt isolados, com o banco já carregado (`data/sismigra.duckdb`):
+
+```bash
+make dbt-build
+```
+
+```bash
+make dbt-docs
+```
+
+O `make dbt-docs` gera o site com dados sintéticos em `dbt/target/static_index.html`. Para usar o
+dbt diretamente, rode a partir da pasta `dbt/`, com `SISMIGRA_DUCKDB` apontando para o banco e as
+seeds copiadas de `ref/` para `dbt/seeds/` (o `src/sismigra/dbt_runner.py` faz isso sozinho).
+
+## 8. Decisões técnicas
 
 | Decisão | Motivo |
 |---|---|
-| **DuckDB com SQL puro** | Processa 1,36 milhão de linhas em cerca de 17 segundos num notebook, sem servidor. O SQL fica versionado e legível (`sql/`). |
+| **DuckDB** | Processa 1,36 milhão de linhas em cerca de 25 segundos num notebook, sem servidor. |
+| **dbt para as transformações** | Modelos em camadas (`stg_`, `int_`, marts), testes declarativos, documentação e linhagem geradas do próprio código. A migração do SQL puro foi validada com equivalência linha a linha. |
+| **Python para bronze, carga e divulgação** | Download, hash e contrato de layout precisam falhar antes de qualquer transformação; o controle de divulgação é um algoritmo iterativo, mais claro em Python do que em SQL. |
+| **Sem pacotes do dbt Hub** | O CI e os testes rodam sem rede. Os testes que viriam de pacotes externos foram escritos como testes genéricos próprios. |
+| **Seeds dentro do projeto dbt** | `ref/` é a fonte única; o pipeline copia os CSVs para `dbt/seeds/` (fora do Git). Com o caminho `../ref`, o dbt gravava o SQL compilado por cima dos CSVs originais; um teste impede que isso volte. |
 | **Ingestão manual com hash** | O site do OBMigra disponibiliza os arquivos para download, sem uma API de acesso direto. O SHA-256 no manifesto prova qual versão de cada arquivo foi usada. |
 | **Duplicatas mantidas** | Sem identificador pessoal, linhas iguais são pessoas diferentes. Prova: em 2026, com idade exata, a taxa de duplicatas cai de cerca de 60% para 35%. |
 | **Faixa etária de 2026 derivada da idade** | Mantém a série comparável, com os mesmos cortes da fonte. A idade exata fica disponível para 2026. |
@@ -288,7 +401,7 @@ esquema estrela completo é para uso interno (validação e exploração local) 
 | **Controle de divulgação com agrupamento antes da supressão** | Apagar as células com menos de 5 registros esconderia 7,3% dos registros e distorceria os totais (perda de um terço em países como Portugal e de 41% no Espírito Santo). O método agrupa primeiro os atributos de menor prioridade (tipologia, subgrupo, perfil, categoria e, por último, o país) e só suprime o que continuar pequeno. Resultado: 99,98% ou mais dos registros publicados, e menos de 0,3% de perda nos totais de países e UFs com 5 mil registros ou mais. |
 | **Dois agregados em vez de um** | Cruzar país e UF na mesma tabela gera milhares de células pequenas. Separar nacionalidade e território reduz o risco de reidentificação e o volume suprimido. |
 
-## 8. Limitações dos dados
+## 9. Limitações dos dados
 
 - **2026 é parcial e não há mês:** não dá para fazer série mensal nem comparar janeiro a setembro
   de 2026 com o mesmo período de 2025. Compare volumes só entre 2021 e 2025 e use 2026 em análises
@@ -314,7 +427,7 @@ esquema estrela completo é para uso interno (validação e exploração local) 
 - **Fonte secundária:** os arquivos vêm do OBMigra/UnB, não diretamente da Polícia Federal. Os
   hashes no manifesto documentam a versão usada.
 
-## 9. Painéis
+## 10. Painéis
 
 **Fonte oficial dos painéis: a pasta [`publicacao/`](publicacao/).** Ela contém os dois agregados
 protegidos, versionados no repositório, e o [`LEIAME`](publicacao/LEIAME.md) com o tipo, um exemplo e
@@ -350,22 +463,22 @@ a descrição de cada coluna. É a única pasta com dados no Git.
 
 **Link:** _a publicar_
 
-## 10. Estrutura do repositório
+## 11. Estrutura do repositório
 
 ```
 sismigra-analytics/
-├── src/sismigra/       # bronze.py, silver.py, gold.py, quality.py, pipeline.py, config.py
-├── sql/                # silver.sql e gold.sql (transformações DuckDB)
+├── src/sismigra/       # bronze, carga, dbt_runner, exportacao, divulgacao, quality, pipeline
+├── dbt/                # projeto dbt: models/ (staging, intermediate, marts), macros/, tests/
 ├── ref/                # tabelas de referência versionadas (amparos, países, municípios, UFs, fontes)
 ├── scripts/            # etapa0_inventario.py, construir_refs.py
 ├── tests/              # pytest com dados sintéticos
 ├── docs/               # dicionário, proteção de dados, revisões, imagens dos painéis
 ├── reports/            # inventário (Etapa 0) e relatório de qualidade
-├── data/               # local, fora do Git (landing, bronze, silver, gold)
-└── .github/workflows/  # CI com os testes
+├── data/               # local, fora do Git (landing, bronze, gold, sismigra.duckdb)
+└── .github/workflows/  # testes (pytest + dbt build) e publicação do dbt docs
 ```
 
-## 11. Fontes
+## 12. Fontes
 
 - Microdados do SISMIGRA: Polícia Federal, distribuídos pelo
   OBMigra/UnB ([Portal de Imigração](https://portaldeimigracao.mj.gov.br)).
