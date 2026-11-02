@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: int_registros_municipio
+    description: >
+      Casamento do município com a DTB 2023 do IBGE pela UF e pelo nome normalizado (maiúsculas,
+      sem acento, só letras) e, quando não casa, com as exceções revisadas de
+      `ref/excecoes_municipios.csv` (correção C03).
+    columns:
+      - name: cod_municipio_ibge
+        description: Código IBGE de 7 dígitos.
+        tests:
+          - relationships:
+              arguments: {to: ref('municipios_ibge'), field: cod_municipio_ibge}
+      - name: municipio_status
+        description: Resultado do casamento.
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["ibge", "exceção manual", "não especificado", "sem correspondência", "uf não informada"]
+
+  - name: int_registros_enriquecidos
+    description: >
+      Registro completo e padronizado (equivalente à antiga camada prata), com a lista das correções
+      aplicadas. Materializado como tabela porque alimenta todos os marts.
+    columns:
+      - {name: id_registro, tests: [unique, not_null]}
+      - {name: correcoes, description: "Códigos das correções aplicadas ao registro (C01 a C09)."}
+      - name: municipio_status
+        tests:
+          - sem_linhas:
+              name: alerta_municipio_sem_correspondencia_ibge
+              arguments: {filtro: "municipio_status = 'sem correspondência'"}
+              config: {severity: warn}
+              description: "A02 (alerta): município informado sem correspondência no IBGE nem exceção."
+
+  - name: int_paises
+    description: >
+      Países padronizados, um por código ISO 3166-1 alfa-3, com chave substituta e continente
+      (o valor mais frequente de `CONTINENTE` para o país de nascimento). Chave -1 = Não informado.
+    columns:
+      - {name: sk_pais, tests: [unique, not_null]}
+      - {name: pais, tests: [unique, not_null]}
+
+  - name: int_mapa_pais
+    description: De cada grafia de país da fonte para a chave do país padronizado.
+    columns:
+      - {name: nome_fonte, tests: [unique, not_null]}
+      - name: sk_pais
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('int_paises'), field: sk_pais}

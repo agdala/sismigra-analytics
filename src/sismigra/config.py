@@ -15,7 +15,7 @@ class Config:
     entrada: Path = RAIZ / "data" / "landing"
     dados: Path = RAIZ / "data"
     ref: Path = RAIZ / "ref"
-    sql: Path = RAIZ / "sql"
+    dbt: Path = RAIZ / "dbt"
     relatorios: Path = RAIZ / "reports" / "qualidade"
     # Única pasta de dados versionada: agregados protegidos (k = 5), fonte oficial dos painéis
     publicacao: Path = RAIZ / "publicacao"
@@ -25,19 +25,20 @@ class Config:
         return self.dados / "bronze"
 
     @property
-    def prata(self) -> Path:
-        return self.dados / "silver"
-
-    @property
     def ouro(self) -> Path:
         return self.dados / "gold"
+
+    @property
+    def banco(self) -> Path:
+        """Arquivo DuckDB compartilhado pelo Python e pelo dbt (fora do Git)."""
+        return self.dados / "sismigra.duckdb"
 
     @property
     def manifesto(self) -> Path:
         return self.bronze / "manifest.json"
 
     def criar_pastas(self) -> None:
-        for p in (self.entrada, self.bronze, self.prata, self.ouro, self.relatorios, self.publicacao):
+        for p in (self.entrada, self.bronze, self.ouro, self.relatorios, self.publicacao):
             p.mkdir(parents=True, exist_ok=True)
 
 

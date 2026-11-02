@@ -55,4 +55,5 @@ Versionados: código, SQL, testes, documentação, tabelas de referência (`ref/
 estrutural (`reports/inventario/`, só estatísticas por coluna), o relatório de qualidade (só contagens)
 e os agregados protegidos de `publicacao/` (k = 5).
 
-Não versionados: os ZIPs e CSVs do SISMIGRA e todas as saídas das camadas bronze, prata e ouro.
+Não versionados: os ZIPs e CSVs do SISMIGRA, o banco `data/sismigra.duckdb` (fontes bronze e modelos
+do dbt) e todas as saídas das camadas bronze, prata e ouro.

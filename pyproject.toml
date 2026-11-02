@@ -1,11 +1,11 @@
 [project]
 name = "sismigra-analytics"
 version = "0.1.0"
-description = "Pipeline em camadas (bronze, prata, ouro) sobre os microdados públicos do SISMIGRA"
+description = "Pipeline em camadas (bronze em Python, transformação em dbt, publicação protegida) sobre os microdados públicos do SISMIGRA"
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"
-dependencies = ["duckdb>=1.1,<3"]
+dependencies = ["duckdb>=1.1,<3", "dbt-core>=1.10,<2", "dbt-duckdb>=1.10,<2"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src", "tests"]

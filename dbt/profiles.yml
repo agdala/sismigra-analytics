@@ -1,0 +1,9 @@
+# Conexão com o mesmo arquivo DuckDB do pipeline Python.
+# O caminho vem da variável SISMIGRA_DUCKDB, definida por src/sismigra/dbt_runner.py.
+sismigra:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('SISMIGRA_DUCKDB', '../data/sismigra.duckdb') }}"
+      threads: 4

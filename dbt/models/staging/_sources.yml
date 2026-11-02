@@ -1,0 +1,73 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: >
+      Camada bronze carregada pelo Python (`src/sismigra/carga.py`) a partir dos arquivos originais
+      do SISMIGRA guardados em `data/bronze/`. Todas as colunas da fonte chegam como texto, sem
+      nenhuma transformação. Antes da carga, o Python valida o contrato de layout de cada arquivo.
+    schema: bronze
+    tables:
+      - name: registros_brutos
+        description: >
+          Uma linha por linha de dados válida dos CSVs do SISMIGRA (2021 a 2026). As colunas
+          `FAIXA_ETARIA` (2021 a 2025) e `IDADE` (2026) coexistem: em cada arquivo, uma delas é nula.
+        columns:
+          - name: arquivo_csv
+            description: Nome do CSV de origem.
+            tests: [not_null]
+          - name: linha_origem
+            description: Número da linha de dados no CSV (1 = primeira linha após o cabeçalho).
+            tests: [not_null]
+          - name: ano_arquivo
+            description: Ano declarado para o arquivo em `ref/fontes.csv`.
+            tests: [not_null]
+          - name: sha12
+            description: 12 primeiros caracteres do SHA-256 do arquivo original.
+            tests: [not_null]
+          - {name: DATAREGISTRO, description: Ano do registro (só o ano).}
+          - {name: AMPARO, description: Código do amparo legal.}
+          - {name: AMPARO_DESCRICAO, description: Código e texto da norma.}
+          - {name: CLASSIFICACAO_REGISTRO, description: "Temporário, Provisório, Residente, Fronteiriço."}
+          - {name: DATAENTRADA, description: "Ano de entrada no Brasil; contém valores inválidos (--, ####)."}
+          - {name: UNIDADE_FED_RESIDENCIA, description: Sigla da UF de residência.}
+          - {name: MUNICIPIO_RESIDENCIA, description: Nome do município (sem código IBGE).}
+          - {name: PAIS_NASCIMENTO, description: País de nascimento por extenso.}
+          - {name: PAIS_NACIONALIDADE, description: País de nacionalidade por extenso.}
+          - {name: CONTINENTE, description: Continente do país de nascimento.}
+          - {name: FAIXA_ETARIA, description: "Faixa etária (2021 a 2025)."}
+          - {name: IDADE, description: "Idade em anos (2026)."}
+          - {name: SEXO, description: Sexo com grafias variadas para não informado.}
+          - {name: ESTADO_CIVIL, description: Estado civil.}
+          - {name: PROFISSAO, description: Ocupação declarada.}
+          - {name: STATUS, description: Situação do registro.}
+          - {name: CLASSIFICACAO_REVISADA, description: Classificação recalculada pela fonte.}
+          - {name: TIPOLOGIA_AMPAROS, description: Agrupamento analítico do amparo feito pela fonte.}
+
+      - name: linhas_malformadas
+        description: Linhas cujo número de colunas difere do cabeçalho (regra de rejeição R00).
+        columns:
+          - {name: arquivo_csv, tests: [not_null]}
+          - {name: linha_origem}
+          - {name: ano_arquivo}
+          - {name: erro, description: Mensagem do leitor de CSV.}
+
+      - name: manifesto
+        description: >
+          Procedência de cada arquivo ingerido (hash, URL, data de ingestão, cobertura), espelho de
+          `data/bronze/manifest.json`. Os dados são anuais, por isso o alerta de atualização considera
+          13 meses sem nova ingestão.
+        loaded_at_field: ingerido_em
+        freshness:
+          warn_after: {count: 395, period: day}
+          error_after: {count: 545, period: day}
+        columns:
+          - {name: csv, description: Nome do CSV extraído., tests: [not_null, unique]}
+          - {name: sha256, description: SHA-256 do arquivo original., tests: [not_null]}
+          - {name: ingerido_em, description: Data e hora da ingestão (UTC)., tests: [not_null]}
+          - {name: url_origem, description: Página de onde o arquivo foi baixado.}
+          - {name: ano, tests: [not_null]}
+          - name: cobertura
+            tests:
+              - accepted_values:
+                  arguments: {values: ["jan-dez", "jan-set"]}

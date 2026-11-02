@@ -56,7 +56,12 @@ Todos chegam como texto, em UTF-8, separados por `;`. Nomes exatamente como no c
 
 ---
 
-## 2. Camada prata (`data/silver/registros.parquet`)
+## 2. Camada prata (modelos dbt `stg_registros` e `int_registros_enriquecidos`)
+
+A prata é construída pelo dbt no banco `data/sismigra.duckdb`: `staging.stg_registros` padroniza e
+`intermediate.int_registros_enriquecidos` acrescenta o código IBGE e a lista de correções. As mesmas
+definições estão nos arquivos `.yml` de `dbt/models/` e no site do
+[dbt docs](https://agdala.github.io/sismigra-analytics/).
 
 | Campo | Tipo | Definição | Origem | Regra |
 |---|---|---|---|---|
@@ -89,12 +94,12 @@ Todos chegam como texto, em UTF-8, separados por `;`. Nomes exatamente como no c
 | `correcoes` | lista | Códigos das correções aplicadas ao registro | Derivado | Alimenta o relatório de qualidade |
 | `sexo_fonte`, `idade_fonte`, `faixa_etaria_fonte`, `estado_civil_fonte` | texto | Valores originais | Fonte | Preservados para auditoria |
 
-Registros rejeitados vão para `data/silver/rejeitados.parquet` com `arquivo_csv`, `linha_origem`,
+Registros rejeitados ficam no modelo `staging.stg_rejeitados` com `arquivo_csv`, `linha_origem`,
 `ano_arquivo` e `regra` (R00 a R03).
 
 ---
 
-## 3. Camada ouro: esquema estrela (`data/gold/`)
+## 3. Camada ouro: esquema estrela (modelos dbt do schema `marts`, exportados em `data/gold/`)
 
 Exportada em Parquet (`data/gold/parquet/`) e CSV (`data/gold/csv/`, separador `;`, UTF-8 com BOM
 para o Excel). Chave `-1` = membro "Não informado" em todas as dimensões.

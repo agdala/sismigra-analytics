@@ -29,7 +29,7 @@ from pathlib import Path
 
 import duckdb
 
-from .silver import lit
+from .carga import lit
 
 LIMIAR = 5
 
@@ -110,7 +110,7 @@ def proteger(con: duckdb.DuckDBPyConnection, origem: str, destino: str, dimensoe
             con.execute(f"UPDATE _p SET sup = true WHERE rowid IN ({', '.join(str(r[0]) for r in alvo)})")
             secundarias += len(alvo)
     con.execute(
-        f"CREATE OR REPLACE TABLE {destino} AS SELECT {dims}, "
+        f"CREATE OR REPLACE TEMP TABLE {destino} AS SELECT {dims}, "
         f"CASE WHEN NOT sup THEN n END AS qtd_registros, nivel AS nivel_agrupamento, "
         f"sup AS suprimido FROM _p ORDER BY ALL"
     )
@@ -133,11 +133,12 @@ def proteger(con: duckdb.DuckDBPyConnection, origem: str, destino: str, dimensoe
     return stats
 
 
-def executar(con: duckdb.DuckDBPyConnection, pasta_saida, limiar: int = LIMIAR) -> dict:
-    """Gera e exporta os agregados protegidos a partir da tabela agregado_base."""
+def executar(con: duckdb.DuckDBPyConnection, pasta_saida, limiar: int = LIMIAR,
+             origem: str = "marts.agregado_base") -> dict:
+    """Gera e exporta os agregados protegidos a partir do modelo dbt marts.agregado_base."""
     resultado = {}
     for nome, spec in TABELAS.items():
-        resultado[nome] = proteger(con, "agregado_base", nome, spec["dimensoes"], spec["etapas"], limiar)
+        resultado[nome] = proteger(con, origem, nome, spec["dimensoes"], spec["etapas"], limiar)
         # CSV para Looker Studio e Power BI: vírgula, UTF-8 sem BOM, ponto decimal, aspas só quando
         # necessário (ex.: "Outros países (Europa)" não precisa; nomes com vírgula, sim)
         con.execute(

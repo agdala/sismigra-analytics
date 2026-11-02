@@ -1,0 +1,87 @@
+version: 2
+
+models:
+  - name: stg_registros
+    description: >
+      Registros aceitos da bronze, com tipos, datas e categorias padronizados. Aplica as regras de
+      correção C01 (ano de entrada), C04 (sexo), C05 e C06 (faixa etária e idade), C07 e C08
+      (estado civil) e C09 (classificação). As linhas rejeitadas (R00 a R03) ficam em `stg_rejeitados`.
+    columns:
+      - name: id_registro
+        description: >
+          Identificador técnico: 12 primeiros caracteres do SHA-256 do arquivo + número da linha.
+          Não identifica pessoa.
+        tests: [unique, not_null]
+      - {name: arquivo_csv, description: CSV de origem., tests: [not_null]}
+      - {name: linha_origem, description: "Linha de dados no CSV (1 = primeira após o cabeçalho)."}
+      - name: ano_registro
+        description: Ano do registro (`DATAREGISTRO` convertido para inteiro).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments: {values: [2021, 2022, 2023, 2024, 2025, 2026], quote: false}
+      - {name: amparo_codigo, description: "Código do amparo legal (inteiro; `049` vira 49).", tests: [not_null]}
+      - {name: amparo_descricao, description: Norma do amparo como na fonte; `-` vira nulo.}
+      - {name: classificacao_registro, description: Tipo de registro; ausente vira "Não informado" (C09).}
+      - {name: classificacao_revisada, description: Classificação revisada da fonte.}
+      - {name: tipologia_fonte, description: Tipologia da fonte, sem alteração.}
+      - name: ano_entrada
+        description: Ano de entrada no Brasil, válido entre 1900 e o ano do registro; senão nulo (C01).
+        tests:
+          - expressao_verdadeira:
+              arguments:
+                expressao: "ano_entrada between 1900 and ano_registro"
+                onde: "ano_entrada is not null"
+      - {name: ano_entrada_fonte, description: Valor original de `DATAENTRADA`, preservado para auditoria.}
+      - {name: uf_sigla, description: "UF de residência em maiúsculas; `-` ou vazio vira nulo (C02)."}
+      - {name: municipio_fonte, description: Município como na fonte.}
+      - {name: pais_nascimento_fonte, description: País de nascimento como na fonte.}
+      - {name: pais_nacionalidade_fonte, description: País de nacionalidade como na fonte.}
+      - {name: continente_fonte, description: Continente como na fonte.}
+      - name: sexo
+        description: Sexo padronizado (C04).
+        tests:
+          - accepted_values:
+              arguments: {values: ["Masculino", "Feminino", "Não informado"]}
+      - name: idade
+        description: Idade em anos (só 2026), válida entre 0 e 120; senão nula (C06).
+        tests:
+          - expressao_verdadeira:
+              arguments: {expressao: "idade between 0 and 120", onde: "idade is not null"}
+      - name: faixa_etaria
+        description: >
+          Faixa etária padronizada. Em 2026 é derivada da idade com os mesmos cortes da fonte (C05).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["0 a 14 anos", "15 a 24 anos", "25 a 39 anos", "40 a 64 anos",
+                         "65 anos ou mais", "Não especificado"]
+      - name: faixa_etaria_origem
+        description: Como a faixa foi obtida.
+        tests:
+          - accepted_values:
+              arguments: {values: ["fonte", "derivada da idade"]}
+      - {name: estado_civil, description: "Estado civil padronizado; `_` vira espaço (C08) e ausente vira Não informado (C07).", tests: [not_null]}
+      - {name: profissao, description: Ocupação; ausente vira "Não informado"., tests: [not_null]}
+      - {name: status, description: Situação do registro., tests: [not_null]}
+      - name: flag_duplicata_exata
+        description: >
+          Pertence a um grupo de linhas idênticas no mesmo arquivo (alerta A01). O registro é mantido:
+          sem identificador pessoal, linhas iguais são pessoas distintas.
+      - {name: sexo_fonte, description: Valor original de `SEXO`.}
+      - {name: idade_fonte, description: Valor original de `IDADE`.}
+      - {name: faixa_etaria_fonte, description: Valor original de `FAIXA_ETARIA`.}
+      - {name: estado_civil_fonte, description: Valor original de `ESTADO_CIVIL`.}
+
+  - name: stg_rejeitados
+    description: >
+      Registros que não entram na prata, com a regra: R00 linha malformada, R01 ano do registro
+      ausente ou não numérico, R02 ano diferente do declarado para o arquivo, R03 amparo ausente.
+    columns:
+      - {name: arquivo_csv, tests: [not_null]}
+      - name: regra
+        tests:
+          - not_null
+          - accepted_values:
+              arguments: {values: ["R00", "R01", "R02", "R03"]}

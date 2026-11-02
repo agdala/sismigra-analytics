@@ -1,0 +1,56 @@
+name: sismigra
+version: "1.0.0"
+config-version: 2
+profile: sismigra
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+# As tabelas de referência vivem em ref/ (fonte única, também usada por scripts/construir_refs.py).
+# src/sismigra/dbt_runner.py copia ref/*.csv para dbt/seeds/ (gerada, fora do Git) a cada execução.
+# As seeds precisam ficar DENTRO do projeto: com um caminho como "../ref", o dbt grava o SQL
+# compilado de cada seed num caminho espelhado que aponta de volta para os CSVs originais.
+seed-paths: ["seeds"]
+target-path: target
+clean-targets: [target, logs]
+
+models:
+  sismigra:
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table
+
+seeds:
+  sismigra:
+    +schema: ref
+    +delimiter: ";"
+    paises_manual:
+      +enabled: false   # insumo de scripts/construir_refs.py; o resultado consolidado é paises.csv
+    uf:
+      +column_types: {cod_uf: varchar, uf_sigla: varchar, uf_nome: varchar, regiao: varchar}
+    municipios_ibge:
+      +column_types: {cod_municipio_ibge: varchar, municipio: varchar, cod_uf: varchar, uf_sigla: varchar}
+    excecoes_municipios:
+      +column_types: {uf: varchar, municipio_fonte: varchar, cod_municipio_ibge: varchar,
+                      municipio_ibge: varchar, tipo_correcao: varchar, justificativa: varchar,
+                      status_revisao: varchar}
+    paises:
+      +column_types: {nome_fonte: varchar, iso3: varchar, nome_padronizado: varchar,
+                      metodo: varchar, observacao: varchar}
+    amparos:
+      +column_types: {codigo: integer, descricao_recente: varchar, classificacao: varchar,
+                      tipologia_fonte: varchar, tipologia_ajustada: varchar, categoria_ampla: varchar,
+                      subgrupo_protecao: varchar, justificativa: varchar}
+    fontes:
+      +column_types: {arquivo_csv: varchar, ano: integer, cobertura: varchar, ano_completo: boolean,
+                      url_origem: varchar, distribuidor: varchar}
+
+tests:
+  sismigra:
+    +severity: error

@@ -1,0 +1,42 @@
+version: 2
+
+seeds:
+  - name: amparos
+    description: >
+      90 códigos de amparo legal com a hierarquia analítica (categoria ampla, subgrupo de proteção,
+      tipologia ajustada), revisada pela responsável pelo projeto. Justificativa linha a linha em
+      `docs/revisao/amparos_revisao.csv`.
+    columns:
+      - {name: codigo, tests: [unique, not_null]}
+      - {name: categoria_ampla, tests: [not_null]}
+  - name: paises
+    description: Grafias de país do SISMIGRA ligadas ao ISO 3166-1 alfa-3 (gerado por scripts/construir_refs.py).
+    columns:
+      - {name: nome_fonte, tests: [unique, not_null]}
+      - {name: nome_padronizado, tests: [not_null]}
+  - name: municipios_ibge
+    description: 5.570 municípios da Divisão Territorial Brasileira (DTB 2023) do IBGE.
+    columns:
+      - {name: cod_municipio_ibge, tests: [unique, not_null]}
+      - name: uf_sigla
+        tests:
+          - relationships: {arguments: {to: ref('uf'), field: uf_sigla}}
+  - name: excecoes_municipios
+    description: Correções manuais de municípios sem correspondência direta na DTB, cada uma com justificativa.
+    columns:
+      - {name: justificativa, tests: [not_null]}
+      - name: cod_municipio_ibge
+        tests:
+          - relationships: {arguments: {to: ref('municipios_ibge'), field: cod_municipio_ibge}}
+  - name: uf
+    description: 27 UFs com código IBGE, sigla, nome e região.
+    columns:
+      - {name: uf_sigla, tests: [unique, not_null]}
+      - {name: cod_uf, tests: [unique, not_null]}
+  - name: fontes
+    description: Um arquivo do SISMIGRA por ano, com cobertura, URL de origem e distribuidor.
+    columns:
+      - {name: ano, tests: [unique, not_null]}
+      - name: cobertura
+        tests:
+          - accepted_values: {arguments: {values: ["jan-dez", "jan-set"]}}
