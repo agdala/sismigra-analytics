@@ -1,0 +1,168 @@
+version: 2
+
+models:
+  - name: fato_registro
+    description: >
+      Fato do esquema estrela. Grão: 1 linha = 1 registro migratório (CRNM ou DP-RNM). A fonte não
+      é agregada; `qtd_registros` vale 1. **Uso interno:** contém células com menos de 5 registros e
+      não pode ser publicado.
+    columns:
+      - {name: id_registro, description: Identificador técnico (ver stg_registros)., tests: [unique, not_null]}
+      - name: sk_ano_registro
+        description: Ano do registro.
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_tempo'), field: sk_tempo}}
+      - name: sk_ano_entrada
+        description: Ano de entrada no Brasil; -1 se inválido.
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_tempo'), field: sk_tempo}}
+      - name: sk_pais_nascimento
+        description: País de nascimento; -1 se ausente.
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_pais'), field: sk_pais}}
+      - name: sk_pais_nacionalidade
+        description: País de nacionalidade; -1 se ausente.
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_pais'), field: sk_pais}}
+      - name: sk_localidade
+        description: Município ou UF de residência; -1 se a UF está ausente.
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_localidade'), field: sk_localidade}}
+      - name: sk_perfil
+        description: Combinação de sexo, faixa etária e estado civil.
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_perfil'), field: sk_perfil}}
+      - name: sk_amparo
+        description: Código do amparo.
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_amparo'), field: sk_amparo}}
+      - name: sk_ocupacao
+        description: Ocupação.
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_ocupacao'), field: sk_ocupacao}}
+      - {name: status, description: Situação do registro (dimensão degenerada).}
+      - {name: status_ativo, description: "`status = 'Ativo'`; filtro padrão dos painéis.", tests: [not_null]}
+      - {name: idade, description: Idade (só 2026).}
+      - {name: faixa_etaria_origem, description: Rastreabilidade da faixa etária.}
+      - {name: municipio_status, description: Rastreabilidade do casamento com o IBGE.}
+      - {name: flag_duplicata_exata, description: Indicador de qualidade (alerta A01).}
+      - {name: flag_corrigido, description: Recebeu ao menos uma correção C.}
+      - name: qtd_registros
+        description: Medida. Sempre 1; somar dá o número de registros.
+        tests:
+          - accepted_values: {arguments: {values: [1], quote: false}}
+
+  - name: dim_tempo
+    description: >
+      Um ano por linha, com dois papéis no fato: ano do registro e ano de entrada. `ano_completo`
+      indica se o arquivo do ano cobre os 12 meses: **2026 é parcial (jan-set)** e não deve entrar em
+      comparações de volume.
+    columns:
+      - {name: sk_tempo, description: "Chave = o próprio ano; -1 = Não informado.", tests: [unique, not_null]}
+      - {name: ano, description: Ano.}
+      - {name: decada, description: Década.}
+      - name: cobertura_registro
+        description: Período coberto pelo arquivo do ano.
+        tests:
+          - accepted_values: {arguments: {values: ["jan-dez", "jan-set"]}}
+      - {name: ano_completo, description: "O ano de registro tem os 12 meses (filtro dos painéis)."}
+      - {name: ano_com_registros, description: Existe arquivo de registros desse ano.}
+
+  - name: dim_pais
+    description: >
+      País padronizado (papéis: nascimento e nacionalidade). Grafias diferentes da fonte viram um só
+      país. Exceções sem ISO documentadas: YUG e ANT (históricos), XXA (apátrida, padrão ICAO), nulo
+      para "Ilhas Virgens (não especificado)".
+    columns:
+      - {name: sk_pais, tests: [unique, not_null]}
+      - {name: pais, description: Nome padronizado em português., tests: [unique, not_null]}
+      - {name: iso3, description: ISO 3166-1 alfa-3.}
+      - {name: continente, description: Continente segundo a fonte., tests: [not_null]}
+
+  - name: dim_localidade
+    description: >
+      Município IBGE de residência, com membros por UF para "Não especificado" e "Sem correspondência
+      no IBGE"; -1 para UF ausente.
+    columns:
+      - {name: sk_localidade, tests: [unique, not_null]}
+      - name: cod_municipio_ibge
+        description: Código de 7 dígitos da DTB 2023.
+        tests:
+          - relationships: {arguments: {to: ref('municipios_ibge'), field: cod_municipio_ibge}}
+      - {name: municipio, description: Nome oficial ou rótulo do membro., tests: [not_null]}
+      - {name: uf_sigla, description: Sigla da UF.}
+      - {name: uf_nome, description: Nome da UF.}
+      - {name: cod_uf, description: Código IBGE da UF.}
+      - name: regiao
+        description: Região geográfica.
+        tests:
+          - accepted_values:
+              arguments: {values: ["Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste", "Não informado"]}
+      - name: tipo_membro
+        tests:
+          - accepted_values:
+              arguments: {values: ["município IBGE", "não especificado", "sem correspondência", "uf não informada"]}
+
+  - name: dim_perfil
+    description: Dimensão "junk" com as combinações de sexo, faixa etária e estado civil.
+    columns:
+      - {name: sk_perfil, tests: [unique, not_null]}
+      - {name: sexo, tests: [not_null]}
+      - {name: faixa_etaria, tests: [not_null]}
+      - name: ordem_faixa_etaria
+        description: 1 a 5 para ordenar as faixas; 9 = não especificado.
+        tests:
+          - accepted_values: {arguments: {values: [1, 2, 3, 4, 5, 9], quote: false}}
+      - {name: estado_civil, tests: [not_null]}
+
+  - name: dim_amparo
+    description: >
+      Código de amparo com a hierarquia analítica revisada pela responsável pelo projeto
+      (`ref/amparos.csv`): categoria ampla, subgrupo de proteção e tipologia ajustada.
+    columns:
+      - {name: sk_amparo, tests: [unique, not_null]}
+      - {name: descricao_recente, description: Norma vigente no ano mais recente.}
+      - name: categoria_ampla
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["Proteção internacional e humanitária", "Mobilidade regional e acordos", "Família",
+                         "Trabalho e investimento", "Estudo", "Outros", "Não informado"]
+      - name: subgrupo_protecao
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["Solicitantes de refúgio", "Refugiados reconhecidos", "Acolhida de venezuelanos",
+                         "Acolhida humanitária", "Não se aplica"]
+      - {name: tipologia_ajustada, description: "Tipologia corrigida (o amparo 290 vira SOLICITAÇÃO DE REFÚGIO (DP-RNM))."}
+
+  - name: dim_ocupacao
+    description: Categorias de profissão da fonte.
+    columns:
+      - {name: sk_ocupacao, tests: [unique, not_null]}
+      - {name: ocupacao, tests: [unique, not_null]}
+
+  - name: amparo_descricao_ano
+    description: Texto da norma de cada código por ano (o mesmo código muda de portaria ao longo do tempo).
+    columns:
+      - {name: amparo_codigo, tests: [not_null]}
+      - {name: registros, tests: [not_null]}
+
+  - name: agregado_base
+    description: >
+      Contagem por ano, território, nacionalidade, perfil e amparo. **Não pode ser publicada:** é a
+      entrada do controle de divulgação (k = 5) em Python (`src/sismigra/divulgacao.py`), que gera os
+      agregados protegidos de `publicacao/`.
+    columns:
+      - name: qtd_registros
+        tests:
+          - not_null
+          - expressao_verdadeira: {arguments: {expressao: "qtd_registros > 0"}}

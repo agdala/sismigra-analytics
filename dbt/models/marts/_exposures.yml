@@ -1,0 +1,32 @@
+version: 2
+
+exposures:
+  - name: painel_looker_studio
+    label: Painel SISMIGRA (Looker Studio)
+    type: dashboard
+    maturity: medium
+    url: https://github.com/agdala/sismigra-analytics/tree/main/publicacao
+    description: >
+      Painel público no Looker Studio. Lê **somente** os agregados protegidos
+      `publicacao/agregado_looker_nacionalidade.csv` e `publicacao/agregado_looker_territorio.csv`,
+      gerados a partir de `agregado_base` pelo controle de divulgação em Python (k = 5, agrupamento
+      progressivo e supressão primária e secundária). Comparações de volume filtram
+      `ano_completo = true`. O link do painel publicado fica no README.
+    depends_on:
+      - ref('agregado_base')
+    owner:
+      name: Agda Santos
+
+  - name: painel_power_bi
+    label: Painel SISMIGRA (Power BI)
+    type: dashboard
+    maturity: medium
+    url: https://github.com/agdala/sismigra-analytics/tree/main/publicacao
+    description: >
+      Painel Power BI (.pbix publicado). Usa os mesmos dois agregados protegidos de `publicacao/`
+      como tabelas independentes, sem relacionamento, nunca o esquema estrela completo. Comparações
+      de volume filtram `ano_completo = true`.
+    depends_on:
+      - ref('agregado_base')
+    owner:
+      name: Agda Santos
