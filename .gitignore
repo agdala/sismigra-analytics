@@ -42,3 +42,6 @@ dbt/target/
 dbt/logs/
 dbt/seeds/
 dbt/.user.yml
+
+# Configuração local de ferramentas de desenvolvimento
+.claude/
