@@ -1,5 +1,7 @@
 # sismigra-analytics
 
+**Português** | [English](README.en.md)
+
 [![testes](https://github.com/agdala/sismigra-analytics/actions/workflows/tests.yml/badge.svg)](https://github.com/agdala/sismigra-analytics/actions/workflows/tests.yml)
 [![dbt docs](https://github.com/agdala/sismigra-analytics/actions/workflows/docs.yml/badge.svg)](https://agdala.github.io/sismigra-analytics/)
 
