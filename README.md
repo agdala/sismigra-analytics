@@ -3,12 +3,13 @@
 [![testes](https://github.com/agdala/sismigra-analytics/actions/workflows/tests.yml/badge.svg)](https://github.com/agdala/sismigra-analytics/actions/workflows/tests.yml)
 [![dbt docs](https://github.com/agdala/sismigra-analytics/actions/workflows/docs.yml/badge.svg)](https://agdala.github.io/sismigra-analytics/)
 
-Pipeline em **Python + dbt + DuckDB** sobre os microdados públicos do **SISMIGRA** (Sistema de
-Registro Nacional Migratório), de 2021 a 2026. São **1.361.391 registros** organizados em camadas
-(bronze em Python, prata e ouro em dbt), com governança e qualidade de dados testadas, um esquema
-estrela e agregados protegidos para Power BI e Looker Studio.
+Pipeline em Python, dbt e DuckDB que transforma os microdados públicos do SISMIGRA em uma base analítica testada e em agregados protegidos para painéis.
 
 **Documentação dos modelos (dbt docs):** <https://agdala.github.io/sismigra-analytics/>
+
+São **1.361.391 registros** do **SISMIGRA** (Sistema de Registro Nacional Migratório), de 2021 a
+2026, organizados em camadas (bronze em Python, prata e ouro em dbt), com governança e qualidade de
+dados testadas, um esquema estrela e agregados protegidos para Power BI e Looker Studio.
 
 > [!IMPORTANT]
 > **2026 é um ano parcial (janeiro a setembro).** Os arquivos trazem só o ano do registro, sem mês,
@@ -448,7 +449,7 @@ a descrição de cada coluna. É a única pasta com dados no Git.
 > `Registros = SUM(tabela[qtd_registros])` e o filtro `ano_completo = true` nos visuais de volume.
 > O `.pbix` publicado não deve conter nenhuma tabela da camada ouro completa.
 
-![Painel Power BI](docs/img/powerbi_visao_geral.png)
+<!-- Captura do painel a incluir quando publicado: docs/img/powerbi_visao_geral.png -->
 
 **Link:** _a publicar_
 
@@ -459,7 +460,7 @@ a descrição de cada coluna. É a única pasta com dados no Git.
 > Google Sheets) e crie o filtro `ano_completo = true` nos gráficos de volume. Use `SUM(qtd_registros)`:
 > as células suprimidas têm contagem vazia e são ignoradas na soma.
 
-![Painel Looker Studio](docs/img/looker_visao_geral.png)
+<!-- Captura do painel a incluir quando publicado: docs/img/looker_visao_geral.png -->
 
 **Link:** _a publicar_
 
@@ -484,6 +485,19 @@ sismigra-analytics/
   OBMigra/UnB ([Portal de Imigração](https://portaldeimigracao.mj.gov.br)).
 - Divisão Territorial Brasileira (DTB 2023): [IBGE](https://www.ibge.gov.br/explica/codigos-dos-municipios.php).
 - Códigos de país: ISO 3166-1, via [pycountry](https://pypi.org/project/pycountry/).
+
+## Projetos relacionados
+
+Os quatro repositórios formam um ciclo de dados, da coleta ao monitoramento:
+
+| Etapa | Projeto | O que faz | Publicado |
+|---|---|---|---|
+| 1. Coletar | [xlsform-validator](https://github.com/agdala/xlsform-validator) | Qualidade, consentimento e LGPD em formulários KoboToolbox/ODK | [versão web](https://agdala.github.io/xlsform-validator/) |
+| 2. Transformar e publicar | **sismigra-analytics** (este repositório) | Pipeline bronze/prata/ouro com Python, DuckDB e dbt, com controle de divulgação | [dbt docs](https://agdala.github.io/sismigra-analytics/) |
+| 3. Integrar | [record-linkage-kit](https://github.com/agdala/record-linkage-kit) | Deduplicação e cruzamento de cadastros, com revisão humana e pseudonimização | [relatório](https://agdala.github.io/record-linkage-kit/) |
+| 4. Monitorar | [monitoring-5w-kit](https://github.com/agdala/monitoring-5w-kit) | Relatos de parceiros, metas e dupla contagem | [relatório](https://agdala.github.io/monitoring-5w-kit/) |
+
+Autoria: Agda Santos, com auxílio de ferramentas de IA.
 
 ## Licença
 
